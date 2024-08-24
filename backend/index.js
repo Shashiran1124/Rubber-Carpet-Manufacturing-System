@@ -26,6 +26,9 @@ connection.once("open", ()=>{
 const testRouter = require("./routes/test.js");
 app.use("/test", testRouter);
 
+const machineRouter = require("./routes/machines.js");//machine
+app.use ("/machine",machineRouter); //machines,js file eka lord venna denna oona url eka machines
+
 app.listen(PORT, ()=>{
     console.log(`Server is up and running on PORT : ${PORT}`);
 });
