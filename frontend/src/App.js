@@ -1,13 +1,18 @@
-import logo from './logo.svg';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
-import { BrowserRouter as Router, Route, } from "react-router-dom";
-import TestComponent from './components/TestComponent';
+
 
 function App() {
+
+  const navigate = useNavigate();
+
   return (
-    <Router>
-      <Route path = "/" exact component = {TestComponent}/>
-      </Router>
+    <div className="App">
+      <header className="App-header">
+        <h1>Welcome to Human Resource Management</h1>
+        <button className='employee-button' onClick={() => navigate('/employees')}>Add Employees</button>
+      </header>
+    </div>
   );
 }
 
