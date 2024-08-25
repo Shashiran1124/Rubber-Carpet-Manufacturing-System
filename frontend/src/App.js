@@ -1,13 +1,15 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { BrowserRouter as Router, Route, } from "react-router-dom";
-import TestComponent from './components/TestComponent';
+import { useNavigate } from 'react-router-dom';
+
 
 function App() {
+  const navigate = useNavigate();
   return (
-    <Router>
-      <Route path = "/" exact component = {TestComponent}/>
-      </Router>
+    <div className='App'>
+      <h1>Hii</h1>
+      <button onClick={() => navigate('/DashSupForm')}>go</button>
+    </div>
   );
 }
 
