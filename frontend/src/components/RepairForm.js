@@ -1,121 +1,136 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import React, { useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { Box, Button, Divider, Grid, Paper, styled, TextField, Typography } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
+import dayjs from "dayjs";
 
 const RepairForm = () => {
-    const {mid} = useParams();
-    const [formData, setFormData] = useState({
-        machineID: mid,
-        repairStartDate: '',
-        partName: '',
-        repairEndDate: '',
-        discription: ''
-    });
+	const { id, mid } = useParams();
+	const [formData, setFormData] = useState({
+		machineID: mid,
+		repairStartDate: "",
+		partName: "",
+		repairEndDate: "",
+		discription: "",
+	});
 
-    const [errors, setErrors] = useState({});
+	const [machineID, setMachineID] = useState("");
+	const [repairStartDate, setRepairStartDate] = useState(dayjs(new Date().toString()));
+	const [partName, setPartName] = useState("");
+	const [repairEndDate, setRepairEndDate] = useState(dayjs(new Date().toString()));
+	const [discription, setDiscription] = useState("");
+	const [errors, setErrors] = useState({});
+	//const [statusError, setStatusError] = useState("");
 
-    const validateForm = () => {
-        const newErrors = {};
-        const partNamePattern = /^[A-Za-z\s]+$/; // Only letters and spaces allowed
-        
-        if (!formData.repairStartDate) newErrors.repairStartDate = 'Repair start date is required';
-        if (!formData.partName) {
-            newErrors.partName = 'Part name is required';
-        } else if (!partNamePattern.test(formData.partName)) {
-            newErrors.partName = 'Part name can only contain letters and spaces';
-        }
-        if (!formData.repairEndDate) newErrors.repairEndDate = 'Repair end date is required';
-        if (!formData.discription) newErrors.discription = 'Description is required';
+	const validateForm = () => {
+		const newErrors = {};
+		const partNamePattern = /^[A-Za-z\s]+$/; // Only letters and spaces allowed
 
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+		if (!formData.repairStartDate) newErrors.repairStartDate = "";
+		if (!formData.partName) {
+			newErrors.partName = "Part name is required";
+		} else if (!partNamePattern.test(formData.partName)) {
+			newErrors.partName = "Part name can only contain letters and spaces";
+		}
+		if (!formData.repairEndDate) newErrors.repairEndDate = "Repair end date is required";
+		if (!formData.discription) newErrors.discription = "Description is required";
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
+	};
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!validateForm()) return;
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData({ ...formData, [name]: value });
+	};
 
-        try {
-            console.log(formData)
-            await axios.post('http://localhost:8070/repair/add',formData);
-            alert('Repair record added successfully');
-            setFormData({
-                repairStartDate: '',
-                partName: '',
-                repairEndDate: '',
-                discription: ''
-            });
-        } catch (err) {
-            console.error(err);
-            alert('Failed to add repair record');
-        }
-    };
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		/* 	if (!validateForm()) {
+			alert("Validation Faild");
+			return;
+		}
+ */
+		const repairData = {
+			machineID: mid,
+			repairStartDate: repairStartDate,
+			partName: partName,
+			repairEndDate: repairEndDate,
+			discription: discription,
+		};
 
-    return (
-        <div className="container">
-            <h2>Add Repair Record</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="repairStartDate" className="form-label">Repair Start Date</label>
-                    <input
-                        type="date"
-                        id="repairStartDate"
-                        name="repairStartDate"
-                        className="form-control"
-                        value={formData.repairStartDate}
-                        onChange={handleChange}
-                    />
-                    {errors.repairStartDate && <div className="text-danger">{errors.repairStartDate}</div>}
-                </div>
+		try {
+			await axios.post("http://localhost:8070/repair/add", repairData);
+			alert("Repair record added successfully");
+			setRepairStartDate(dayjs(new Date().toString()));
+			setPartName("");
+			setRepairEndDate(dayjs(new Date().toString()));
+			setDiscription("");
+		} catch (err) {
+			alert("Failed to add repair record");
+		}
+	};
 
-                <div className="mb-3">
-                    <label htmlFor="partName" className="form-label">Part Name</label>
-                    <input
-                        type="text"
-                        id="partName"
-                        name="partName"
-                        className="form-control"
-                        value={formData.partName}
-                        onChange={handleChange}
-                    />
-                    {errors.partName && <div className="text-danger">{errors.partName}</div>}
-                </div>
+	return (
+		<LocalizationProvider dateAdapter={AdapterDayjs}>
+			<Box display="flex" height="100vh">
+				<Box sx={{ width: "80%", padding: "20px" }}>
+					<Paper elevation={3} sx={{ padding: "20px" }}>
+						<Grid container justifyContent="space-between">
+							<Typography variant="h5" sx={{ fontWeight: "bold" }}>
+								Add Repair Record
+							</Typography>
+						</Grid>
+						<Divider sx={{ margin: "20px 0" }} />
 
-                <div className="mb-3">
-                    <label htmlFor="repairEndDate" className="form-label">Repair End Date</label>
-                    <input
-                        type="date"
-                        id="repairEndDate"
-                        name="repairEndDate"
-                        className="form-control"
-                        value={formData.repairEndDate}
-                        onChange={handleChange}
-                    />
-                    {errors.repairEndDate && <div className="text-danger">{errors.repairEndDate}</div>}
-                </div>
+						<Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
+							<DatePicker
+								label="Repair Start Date"
+								value={repairStartDate}
+								onChange={(newValue) => setRepairStartDate(newValue)}
+							/>
+							<TextField
+								fullWidth
+								label="Part Name"
+								variant="outlined"
+								margin="normal"
+								value={partName}
+								onChange={(event) => setPartName(event.target.value)}
+								required
+							/>
+							<DatePicker
+								label="Repair End Date"
+								value={repairEndDate}
+								onChange={(newValue) => setRepairEndDate(newValue)}
+							/>
 
-                <div className="mb-3">
-                    <label htmlFor="discription" className="form-label">Description</label>
-                    <textarea
-                        id="discription"
-                        name="discription"
-                        className="form-control"
-                        rows="3"
-                        value={formData.discription}
-                        onChange={handleChange}
-                    />
-                    {errors.discription && <div className="text-danger">{errors.discription}</div>}
-                </div>
+							<TextField
+								fullWidth
+								label="Part Name"
+								variant="outlined"
+								margin="normal"
+								value={discription}
+								onChange={(event) => setDiscription(event.target.value)}
+								required
+							/>
 
-                <button type="submit" className="btn btn-primary">Add Repair Record</button>
-            </form>
-        </div>
-    );
+							<Button
+								variant="contained"
+								sx={{ backgroundColor: "#7e57c2", color: "#fff", marginTop: "20px" }}
+								fullWidth
+								type="submit"
+							>
+								Submit
+							</Button>
+						</Box>
+					</Paper>
+				</Box>
+			</Box>
+		</LocalizationProvider>
+	);
 };
 
 export default RepairForm;

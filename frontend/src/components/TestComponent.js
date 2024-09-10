@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function TestComponent() {
   return (
-    <div>TestComponent</div>
+    <div>TestComponent
+      <a href="/machine/add"><button>Add MachineAdd</button></a>
+    </div>
   )
 }
