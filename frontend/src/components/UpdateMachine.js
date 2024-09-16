@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // useNavigate replaces useHistory
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { Box, Button, Divider, Grid, Paper, TextField, Typography } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 
 const UpdateMachine = () => {
 	const { id } = useParams(); // Get ID from URL parameters
-	const history = useHistory(); // For redirecting after update
+	const navigate = useNavigate(); // useNavigate instead of useHistory
 	const [machine, setMachine] = useState({
 		machineID: "",
 		date: "",
@@ -79,7 +79,7 @@ const UpdateMachine = () => {
 			.then((response) => {
 				setSuccess(response.data.status);
 				setError(null);
-				setTimeout(() => history.push("/"), 2000); // Redirect after 2 seconds
+				setTimeout(() => navigate("/"), 2000); // use navigate instead of history.push
 			})
 			.catch((error) => {
 				setError("Error updating machine details");
@@ -96,7 +96,7 @@ const UpdateMachine = () => {
 					<Paper elevation={3} sx={{ padding: "20px" }}>
 						<Grid container justifyContent="space-between">
 							<Typography variant="h5" sx={{ fontWeight: "bold" }}>
-								Machin Update
+								Machine Update
 							</Typography>
 						</Grid>
 						<Divider sx={{ margin: "20px 0" }} />

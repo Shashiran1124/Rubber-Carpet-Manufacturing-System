@@ -1,16 +1,22 @@
-import React, { useState } from "react";
-import { List, ListItem, ListItemText, Divider, Box } from "@mui/material";
-import { Home as HomeIcon, Assessment as AssessmentIcon, ListAlt as ListAltIcon } from "@mui/icons-material";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // useNavigate replaces useHistory
+import { Box, List, ListItem, Divider, ListItemText } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import { useState, useEffect } from "react";
 
 const Sidebar = () => {
-	const history = useHistory();
+	const navigate = useNavigate(); // useNavigate instead of useHistory
 	const location = useLocation();
 	const [active, setActive] = useState(location.pathname);
 
+	useEffect(() => {
+		setActive(location.pathname); // This ensures active state is updated when the location changes
+	}, [location.pathname]);
+
 	const handleNavigation = (path) => {
 		setActive(path);
-		history.push(path);
+		navigate(path); // use navigate instead of history.push
 	};
 
 	const isActive = (paths) => paths.includes(active);
@@ -80,20 +86,20 @@ const Sidebar = () => {
 						borderRadius: "6px",
 						border: "2px solid #7540a7",
 						marginBottom: "4px",
-						backgroundColor: isActive(["/DashSupForm", "/DashSupForm"]) ? "#7540a7" : "inherit",
+						backgroundColor: isActive(["/DashSupForm"]) ? "#7540a7" : "inherit",
 					}}
 					onClick={() => handleNavigation("/DashSupForm")}
 				>
 					<ListAltIcon
 						sx={{
-							color: isActive(["/DashSupForm", "/DashSupForm"]) ? "#fff" : "#000",
+							color: isActive(["/DashSupForm"]) ? "#fff" : "#000",
 						}}
 					/>
 					<ListItemText
 						primary="All Machines"
 						sx={{
 							paddingLeft: "10px",
-							color: isActive(["/DashSupForm", "/DashSupForm"]) ? "#fff" : "#000",
+							color: isActive(["/DashSupForm"]) ? "#fff" : "#000",
 						}}
 					/>
 				</ListItem>
@@ -123,7 +129,7 @@ const Sidebar = () => {
 				</ListItem>
 				<Divider sx={{ backgroundColor: "#fff" }} />
 
-				{/* View Order Details*/}
+				{/* View Order Details */}
 				<ListItem
 					button
 					sx={{
@@ -147,7 +153,7 @@ const Sidebar = () => {
 				</ListItem>
 				<Divider sx={{ backgroundColor: "#fff" }} />
 
-				{/* CalculateRawMaterialCosts */}
+				{/* Calculate Raw Material Costs */}
 				<ListItem
 					button
 					sx={{

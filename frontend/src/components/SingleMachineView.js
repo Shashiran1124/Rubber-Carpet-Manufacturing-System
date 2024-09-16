@@ -1,19 +1,22 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom"; // Corrected import
 
 export default function SingleMachineView() {
 	const [machineData, setMachineData] = useState([]);
 	const [repairData, setRepairData] = useState([]);
 
-	const { id, mid } = useParams();
+	const { id, mid } = useParams(); // Fetch params from the URL
 
 	useEffect(() => {
+		// Fetch machine data by ID
 		axios.get(`http://localhost:8070/machine/${id}`).then((res) => {
 			setMachineData(res.data);
 			console.log(res.data);
 		});
+
+		// Fetch repair data for the machine
 		axios.get(`http://localhost:8070/repair/${mid}`).then((res) => {
 			setRepairData(res.data);
 			console.log(res.data);
@@ -45,10 +48,10 @@ export default function SingleMachineView() {
 						{repairData.map((rowData) => (
 							<TableRow key={rowData._id}>
 								<TableCell>{rowData.repairStartDate}</TableCell>
-								<TableCell> {rowData.partName}</TableCell>
-								<TableCell> {rowData.partName}</TableCell>
-								<TableCell> {rowData.repairEndDate}</TableCell>
-								<TableCell> {rowData.discription}</TableCell>
+								<TableCell>{rowData.partName}</TableCell>
+								<TableCell>{rowData.status}</TableCell> {/* Corrected status field */}
+								<TableCell>{rowData.repairEndDate}</TableCell>
+								<TableCell>{rowData.description}</TableCell> {/* Corrected typo from 'discription' */}
 							</TableRow>
 						))}
 					</TableBody>

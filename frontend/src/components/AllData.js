@@ -12,14 +12,14 @@ import {
 	Paper,
 	CircularProgress,
 } from "@mui/material";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // useNavigate replaces useHistory
 import Button from "@mui/material/Button";
 
 const MachineList = () => {
 	const [machines, setMachines] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
-	const history = useHistory(); // Correct usage of useHistory
+	const navigate = useNavigate(); // useNavigate instead of useHistory
 
 	useEffect(() => {
 		const fetchMachines = async () => {
@@ -39,7 +39,7 @@ const MachineList = () => {
 
 	const handleEditClick = (mID) => {
 		// Navigate to the update page with the machine ID
-		history.push(`/machine/update/${mID}`);
+		navigate(`/machine/update/${mID}`); // use navigate instead of history.push
 	};
 
 	const handleDeleteClick = async (mID) => {

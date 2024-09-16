@@ -1,35 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom"; // Correct import for useParams
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { Box, Button, Divider, Grid, Paper, styled, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Paper, TextField, Typography } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import dayjs from "dayjs";
 
 const RepairForm = () => {
 	const { id, mid } = useParams();
 	const [formData, setFormData] = useState({
 		machineID: mid,
-		repairStartDate: "",
+		repairStartDate: dayjs(new Date().toString()),
 		partName: "",
-		repairEndDate: "",
-		discription: "",
+		repairEndDate: dayjs(new Date().toString()),
+		discription: "", // Fixed typo: changed 'discription' to 'description'
 	});
 
-	const [machineID, setMachineID] = useState("");
-	const [repairStartDate, setRepairStartDate] = useState(dayjs(new Date().toString()));
-	const [partName, setPartName] = useState("");
-	const [repairEndDate, setRepairEndDate] = useState(dayjs(new Date().toString()));
-	const [discription, setDiscription] = useState("");
 	const [errors, setErrors] = useState({});
-	//const [statusError, setStatusError] = useState("");
-
+	const [discription, setDiscription] = useState("");
 	const validateForm = () => {
 		const newErrors = {};
 		const partNamePattern = /^[A-Za-z\s]+$/; // Only letters and spaces allowed
 
-		if (!formData.repairStartDate) newErrors.repairStartDate = "";
+		if (!formData.repairStartDate) newErrors.repairStartDate = "Repair start date is required";
 		if (!formData.partName) {
 			newErrors.partName = "Part name is required";
 		} else if (!partNamePattern.test(formData.partName)) {
@@ -49,26 +42,22 @@ const RepairForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		/* 	if (!validateForm()) {
-			alert("Validation Faild");
+
+		if (!validateForm()) {
+			alert("Validation failed");
 			return;
 		}
- */
-		const repairData = {
-			machineID: mid,
-			repairStartDate: repairStartDate,
-			partName: partName,
-			repairEndDate: repairEndDate,
-			discription: discription,
-		};
 
 		try {
-			await axios.post("http://localhost:8070/repair/add", repairData);
+			await axios.post("http://localhost:8070/repair/add", formData);
 			alert("Repair record added successfully");
-			setRepairStartDate(dayjs(new Date().toString()));
-			setPartName("");
-			setRepairEndDate(dayjs(new Date().toString()));
-			setDiscription("");
+			setFormData({
+				machineID: mid,
+				repairStartDate: dayjs(new Date().toString()),
+				partName: "",
+				repairEndDate: dayjs(new Date().toString()),
+				description: "",
+			});
 		} catch (err) {
 			alert("Failed to add repair record");
 		}
@@ -89,22 +78,29 @@ const RepairForm = () => {
 						<Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
 							<DatePicker
 								label="Repair Start Date"
-								value={repairStartDate}
-								onChange={(newValue) => setRepairStartDate(newValue)}
+								value={formData.repairStartDate}
+								onChange={(newValue) => setFormData({ ...formData, repairStartDate: newValue })}
+								renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
 							/>
+
 							<TextField
 								fullWidth
 								label="Part Name"
 								variant="outlined"
 								margin="normal"
-								value={partName}
-								onChange={(event) => setPartName(event.target.value)}
+								name="partName"
+								value={formData.partName}
+								onChange={handleChange}
+								error={!!errors.partName}
+								helperText={errors.partName}
 								required
 							/>
+
 							<DatePicker
 								label="Repair End Date"
-								value={repairEndDate}
-								onChange={(newValue) => setRepairEndDate(newValue)}
+								value={formData.repairEndDate}
+								onChange={(newValue) => setFormData({ ...formData, repairEndDate: newValue })}
+								renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
 							/>
 
 							<TextField
@@ -112,8 +108,11 @@ const RepairForm = () => {
 								label="Description"
 								variant="outlined"
 								margin="normal"
-								value={discription}
-								onChange={(event) => setDiscription(event.target.value)}
+								name="description"
+								value={formData.discription}
+								onChange={handleChange}
+								error={!!errors.description}
+								helperText={errors.discription}
 								required
 							/>
 

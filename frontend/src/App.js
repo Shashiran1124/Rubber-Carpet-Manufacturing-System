@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Switch is now Routes
 import Sidebar from "./components/Sidebar";
 import TestComponent from "./components/TestComponent";
 import MachineRegister from "./components/MachineRegister";
@@ -16,14 +16,14 @@ function App() {
 				<Sidebar />
 
 				<div style={{ flex: 1, padding: "20px" }}>
-					<Switch>
-						<Route path="/" exact component={TestComponent} />
-						<Route path="/machine/add" exact component={MachineRegister} />
-						<Route path="/machine/all" exact component={AllData} />
-						<Route path="/machine/update/:id" exact component={UpdateMachine} />
-						<Route path="/machine/view/:id/:mid" exact component={SingleMachineView} />
-						<Route path="/repair/add/:mid" exact component={RepairForm} />
-					</Switch>
+					<Routes>
+						<Route path="/" element={<TestComponent />} />
+						<Route path="/machine/add" element={<MachineRegister />} />
+						<Route path="/machine/all" element={<AllData />} />
+						<Route path="/machine/update/:id" element={<UpdateMachine />} />
+						<Route path="/machine/view/:id/:mid" element={<SingleMachineView />} />
+						<Route path="/repair/add/:mid" element={<RepairForm />} />
+					</Routes>
 				</div>
 			</div>
 		</Router>
