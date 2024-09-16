@@ -31,24 +31,42 @@ router.route("/add").post((req, res) => {
 		});
 });
 //http:/Localhost:8070/machine
-router.route("/").get((req, res) => {
-	Machine.find()
-		.then((machines) => {
-			let listOfMachines = [];
-			for (let item of machines) {
-				listOfMachines.push({
-					_id: item._id,
-					machineID: item.machineID,
-					date: momentController(item.createdOn).format("MMMM Do YYYY"),
-					status: item.status,
-					nextGeneralRepairDate: momentController(item.nextGeneralRepairDate).format("MMMM Do YYYY"),
-				});
-			}
-			res.json(listOfMachines);
-		})
-		.catch((err) => {
-			console.log(err);
+router.route("/").post(async (request, response) => {
+	try {
+		const { searchText, pageNumber, pageSize } = request.body;
+		let listOfMachineDTOs = [];
+		let query = {};
+
+		if (searchText) {
+			query.machineID = { $regex: new RegExp(searchText, "i") };
+		}
+
+		const totalRecordCount = await Machine.countDocuments(query);
+
+		let listOfMachines = await Machine.find(query)
+			.skip((pageNumber - 1) * pageSize)
+			.limit(pageSize)
+			.exec();
+
+		for (let item of listOfMachines) {
+			listOfMachineDTOs.push({
+				_id: item._id,
+				machineID: item.machineID,
+				date: momentController(item.createdOn).format("MMMM Do YYYY"),
+				status: item.status,
+				nextGeneralRepairDate: momentController(item.nextGeneralRepairDate).format("MMMM Do YYYY"),
+			});
+		}
+
+		response.json({
+			items: listOfMachineDTOs,
+			currentPage: pageNumber,
+			totalPages: Math.ceil(totalRecordCount / pageSize),
+			totalRecordCount: totalRecordCount,
 		});
+	} catch (error) {
+		console.log(error);
+	}
 });
 //http:Localhost:8070/update/:id
 router.route("/update/:id").put(async (req, res) => {
