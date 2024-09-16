@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router(); //////import express pacage with Router
 let repair = require("../models/Repair"); //should use machine model so import it (requir= import karana use karanva)
-
+const momentController = require("moment");
 //front end idn backend call karannna URL ekak use karanva http:/Localhost:8070/machine/add execute venava *ekathami methana venne
 router.route("/add").post((req, res) => {
 	//router for create function  *router variable eke thiyenava function ekak ekata eka parametr ekak denna one
@@ -49,13 +49,24 @@ router.route("/").get((req, res) => {
 
 router.route("/:mid").get((req, res) => {
 	//all data display using slash   parameter = /   /disply thibboth ....machine/display
-	//get - http request method  *data gannava kohenhari
+	//get - http request method
 	let mid = req.params.mid;
 	repair
 		.find({ machineID: mid })
 		.then((repairs) => {
+			let listOfRepair = [];
+			for (let time of repairs) {
+				listOfRepair.push({
+					_id: time._id,
+					machineID: time.machineID,
+					repairStartDate: momentController(time.createdOn).format("MMMM DO YYYY"),
+					partName: time.partName,
+					repairEndDate: momentController(time.repairEndDate).format("MMMM DO YYYY"),
+					discription: time.discription,
+				});
+			}
 			// Date Fix
-			res.json(repairs);
+			res.json(listOfRepair);
 		})
 		.catch((err) => {
 			console.log(err);

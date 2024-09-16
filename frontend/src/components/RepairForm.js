@@ -109,7 +109,7 @@ const RepairForm = () => {
 
 							<TextField
 								fullWidth
-								label="Part Name"
+								label="Description"
 								variant="outlined"
 								margin="normal"
 								value={discription}

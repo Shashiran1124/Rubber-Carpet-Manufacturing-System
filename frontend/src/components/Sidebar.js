@@ -90,7 +90,7 @@ const Sidebar = () => {
 						}}
 					/>
 					<ListItemText
-						primary="Supplier and Raw Material Details"
+						primary="All Machines"
 						sx={{
 							paddingLeft: "10px",
 							color: isActive(["/DashSupForm", "/DashSupForm"]) ? "#fff" : "#000",
@@ -114,7 +114,7 @@ const Sidebar = () => {
 					onClick={() => handleNavigation("/DashOrderForm")}
 				>
 					<ListItemText
-						primary="Create An Order"
+						primary="Add New Machine"
 						sx={{
 							paddingLeft: "10px",
 							color: isActive(["/DashOrderForm"]) ? "#fff" : "#000",
@@ -138,7 +138,7 @@ const Sidebar = () => {
 					onClick={() => handleNavigation("/DashOrderTable")}
 				>
 					<ListItemText
-						primary="View Order Details"
+						primary="Add New Buy Part"
 						sx={{
 							paddingLeft: "10px",
 							color: isActive(["/DashOrderTable"]) ? "#fff" : "#000",
@@ -162,7 +162,7 @@ const Sidebar = () => {
 					onClick={() => handleNavigation("/DashRawMaterialCostForm")}
 				>
 					<ListItemText
-						primary="Calculate Raw Material Costs"
+						primary="View Buy Parts"
 						sx={{
 							paddingLeft: "10px",
 							color: isActive(["/DashRawMaterialCostForm"]) ? "#fff" : "#000",

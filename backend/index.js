@@ -8,7 +8,13 @@ require("dotenv").config();
 
 const PORT = process.env.PORT || 8070;
 
-app.use(cors());
+app.use(
+	cors({
+		origin: "*",
+		allowedHeaders: "*",
+		exposedHeaders: ["Content-Disposition", "Content-Type"],
+	})
+);
 app.use(bodyParser.json());
 
 const URL = process.env.MONGODB_URL;
