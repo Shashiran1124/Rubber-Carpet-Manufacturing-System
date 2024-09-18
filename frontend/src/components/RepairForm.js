@@ -43,10 +43,10 @@ const RepairForm = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (!validateForm()) {
+		/*if (!validateForm()) {
 			alert("Validation failed");
 			return;
-		}
+		}*/
 
 		try {
 			await axios.post("http://localhost:8070/repair/add", formData);
@@ -59,6 +59,7 @@ const RepairForm = () => {
 				description: "",
 			});
 		} catch (err) {
+			console.error("Error:", err);
 			alert("Failed to add repair record");
 		}
 	};
@@ -108,10 +109,10 @@ const RepairForm = () => {
 								label="Description"
 								variant="outlined"
 								margin="normal"
-								name="description"
+								name="discription"
 								value={formData.discription}
 								onChange={handleChange}
-								error={!!errors.description}
+								error={!!errors.discription}
 								helperText={errors.discription}
 								required
 							/>

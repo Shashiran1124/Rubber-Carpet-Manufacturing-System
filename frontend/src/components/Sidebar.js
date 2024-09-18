@@ -86,20 +86,20 @@ const Sidebar = () => {
 						borderRadius: "6px",
 						border: "2px solid #7540a7",
 						marginBottom: "4px",
-						backgroundColor: isActive(["/DashSupForm"]) ? "#7540a7" : "inherit",
+						backgroundColor: isActive(["/machine/all"]) ? "#7540a7" : "inherit",
 					}}
-					onClick={() => handleNavigation("/DashSupForm")}
+					onClick={() => handleNavigation("/machine/all")}
 				>
 					<ListAltIcon
 						sx={{
-							color: isActive(["/DashSupForm"]) ? "#fff" : "#000",
+							color: isActive(["/machine/all"]) ? "#fff" : "#000",
 						}}
 					/>
 					<ListItemText
 						primary="All Machines"
 						sx={{
 							paddingLeft: "10px",
-							color: isActive(["/DashSupForm"]) ? "#fff" : "#000",
+							color: isActive(["/machine/all"]) ? "#fff" : "#000",
 						}}
 					/>
 				</ListItem>
@@ -115,15 +115,15 @@ const Sidebar = () => {
 						borderRadius: "6px",
 						border: "2px solid #7540a7",
 						marginBottom: "4px",
-						backgroundColor: isActive(["/DashOrderForm"]) ? "#7540a7" : "inherit",
+						backgroundColor: isActive(["/machine/add"]) ? "#7540a7" : "inherit",
 					}}
-					onClick={() => handleNavigation("/DashOrderForm")}
+					onClick={() => handleNavigation("/machine/add")}
 				>
 					<ListItemText
 						primary="Add New Machine"
 						sx={{
 							paddingLeft: "10px",
-							color: isActive(["/DashOrderForm"]) ? "#fff" : "#000",
+							color: isActive(["/machine/add"]) ? "#fff" : "#000",
 						}}
 					/>
 				</ListItem>
@@ -139,15 +139,15 @@ const Sidebar = () => {
 						borderRadius: "6px",
 						border: "2px solid #7540a7",
 						marginBottom: "4px",
-						backgroundColor: isActive(["/DashOrderTable"]) ? "#7540a7" : "inherit",
+						backgroundColor: isActive(["/Part/add"]) ? "#7540a7" : "inherit",
 					}}
-					onClick={() => handleNavigation("/DashOrderTable")}
+					onClick={() => handleNavigation("/Part/add")}
 				>
 					<ListItemText
 						primary="Add New Buy Part"
 						sx={{
 							paddingLeft: "10px",
-							color: isActive(["/DashOrderTable"]) ? "#fff" : "#000",
+							color: isActive(["/Part/add"]) ? "#fff" : "#000",
 						}}
 					/>
 				</ListItem>
@@ -163,15 +163,15 @@ const Sidebar = () => {
 						borderRadius: "6px",
 						border: "2px solid #7540a7",
 						marginBottom: "4px",
-						backgroundColor: isActive(["/DashRawMaterialCostForm"]) ? "#7540a7" : "inherit",
+						backgroundColor: isActive(["/Part/all"]) ? "#7540a7" : "inherit",
 					}}
-					onClick={() => handleNavigation("/DashRawMaterialCostForm")}
+					onClick={() => handleNavigation("/Part/all")}
 				>
 					<ListItemText
 						primary="View Buy Parts"
 						sx={{
 							paddingLeft: "10px",
-							color: isActive(["/DashRawMaterialCostForm"]) ? "#fff" : "#000",
+							color: isActive(["/Part/all"]) ? "#fff" : "#000",
 						}}
 					/>
 				</ListItem>

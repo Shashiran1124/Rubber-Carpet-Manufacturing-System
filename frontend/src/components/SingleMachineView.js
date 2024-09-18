@@ -39,7 +39,6 @@ export default function SingleMachineView() {
 						<TableRow>
 							<TableCell>Repair Start Date</TableCell>
 							<TableCell>Part Name</TableCell>
-							<TableCell>Status</TableCell>
 							<TableCell>Repair End Date</TableCell>
 							<TableCell>Description</TableCell>
 						</TableRow>
@@ -49,7 +48,6 @@ export default function SingleMachineView() {
 							<TableRow key={rowData._id}>
 								<TableCell>{rowData.repairStartDate}</TableCell>
 								<TableCell>{rowData.partName}</TableCell>
-								<TableCell>{rowData.status}</TableCell> {/* Corrected status field */}
 								<TableCell>{rowData.repairEndDate}</TableCell>
 								<TableCell>{rowData.description}</TableCell> {/* Corrected typo from 'discription' */}
 							</TableRow>

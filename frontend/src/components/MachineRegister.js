@@ -6,6 +6,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";//
+
 
 const AddMachine = () => {
 	const [machineID, setMachineID] = useState("");
@@ -14,6 +18,9 @@ const AddMachine = () => {
 	const [nextGeneralRepairDate, setNextGeneralRepairDate] = useState(null);
 	const [error, setError] = useState("");
 	const [statusError, setStatusError] = useState("");
+
+	const navigate = useNavigate();
+
 
 	const handleDateChange = (date) => {
 		const today = dayjs().startOf("day"); // Start of today
@@ -32,8 +39,8 @@ const AddMachine = () => {
 		e.preventDefault();
 
 		// Validate the status field
-		if (status !== "Active" && status !== "Inactive") {
-			setStatusError('Status must be either "Active" or "Inactive".');
+		if (status !== "Active" && status !== "InActive") {
+			setStatusError('Status must be either "Active" or "InActive".');
 			return;
 		} else {
 			setStatusError("");
@@ -48,21 +55,34 @@ const AddMachine = () => {
 
 		try {
 			const response = await axios.post("http://localhost:8070/machine/add", machineData);
-			alert("Machine Added Successfully!");
+			toast.success("Machine added successfully!"); // Success toast message
+			// Clear the form fields after success
+			setMachineID("");
+			setStatus("");
+			setNextGeneralRepairDate(null);
+			setError("");
+			setStatusError("");
+            
+			 // Delay navigation to allow the toast message to be seen
+			setTimeout(() => {
+			navigate("/machine/all");
+		    }, 2000); // 2000 milliseconds = 2 seconds
+			
 		} catch (error) {
 			console.error("There was an error adding the machine!", error);
-			alert("Failed to add machine");
+			toast.error("Failed to add machine"); // Error toast message
 		}
 	};
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
 			<Box display="flex" height="100vh">
+				<ToastContainer />
 				<Box sx={{ width: "80%", padding: "20px" }}>
 					<Paper elevation={3} sx={{ padding: "20px" }}>
 						<Grid container justifyContent="space-between">
 							<Typography variant="h5" sx={{ fontWeight: "bold" }}>
-								Mechanical Inspector
+								Machine Registration
 							</Typography>
 							<Paper
 								elevation={1}

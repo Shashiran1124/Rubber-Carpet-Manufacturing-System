@@ -10,6 +10,8 @@ import RepairForm from "./components/RepairForm";
 import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BuyFormPart from "./components/BuyPartForm";
+import BuyPartView from "./components/BuyPartView";
 
 function App() {
 	return (
@@ -25,6 +27,13 @@ function App() {
 						<Route path="/machine/update/:id" element={<UpdateMachine />} />
 						<Route path="/machine/view/:id/:mid" element={<SingleMachineView />} />
 						<Route path="/repair/add/:mid" element={<RepairForm />} />
+						<Route path="/Part/add" element={<BuyFormPart />} />
+						<Route path="/Part/all" element={<BuyPartView />} />
+
+
+						
+
+
 					</Routes>
 				</div>
 			</div>
