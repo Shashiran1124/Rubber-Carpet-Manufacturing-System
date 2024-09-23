@@ -1,33 +1,37 @@
 const router = require("express").Router();
-const Supplier = require("../models/Suppliers");  // Correct path to model
+const Suporder = require("../models/Suporder");
+const Supplier = require("../models/Suporder");  // Correct path to model
 
 // Data insertion
-router.route("/add").post((req, res) => {
-    const { companyName, address, contactNumber, materialType,unit, quantity } = req.body;
+router.route("/addorder").post((req, res) => {
+    const { dateOfOrder,companyName, contactNumber, materialType,unit, quantity } = req.body;
     
-    const newSupplier = new Supplier({
+    const newSuporder = new Suporder({
+        dateOfOrder,
         companyName,
-        address,
         contactNumber,
         materialType,
         unit,
         quantity
     });
     
-    newSupplier.save()
+    newSuporder.save()
         .then(() => {
-            res.json("Supplier Added");
+            res.json("Raw Material Order Added");
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({ error: "Error adding supplier" });  // Send error response
+            res.status(500).json({ error: "Error adding Order" });  // Send error response
         });
 });
 
+
+
+
 router.route("/").get((req, res) => {
-    Supplier.find()
-        .then((suppliers) => {
-            res.json(suppliers);
+    Suporder.find()
+        .then((suporders) => {
+            res.json(suporders);
         })
         .catch((err) => {
             console.log(err);
@@ -37,23 +41,26 @@ router.route("/").get((req, res) => {
 });
 
 
+
+
+
 // Update a supplier by ID
 router.route("/update/:id").put(async (req, res) => {
     const id = req.params.id;
     const { companyName, address, contactNumber, materialType,unit, quantity } = req.body;
 
     try {
-        const updatedSupplier = await Supplier.findByIdAndUpdate(
+        const updatedSuporder = await Suporder.findByIdAndUpdate(
             id,
             { companyName, address, contactNumber, materialType,unit, quantity },
             { new: true }  // Return the updated document
         );
 
-        if (!updatedSupplier) {
-            return res.status(404).json({ message: "Supplier not found" });
+        if (!updatedSuporder) {
+            return res.status(404).json({ message: "Order not found" });
         }
 
-        res.json({ message: "Supplier updated successfully", updatedSupplier });
+        res.json({ message: "Order updated successfully", updatedSuporder });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Error updating supplier" });
@@ -69,16 +76,19 @@ router.route("/delete/:id").delete((req, res) => {
     const id = req.params.id;
 
     Supplier.findByIdAndDelete(id)
-        .then((deletedSupplier) => {
-            if (!deletedSupplier) {
-                return res.status(404).json({ message: "Supplier not found" });
+        .then((deletedSuporder) => {
+            if (!deletedSuporder) {
+                return res.status(404).json({ message: "Order not found" });
             }
-            res.json({ message: "Supplier deleted successfully" });
+           
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).json({ error: "Error deleting supplier" });  // Send error response
+            res.status(500).json({ error: "Error deleting order" });  // Send error response
         });
 });
 
+
 module.exports = router;
+
+

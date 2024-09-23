@@ -1,36 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import TiersImage from '../images/Tiers.jpg';
 import { useNavigate, useLocation } from 'react-router-dom';
-import supplierImage from '../images/supplier.jpg';
 
-export default function SupplierForm() {
-  
+export default function OrderForm() {
   const navigate = useNavigate();
-  const location = useLocation(); // Access location to get passed supplier data
+  const location = useLocation(); // Access location to get passed order data
   const [formData, setFormData] = useState({
+    dateOfOrder: '',
     companyName: '',
-    address: '',
     contactNumber: '',
     materialType: '',
-    unit: '',
-    quantity: ''
+    quantity: '',
+    unit: ''
   });
 
   const [isEditMode, setIsEditMode] = useState(false);
-  const [supplierId, setSupplierId] = useState(null);
+  const [orderId, setOrderId] = useState(null);
   const [errors, setErrors] = useState({}); // New state to track errors
 
   useEffect(() => {
-    if (location.state && location.state.supplier) {
-      const supplier = location.state.supplier;
+    if (location.state && location.state.order) {
+      const order = location.state.order;
+
+      const formattedDate = order.dateOfOrder ? new Date(order.dateOfOrder).toISOString().split('T')[0]:'';
+
       setFormData({
-        companyName: supplier.companyName,
-        address: supplier.address,
-        contactNumber: supplier.contactNumber,
-        materialType: supplier.materialType,
-        unit: supplier.unit,
-        quantity: supplier.quantity,
+        dateOfOrder: formattedDate,
+        companyName: order.companyName,
+        contactNumber: order.contactNumber,
+        materialType: order.materialType,
+        quantity: order.quantity,
+        unit: order.unit,
       });
-      setSupplierId(supplier._id);
+      setOrderId(order._id);
       setIsEditMode(true);
     }
   }, [location.state]);
@@ -42,24 +44,16 @@ export default function SupplierForm() {
 
     if (name === 'contactNumber') {
       validValue = value.replace(/[^0-9]/g, '');
-      if (validValue.length !== 10) {
-        error = '';
-      }
-    }
-
-    if (name === 'companyName') {
-      validValue = value.replace(/[^A-Za-z ]/g, '');
-      if (!validValue) {
-        error = 'Please enter a valid company name';
-      }
+      if (validValue.length > 10) validValue = validValue.slice(0, 10);
     }
 
     if (name === 'quantity') {
       validValue = value.replace(/[^0-9]/g, '');
-      if (parseInt(validValue, 10) < 0) {
-        validValue = '0'; // Prevent negative values
-        error = '';
-      }
+      if (parseInt(validValue, 10) < 0) validValue = '0'; // Prevent negative values
+    }
+
+    if (name === 'companyName' || name === 'materialType') {
+      validValue = value.replace(/[^A-Za-z ]/g, '');
     }
 
     setFormData({
@@ -77,8 +71,8 @@ export default function SupplierForm() {
     e.preventDefault();
     try {
       const url = isEditMode
-        ? `http://localhost:8070/test/update/${supplierId}`
-        : 'http://localhost:8070/test/add';
+        ? `http://localhost:8070/test1/update/${orderId}`
+        : 'http://localhost:8070/test1/addorder';
       const method = isEditMode ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -90,20 +84,15 @@ export default function SupplierForm() {
       });
 
       if (response.ok) {
-        alert(`Supplier ${isEditMode ? 'updated' : 'added'} successfully`);
-        navigate('/DashF1T');
+        alert(`Order ${isEditMode ? 'updated' : 'submitted'} successfully`);
+        navigate('/DashOFTable');
       } else {
-        alert(`Failed to ${isEditMode ? 'update' : 'add'} supplier`);
+        alert(`Failed to ${isEditMode ? 'update' : 'submit'} order`);
       }
     } catch (error) {
       console.error('Error:', error);
-      alert(`An error occurred while ${isEditMode ? 'updating' : 'adding'} the supplier.`);
+      alert(`An error occurred while ${isEditMode ? 'updating' : 'submitting'} the order.`);
     }
-  };
-
-
-  const handleViewTable = () => {
-    navigate('/DashF1T'); // Navigate to the table view
   };
 
   return (
@@ -116,7 +105,7 @@ export default function SupplierForm() {
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={supplierImage} alt="Order" style={{ width: '350px', height: '84vh', borderRadius: '10px' }} />
+        <img src={TiersImage} alt="Order" style={{ width: '350px', height: '84vh', borderRadius: '10px' }} />
       </div>
 
       <div style={{
@@ -128,8 +117,26 @@ export default function SupplierForm() {
         maxWidth: '450px',
         border: '2px solid #000000',
       }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Supplier & Raw Material Details Form</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Raw Material Order Form</h2>
         <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: '15px' }}>
+            <label htmlFor="dateOfOrder" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Date of Order:</label>
+            <input
+              type="date"
+              id="dateOfOrder"
+              name="dateOfOrder"
+              value={formData.dateOfOrder}
+              onChange={handleChange}
+              required
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="companyName" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Company Name:</label>
             <input
@@ -148,26 +155,6 @@ export default function SupplierForm() {
                 boxSizing: 'border-box'
               }}
             />
-            {errors.companyName && <p style={{ color: 'red', marginTop: '5px' }}>{errors.companyName}</p>}
-          </div>
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="address" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Address:</label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              required
-              style={{
-                width: '100%',
-                padding: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '5px',
-                boxSizing: 'border-box'
-              }}
-            />
-            {errors.address && <p style={{ color: 'red', marginTop: '5px' }}>{errors.address}</p>}
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="contactNumber" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Contact Number:</label>
@@ -179,8 +166,8 @@ export default function SupplierForm() {
               onChange={handleChange}
               required
               maxLength="10"
-              pattern="\d{10}"
-              title="Contact number should be exactly 10 digits."
+              pattern="\d*"
+              title="Contact number should be numeric and up to 10 digits only."
               style={{
                 width: '100%',
                 padding: '10px',
@@ -189,7 +176,6 @@ export default function SupplierForm() {
                 boxSizing: 'border-box'
               }}
             />
-            {errors.contactNumber && <p style={{ color: 'red', marginTop: '5px' }}>{errors.contactNumber}</p>}
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="materialType" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Material Type:</label>
@@ -214,9 +200,7 @@ export default function SupplierForm() {
               <option value="Rubber Mats">Rubber Mats</option>
               <option value="Belts">Belts</option>
             </select>
-            {errors.materialType && <p style={{ color: 'red', marginTop: '5px' }}>{errors.materialType}</p>}
           </div>
-          
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="quantity" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Quantity:</label>
             <input
@@ -227,7 +211,6 @@ export default function SupplierForm() {
               onChange={handleChange}
               required
               min="0"
-              step="1"
               style={{
                 width: '100%',
                 padding: '10px',
@@ -236,9 +219,7 @@ export default function SupplierForm() {
                 boxSizing: 'border-box'
               }}
             />
-            {errors.quantity && <p style={{ color: 'red', marginTop: '5px' }}>{errors.quantity}</p>}
           </div>
-
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="unit" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Unit:</label>
             <select
@@ -258,34 +239,30 @@ export default function SupplierForm() {
               <option value="">Select Unit</option>
               <option value="Kilograms">Kilograms</option>
               <option value="Tons">Tons</option>
-              <option value="Pounds">Pounds
-
-              </option>
+              <option value="Pounds">Pounds</option>
 
             </select>
-            {errors.unit && <p style={{ color: 'red', marginTop: '5px' }}>{errors.unit}</p>}
           </div>
-
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <button
               type="submit"
               style={{
                 padding: '10px 20px',
-                backgroundColor: '#007BFF',
+                backgroundColor: '#4CAF50',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '5px',
                 cursor: 'pointer'
               }}
             >
-              {isEditMode ? 'Update' : 'Submit'}
+              {isEditMode ? 'Update' : 'Create'}
             </button>
             <button
               type="button"
-              onClick={handleViewTable}
+              onClick={() => navigate('/DashOFTable')}
               style={{
                 padding: '10px 20px',
-                backgroundColor: '#12F212',
+                backgroundColor: '#f44336',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '5px',

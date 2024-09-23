@@ -8,7 +8,7 @@ function App() {
   return (
     <div className='App'>
       <h1>Hii</h1>
-      <button onClick={() => navigate('/DashSupForm')}>go</button>
+      <button onClick={() => navigate('/DashReport')}>go</button>
     </div>
   );
 }
