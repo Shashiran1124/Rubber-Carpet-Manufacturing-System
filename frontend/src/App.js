@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Switch is now Routes
-//import Head from "./components/Head";// nave bar
+import Head from "./components/Head"; // nave bar
 import Sidebar from "./components/Sidebar";
 import TestComponent from "./components/TestComponent";
 import MachineRegister from "./components/MachineRegister";
@@ -17,8 +17,8 @@ import BuyPartView from "./components/BuyPartView";
 function App() {
 	return (
 		<Router>
+			<Head />
 			<div style={{ display: "flex" }}>
-				
 				<Sidebar />
 
 				<div style={{ flex: 1, padding: "20px" }}>
@@ -31,11 +31,6 @@ function App() {
 						<Route path="/repair/add/:mid" element={<RepairForm />} />
 						<Route path="/Part/add" element={<BuyFormPart />} />
 						<Route path="/Part/all" element={<BuyPartView />} />
-
-
-						
-
-
 					</Routes>
 				</div>
 			</div>
