@@ -30,6 +30,7 @@ router.get('/all', async (req, res) => {
 
         for(var pettyCash of listOfPettyCashDetails){
             pettyCashContainer.push({
+               _id : pettyCash._id,
                 date : pettyCash.date.toString(),
                 description : pettyCash.description ?? "",
                 amount : pettyCash.amount,
@@ -50,25 +51,44 @@ router.get('/all', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-// Update Petty Cash
+
+// Update petty cash record by ID
 router.put('/update/:id', async (req, res) => {
     try {
-        const { date, description, payment } = req.body;
-        const updatedEntry = await PettyCash.findByIdAndUpdate(req.params.id, {
-            date,
-            description,
-            payment
-        }, { new: true });
-
-        if (!updatedEntry) {
-            return res.status(404).json({ message: "Entry not found" });
-        }
-
-        res.status(200).json(updatedEntry);
+      const { date, description, amount } = req.body;
+  
+      // Find the petty cash record by ID and update it
+      const updatedPettyCash = await PettyCash.findByIdAndUpdate(
+        req.params.id,
+        { date, description, amount },  // Updating the fields
+        { new: true }  // This option returns the updated document
+      );
+  
+      if (!updatedPettyCash) {
+        return res.status(404).json({ message: 'Petty Cash record not found' });
+      }
+  
+      // Return the updated petty cash record
+      res.status(200).json(updatedPettyCash);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      console.error('Error updating petty cash entry:', error);
+      res.status(500).json({ message: 'Failed to update petty cash entry', error });
     }
-});
+  });
+
+  // Get petty cash record by ID
+router.get('/:id', async (req, res) => {
+    try {
+      const pettyCash = await PettyCash.findById(req.params.id);
+      if (!pettyCash) {
+        return res.status(404).json({ message: 'Petty Cash record not found' });
+      }
+      res.status(200).json(pettyCash);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching petty cash entry', error });
+    }
+  });
+  
 
 
 
