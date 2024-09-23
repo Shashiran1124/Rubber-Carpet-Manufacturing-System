@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Switch is now Routes
+//import Head from "./components/Head";// nave bar
 import Sidebar from "./components/Sidebar";
 import TestComponent from "./components/TestComponent";
 import MachineRegister from "./components/MachineRegister";
@@ -17,6 +18,7 @@ function App() {
 	return (
 		<Router>
 			<div style={{ display: "flex" }}>
+				
 				<Sidebar />
 
 				<div style={{ flex: 1, padding: "20px" }}>

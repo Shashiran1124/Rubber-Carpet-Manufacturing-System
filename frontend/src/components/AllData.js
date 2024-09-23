@@ -31,15 +31,15 @@ const MachineList = () => {
 	const [totalRecords, setTotalRecords] = useState(0);
 
 	useEffect(() => {
-		fetchMachines();
+		fetchMachines(page + 1, rowsPerPage);
 	}, [page, rowsPerPage, searchText]);
 
-	const fetchMachines = async () => {
+	const fetchMachines = async (pageNumber = 1, pageSize = rowsPerPage) => {
 		try {
 			const response = await axios.post("http://localhost:8070/machine/", {
 				searchText: searchText,
-				pageNumber: page === 0 ? 1 : page,
-				pageSize: rowsPerPage,
+				pageNumber: pageNumber,
+				pageSize: pageSize,
 			});
 			const { items, totalRecordCount } = response.data;
 			setMachines(items);
@@ -80,7 +80,14 @@ const MachineList = () => {
 		setPage(0);
 	};
 
+	const handleRouteMachineRepirList = (rowData) => {
+		try {
+			navigate(`/machine/view/${rowData._id}/${rowData.machineID}`);
+		} catch (error) {}
+	};
+
 	const handleChangePage = (event, newPage) => {
+		console.log(newPage);
 		setPage(newPage);
 	};
 
@@ -88,7 +95,7 @@ const MachineList = () => {
 		<div className="container py-4">
 			<div className="row">
 				<div className="col">
-					<h4 className="mb-3">Machine List</h4>
+					<h3 className="mb-3">Machine List</h3>
 				</div>
 			</div>
 			{loading ? (
@@ -122,11 +129,13 @@ const MachineList = () => {
 								<Table>
 									<TableHead>
 										<TableRow>
-											<TableCell>Machine ID</TableCell>
-											<TableCell>Date</TableCell>
-											<TableCell>Status</TableCell>
-											<TableCell>Next General Repair Date</TableCell>
-											<TableCell>Actions</TableCell>
+											<TableCell sx={{ backgroundColor: "#1976d2", color: "white" }}>Machine ID</TableCell>
+											<TableCell sx={{ backgroundColor: "#1976d2", color: "white" }}>Date</TableCell>
+											<TableCell sx={{ backgroundColor: "#1976d2", color: "white" }}>Status</TableCell>
+											<TableCell sx={{ backgroundColor: "#1976d2", color: "white" }}>
+												Next General Repair Date
+											</TableCell>
+											<TableCell sx={{ backgroundColor: "#1976d2", color: "white" }}>Actions</TableCell>
 										</TableRow>
 									</TableHead>
 									<TableBody>
@@ -147,8 +156,20 @@ const MachineList = () => {
 													>
 														Edit
 													</Button>
-													<Button variant="contained" color="error" onClick={() => handleDeleteClick(machine._id)}>
+													<Button
+														variant="contained"
+														color="error"
+														className="me-2"
+														onClick={() => handleDeleteClick(machine._id)}
+													>
 														Delete
+													</Button>
+													<Button
+														variant="contained"
+														style={{ backgroundColor: "orange" }}
+														onClick={() => handleRouteMachineRepirList(machine)}
+													>
+														View Repair Details
 													</Button>
 												</TableCell>
 											</TableRow>

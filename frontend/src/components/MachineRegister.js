@@ -1,34 +1,42 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Box, TextField, Button, Typography, Divider, Grid, Paper } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
+import {
+	Box,
+	TextField,
+	Button,
+	Typography,
+	Divider,
+	Grid,
+	Paper,
+	MenuItem,
+	Select,
+	InputLabel,
+	FormControl,
+} from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";//
-
+import { useNavigate } from "react-router-dom"; //
 
 const AddMachine = () => {
 	const [machineID, setMachineID] = useState("");
 	const [date, setDate] = useState(dayjs().format("YYYY-MM-DD"));
-	const [status, setStatus] = useState("");
+	const [status, setStatus] = useState(""); // Removed validation error for status
 	const [nextGeneralRepairDate, setNextGeneralRepairDate] = useState(null);
-	const [error, setError] = useState("");
-	const [statusError, setStatusError] = useState("");
+	const [error, setError] = useState(""); // For repair date validation
 
 	const navigate = useNavigate();
 
-
 	const handleDateChange = (date) => {
-		const today = dayjs().startOf("day"); // Start of today
-		const selectedDate = dayjs(date).startOf("day"); // Start of the selected date
+		const today = dayjs().startOf("day");
+		const selectedDate = dayjs(date).startOf("day");
 
 		if (selectedDate.isSame(today) || selectedDate.isBefore(today)) {
 			setError("Next General Repair Date must be a future date.");
-			setNextGeneralRepairDate(null); // Reset the selected date
+			setNextGeneralRepairDate(null);
 		} else {
 			setNextGeneralRepairDate(date);
 			setError("");
@@ -37,14 +45,6 @@ const AddMachine = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		// Validate the status field
-		if (status !== "Active" && status !== "InActive") {
-			setStatusError('Status must be either "Active" or "InActive".');
-			return;
-		} else {
-			setStatusError("");
-		}
 
 		const machineData = {
 			machineID,
@@ -55,22 +55,22 @@ const AddMachine = () => {
 
 		try {
 			const response = await axios.post("http://localhost:8070/machine/add", machineData);
-			toast.success("Machine added successfully!"); // Success toast message
-			// Clear the form fields after success
-			setMachineID("");
-			setStatus("");
-			setNextGeneralRepairDate(null);
-			setError("");
-			setStatusError("");
-            
-			 // Delay navigation to allow the toast message to be seen
-			setTimeout(() => {
-			navigate("/machine/all");
-		    }, 2000); // 2000 milliseconds = 2 seconds
-			
+
+			if (response.data.isSuccess) {
+				toast.success(response.data.message);
+				setMachineID("");
+				setStatus("");
+				setNextGeneralRepairDate(null);
+				setError("");
+				setTimeout(() => {
+					navigate("/machine/all");
+				}, 2000);
+			} else {
+				toast.error(response.data.message);
+			}
 		} catch (error) {
 			console.error("There was an error adding the machine!", error);
-			toast.error("Failed to add machine"); // Error toast message
+			toast.error("Failed to add machine");
 		}
 	};
 
@@ -118,17 +118,16 @@ const AddMachine = () => {
 								}}
 								required
 							/>
-							<TextField
-								fullWidth
-								label="Working Condition"
-								variant="outlined"
-								margin="normal"
-								value={status}
-								onChange={(e) => setStatus(e.target.value)}
-								error={!!statusError}
-								helperText={statusError}
-								required
-							/>
+
+							{/* Dropdown for Status */}
+							<FormControl fullWidth margin="normal">
+								<InputLabel>Status</InputLabel>
+								<Select value={status} label="Status" onChange={(e) => setStatus(e.target.value)} required>
+									<MenuItem value="Active">Active</MenuItem>
+									<MenuItem value="InActive">InActive</MenuItem>
+								</Select>
+							</FormControl>
+
 							<DatePicker
 								label="Next General Repair Date"
 								value={nextGeneralRepairDate}

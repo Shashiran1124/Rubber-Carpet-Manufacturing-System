@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom"; // Correct import for useParams
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { Box, Button, Divider, Grid, Paper, TextField, Typography } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const RepairForm = () => {
 	const { id, mid } = useParams();
@@ -15,6 +19,7 @@ const RepairForm = () => {
 		repairEndDate: dayjs(new Date().toString()),
 		discription: "", // Fixed typo: changed 'discription' to 'description'
 	});
+	const navigate = useNavigate();
 
 	const [errors, setErrors] = useState({});
 	const [discription, setDiscription] = useState("");
@@ -50,23 +55,29 @@ const RepairForm = () => {
 
 		try {
 			await axios.post("http://localhost:8070/repair/add", formData);
-			alert("Repair record added successfully");
+			toast.success("Repair record added successfully");
 			setFormData({
 				machineID: mid,
 				repairStartDate: dayjs(new Date().toString()),
 				partName: "",
 				repairEndDate: dayjs(new Date().toString()),
 				description: "",
+				//navigate("single")
 			});
+			setTimeout(() => {
+				navigate("/machine/all");
+			}, 2000); // 2000 milliseconds = 2 seconds
 		} catch (err) {
 			console.error("Error:", err);
-			alert("Failed to add repair record");
+			toast.error("Failed to add repair record");
 		}
 	};
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
 			<Box display="flex" height="100vh">
+				<ToastContainer />
+
 				<Box sx={{ width: "80%", padding: "20px" }}>
 					<Paper elevation={3} sx={{ padding: "20px" }}>
 						<Grid container justifyContent="space-between">
@@ -80,6 +91,7 @@ const RepairForm = () => {
 							<DatePicker
 								label="Repair Start Date"
 								value={formData.repairStartDate}
+								disablePast //prop
 								onChange={(newValue) => setFormData({ ...formData, repairStartDate: newValue })}
 								renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
 							/>
@@ -100,6 +112,7 @@ const RepairForm = () => {
 							<DatePicker
 								label="Repair End Date"
 								value={formData.repairEndDate}
+								disablePast
 								onChange={(newValue) => setFormData({ ...formData, repairEndDate: newValue })}
 								renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
 							/>

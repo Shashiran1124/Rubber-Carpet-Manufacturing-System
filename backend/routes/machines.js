@@ -3,37 +3,40 @@ const router = express.Router(); //////import express pacage with Router
 let Machine = require("../models/machine"); //should use machine model so import it (requir= import karana use karanva)
 const momentController = require("moment");
 //front end idn backend call karannna URL ekak use karanva http:/Localhost:8070/machine/add execute venava *ekathami methana venne
-router.route("/add").post((req, res) => {
-	//router for create function  *router variable eke thiyenava function ekak ekata eka parametr ekak denna one
+router.route("/add").post(async (request, response) => {
+	try {
+		const { machineID, date, status, nextGeneralRepairDate } = request.body;
+		let query = {};
+		query.machineID = machineID;
 
-	const machineID = req.body.machineID;
-	const date = Date(req.body.date);
-	const status = req.body.status;
-	const nextGeneralRepairDate = Date(req.body.nextGeneralRepairDate);
+		const exsistingMachine = await Machine.find(query);
 
-	const newmachine = new Machine({
-		// Create a new instance of the machine model
-		machineID,
-		date,
-		status,
-		nextGeneralRepairDate,
-	});
+		if (Object.keys(exsistingMachine).length > 0) {
+			return response.json({
+				isSuccess: false,
+				message: `Machine id (${machineID}) ready exsist, please enter valid machine Id`,
+			});
+		}
 
-	newmachine
-		.save()
-		.then(() => {
-			res.json("Machine Added"); // Send a JSON response if the save operation is successful
-		})
-		.catch((err) => {
-			// Make sure to include 'err' as the parameter in the catch block
-			console.error(err); // Log the error for debugging
-			res.status(500).json({ error: "Failed to add machine" }); // Optionally send a response with an error message
+		const newMachine = new Machine({
+			machineID,
+			date: new Date(date),
+			status,
+			nextGeneralRepairDate: new Date(nextGeneralRepairDate),
 		});
+
+		await newMachine.save();
+
+		return response.json({ isSuccess: true, message: "Machine added successfully" });
+	} catch (error) {
+		return response.json({ isSuccess: false, message: "Failed to add machine" });
+	}
 });
 //http:/Localhost:8070/machine
 router.route("/").post(async (request, response) => {
 	try {
 		const { searchText, pageNumber, pageSize } = request.body;
+
 		let listOfMachineDTOs = [];
 		let query = {};
 

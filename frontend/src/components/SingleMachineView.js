@@ -37,10 +37,10 @@ export default function SingleMachineView() {
 				<Table>
 					<TableHead>
 						<TableRow>
-							<TableCell>Repair Start Date</TableCell>
-							<TableCell>Part Name</TableCell>
-							<TableCell>Repair End Date</TableCell>
-							<TableCell>Description</TableCell>
+							<TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Repair Start Date</TableCell>
+							<TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Part Name</TableCell>
+							<TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Repair End Date</TableCell>
+							<TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Description</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -49,7 +49,7 @@ export default function SingleMachineView() {
 								<TableCell>{rowData.repairStartDate}</TableCell>
 								<TableCell>{rowData.partName}</TableCell>
 								<TableCell>{rowData.repairEndDate}</TableCell>
-								<TableCell>{rowData.description}</TableCell> {/* Corrected typo from 'discription' */}
+								<TableCell>{rowData.discription}</TableCell> {/* Corrected typo from 'discription' */}
 							</TableRow>
 						))}
 					</TableBody>
