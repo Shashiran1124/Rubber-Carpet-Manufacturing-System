@@ -16,6 +16,7 @@ import axios from "axios"; // Import Axios
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const ProfitLostForm = () => {
   const [formData, setFormData] = useState({
     date: dayjs(), // Initialize with Day.js instead of new Date()
@@ -27,7 +28,7 @@ const ProfitLostForm = () => {
   const [errors, setErrors] = useState({ amount: "" }); // To handle validation errors
   const [serverResponse, setServerResponse] = useState(""); // To handle server responses (success or error)
 
-  // Handle input changes with validation for amount
+  // Handle input changes with validation for amount and description
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -53,6 +54,33 @@ const ProfitLostForm = () => {
           amount: "Amount must be a valid number (e.g., 100 or 100.50)",
         });
       }
+    } 
+    // Prevent numbers and special characters in 'description' field
+    else if (name === "description") {
+      const descriptionPattern = /^[A-Za-z\s]*$/; // Only letters and spaces allowed
+      if (descriptionPattern.test(value)) {
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+
+        // Clear any previous error if the input is valid
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          description: "",
+        }));
+      } else {
+        // Set error if the input is invalid
+        setErrors({
+          description: "Description can only contain letters and spaces.",
+        });
+      }
+    } else {
+      // For other fields, simply update the form data without validation
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
     }
   };
 
@@ -68,8 +96,8 @@ const ProfitLostForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (errors.amount) {
-      toast.error("Please fix the amount error before submitting.");
+    if (errors.amount || errors.description) {
+      toast.error("Please fix the errors before submitting.");
       return;
     }
 
@@ -85,6 +113,14 @@ const ProfitLostForm = () => {
         toast.success("Entry added successfully");
         console.log("Form submitted:", formData);
       }
+      // Clear the form by resetting formData to its initial values
+      setFormData({
+        date: dayjs(),  // Reset date to current date
+        type: "",
+        description: "",
+        amount: "",
+      });
+
     } catch (error) {
       // If there's an error, handle the error response
       toast.error("Entry submission failed. Try again!");
@@ -136,6 +172,8 @@ const ProfitLostForm = () => {
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
+                error={!!errors.description}
+                helperText={errors.description}
                 fullWidth
                 margin="normal"
                 required

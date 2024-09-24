@@ -3,9 +3,7 @@ import { TextField, Button, MenuItem, Grid, Box, Typography } from '@mui/materia
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import { Navigate, useNavigate } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -22,61 +20,114 @@ const SalaryForm = () => {
     perHoureRate: ''
   });
 
-  const navigate =useNavigate();
-
-
-  const [error, setError] = useState({
-    employeName: false,
-    basicSalary: false,
-    oTHours: false,
-    perHoureRate: false
+  const [errors, setErrors] = useState({
+    employeID: '',
+    employeName: '',
+    basicSalary: '',
+    oTHours: '',
+    perHoureRate: ''
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
 
-  const validateFields = () => {
-    const isNameValid = /^[A-Za-z\s]+$/.test(formData.employeName); // Alphabets and spaces only
-    const isBasicSalaryValid = /^\d+(\.\d{1,2})?$/.test(formData.basicSalary); // Numbers with optional 2 decimal points
-    const isOTHoursValid = /^\d+$/.test(formData.oTHours); // Only digits for OT Hours
-    const isPerHoureRateValid = /^\d+(\.\d{1,2})?$/.test(formData.perHoureRate); // Numbers with optional 2 decimal points
+    // Prevent unwanted characters from being typed
+    let cleanValue = value;
 
-    setError({
-      employeName: !isNameValid,
-      basicSalary: !isBasicSalaryValid,
-      oTHours: !isOTHoursValid,
-      perHoureRate: !isPerHoureRateValid
-    });
+    switch (name) {
+      case 'employeID':
+        cleanValue = cleanValue.replace(/[^a-zA-Z0-9]/g, ''); // Only letters and numbers
+        break;
+      case 'employeName':
+        cleanValue = cleanValue.replace(/[^a-zA-Z\s]/g, ''); // Only letters and spaces
+        break;
+      case 'basicSalary':
+      case 'perHoureRate':
+        cleanValue = cleanValue.replace(/[^0-9.]/g, ''); // Only numbers and decimal point
+        break;
+      case 'oTHours':
+        cleanValue = cleanValue.replace(/[^0-9]/g, ''); // Only numbers
+        break;
+      default:
+        break;
+    }
 
-    return isNameValid && isBasicSalaryValid && isOTHoursValid && isPerHoureRateValid;
+    // Update formData with cleaned input
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: cleanValue
+    }));
+
+    // Validate after setting the state
+    switch (name) {
+      case 'employeID':
+        const idPattern = /^[A-Za-z0-9]*$/; // No special characters
+        if (!idPattern.test(cleanValue)) {
+          setErrors((prevErrors) => ({ ...prevErrors, employeID: 'Employee ID can only contain letters and numbers.' }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, employeID: '' }));
+        }
+        break;
+
+      case 'employeName':
+        const namePattern = /^[A-Za-z\s]*$/; // Alphabets and spaces only, no numbers or special characters
+        if (!namePattern.test(cleanValue)) {
+          setErrors((prevErrors) => ({ ...prevErrors, employeName: 'Name can only contain letters and spaces.' }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, employeName: '' }));
+        }
+        break;
+
+      case 'basicSalary':
+        const salaryPattern = /^\d*\.?\d{0,2}$/; // Numbers with optional 2 decimal places
+        if (!salaryPattern.test(cleanValue)) {
+          setErrors((prevErrors) => ({ ...prevErrors, basicSalary: 'Invalid salary (e.g., 100 or 100.50).' }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, basicSalary: '' }));
+        }
+        break;
+
+      case 'oTHours':
+        const otHoursPattern = /^\d*$/; // Only digits (no letters or special characters)
+        if (!otHoursPattern.test(cleanValue)) {
+          setErrors((prevErrors) => ({ ...prevErrors, oTHours: 'Invalid OT hours (numbers only).' }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, oTHours: '' }));
+        }
+        break;
+
+      case 'perHoureRate':
+        const perHourPattern = /^\d*\.?\d{0,2}$/; // Numbers with optional 2 decimal places
+        if (!perHourPattern.test(cleanValue)) {
+          setErrors((prevErrors) => ({ ...prevErrors, perHoureRate: 'Invalid rate (e.g., 10 or 10.50).' }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, perHoureRate: '' }));
+        }
+        break;
+
+      default:
+        setFormData((prevData) => ({ ...prevData, [name]: cleanValue }));
+        break;
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateFields()) {
+    // If there are errors, prevent submission
+    if (Object.values(errors).some((error) => error !== '')) {
+      toast.error('Please fix the validation errors before submitting.');
       return;
     }
 
     try {
       await axios.post("http://localhost:8070/salary/add", formData);
       toast.success('Salary record added successfully!');
-      //employeID("");
-      //employeName("");
-      //month("");
-      //basicSalary("");
-      //oTHours("");
-      //perHoureRate("")
-      setTimeout(()=>{
+      setTimeout(() => {
         navigate(`/salaryCal/all`);
-
-      },2000);
-      
+      }, 2000);
     } catch (err) {
       console.error(err);
       toast.error('Failed to add salary record');
@@ -84,12 +135,12 @@ const SalaryForm = () => {
   };
 
   return (
-    <Box sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
+    <Box sx={{ mt: 4, p: 4, borderRadius: 2, boxShadow: 3, maxWidth: '800px', mx: 'auto' }}>
+      <Typography variant="h4" gutterBottom align="center" sx={{ mb: 4, color: 'primary.main' }}>
         Add Employee Salary Record
       </Typography>
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
               label="Employee ID"
@@ -98,6 +149,9 @@ const SalaryForm = () => {
               onChange={handleInputChange}
               fullWidth
               required
+              error={Boolean(errors.employeID)}
+              helperText={errors.employeID}
+              sx={{ bgcolor: 'background.paper' }}
             />
           </Grid>
 
@@ -109,8 +163,9 @@ const SalaryForm = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              error={error.employeName}
-              helperText={error.employeName ? 'Name cannot contain numbers or special characters' : ''}
+              error={Boolean(errors.employeName)}
+              helperText={errors.employeName}
+              sx={{ bgcolor: 'background.paper' }}
             />
           </Grid>
 
@@ -123,6 +178,7 @@ const SalaryForm = () => {
               onChange={handleInputChange}
               fullWidth
               required
+              sx={{ bgcolor: 'background.paper' }}
             >
               {months.map((month) => (
                 <MenuItem key={month} value={month}>
@@ -140,8 +196,9 @@ const SalaryForm = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              error={error.basicSalary}
-              helperText={error.basicSalary ? 'Invalid basic salary (numbers only)' : ''}
+              error={Boolean(errors.basicSalary)}
+              helperText={errors.basicSalary}
+              sx={{ bgcolor: 'background.paper' }}
             />
           </Grid>
 
@@ -153,8 +210,9 @@ const SalaryForm = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              error={error.oTHours}
-              helperText={error.oTHours ? 'Invalid OT Hours (numbers only)' : ''}
+              error={Boolean(errors.oTHours)}
+              helperText={errors.oTHours}
+              sx={{ bgcolor: 'background.paper' }}
             />
           </Grid>
 
@@ -166,19 +224,20 @@ const SalaryForm = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              error={error.perHoureRate}
-              helperText={error.perHoureRate ? 'Invalid rate (numbers only)' : ''}
+              error={Boolean(errors.perHoureRate)}
+              helperText={errors.perHoureRate}
+              sx={{ bgcolor: 'background.paper' }}
             />
           </Grid>
         </Grid>
 
-        <Box sx={{ mt: 4 }}>
-          <Button type="submit" variant="contained" color="primary">
+        <Box sx={{ mt: 4, textAlign: 'center' }}>
+          <Button type="submit" variant="contained" color="primary" sx={{ width: '50%' }}>
             Submit Salary Record
           </Button>
         </Box>
       </form>
-    <ToastContainer/>  
+      <ToastContainer />
     </Box>
   );
 };

@@ -78,14 +78,27 @@ const Sidebar = () => {
                     <ListItemText primary=" PettyCash View" sx={{ paddingLeft: "10px", color: isActive(['/pettyCash/all']) ? '#FFF' : '#000' }} />
                 </ListItem>
 
-                  <ListItem 
+                <ListItem 
                     button 
                     sx={{ padding: "15px 20px", backgroundColor: isActive(['/profitAndLosts/add']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
                     onClick={() => handleNavigation('/profitAndLosts/add')}
                 >
-                    <ListItemText primary="Income Expenses Form" sx={{ paddingLeft: "10px", color: isActive(['/profitAndLosts/add']) ? '#FFF' : '#000' }} />
+                    <ListItemText primary="Income Expenses Form " sx={{ paddingLeft: "10px", color: isActive(['/profitAndLosts/add']) ? '#FFF' : '#000' }} />
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#FFF" }} />
+
+                <ListItem 
+                    button 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/profitAndLosts/all']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
+                    onClick={() => handleNavigation('/profitAndLosts/all')}
+                >
+                    <ListItemText primary="Income Expenses " sx={{ paddingLeft: "10px", color: isActive(['/profitAndLosts/all']) ? '#FFF' : '#000' }} />
+                </ListItem>
+                <Divider sx={{ backgroundColor: "#FFF" }} />
+                
+
+                
+                
 
             </List>
         </Box>

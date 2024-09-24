@@ -6,9 +6,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from 'axios';  // Axios for making HTTP requests
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";//
+import { useNavigate } from "react-router-dom";
 
-const PettyCahs = () => {
+const PettyCash = () => {
   // State to manage form data
   const [formData, setFormData] = useState({
     date: null,
@@ -18,26 +18,38 @@ const PettyCahs = () => {
 
   // State for errors
   const [errors, setErrors] = useState({});
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   // Handle form input changes
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
 
-    // Validate amount field
-    if (e.target.name === 'amount') {
-      const amountRegex = /^[0-9]+$/;  // Regex to allow only numbers
-      if (!amountRegex.test(e.target.value)) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          amount: 'Please enter a valid amount (only numbers).',
-        }));
-      } else {
-        setErrors((prevErrors) => ({ ...prevErrors, amount: '' }));
-      }
+    // Handle the description field to prevent special characters
+    if (name === 'description') {
+      const cleanValue = value.replace(/[^a-zA-Z0-9\s]/g, ''); // Only allows letters, numbers, and spaces
+      setFormData({
+        ...formData,
+        [name]: cleanValue
+      });
+      setErrors((prevErrors) => ({ ...prevErrors, description: '' })); // Reset any previous errors for description
+    }
+
+    // Handle the amount field to prevent letters and special characters
+    else if (name === 'amount') {
+      const cleanValue = value.replace(/[^0-9]/g, ''); // Only allows digits (no letters or special characters)
+      setFormData({
+        ...formData,
+        [name]: cleanValue
+      });
+      setErrors((prevErrors) => ({ ...prevErrors, amount: '' })); // Reset any previous errors for amount
+    }
+
+    // Default case for other fields (if any)
+    else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
     }
   };
 
@@ -73,16 +85,15 @@ const PettyCahs = () => {
 
       // Log success message or show success notification
       console.log('Form submitted successfully:', response.data);
-      toast.success('buy part  entered successfully');
+      toast.success('Petty cash entry added successfully');
       setTimeout(() => {
         navigate("/pettyCash/all");
-        }, 2000); //2second delay
-        setFormData({
-            date: null,
-            description: '',
-            amount: ''
-        });
-    
+      }, 2000); //2 second delay
+      setFormData({
+        date: null,
+        description: '',
+        amount: ''
+      });
 
     } catch (error) {
       console.error('There was an error submitting the form:', error);
@@ -93,7 +104,7 @@ const PettyCahs = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box display="flex" height="100vh" justifyContent="center" alignItems="center">
-      <ToastContainer />
+        <ToastContainer />
         <Box sx={{ width: "80%", padding: "20px" }}>
           <Paper elevation={3} sx={{ padding: "20px" }}>
             <Grid container justifyContent="space-between">
@@ -109,6 +120,7 @@ const PettyCahs = () => {
               <DatePicker
                 label="Date"
                 value={formData.date}
+                disablePast//pat date cant enter
                 onChange={(newValue) => handleDateChange('date', newValue)}
                 renderInput={(params) => (
                   <TextField
@@ -166,4 +178,4 @@ const PettyCahs = () => {
   );
 };
 
-export default PettyCahs;
+export default PettyCash;

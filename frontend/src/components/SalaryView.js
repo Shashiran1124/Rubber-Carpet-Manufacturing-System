@@ -101,15 +101,15 @@ export default function SalaryView() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Employee ID</TableCell>
-              <TableCell>Employee Name</TableCell>
-              <TableCell>Month</TableCell>
-              <TableCell>Basic Salary</TableCell>
-              <TableCell>ETF Amount</TableCell>
-              <TableCell>EPF Amount</TableCell>
-              <TableCell>OT Amount</TableCell>
-              <TableCell>Net Salary</TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Employee ID</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Employee Name</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Month</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Basic Salary</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>ETF Amount</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>EPF Amount</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>OT Amount</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Net Salary</TableCell>
+              <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

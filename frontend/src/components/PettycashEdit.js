@@ -37,10 +37,33 @@ const PettycashEdit = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    // Prevent special characters from being typed in 'description'
+    if (name === 'description') {
+      const cleanDescription = value.replace(/[^a-zA-Z0-9\s]/g, ''); // Only letters, numbers, and spaces allowed
+      setFormData({
+        ...formData,
+        [name]: cleanDescription
+      });
+    }
+
+    // Prevent special characters and letters from being typed in 'amount'
+    else if (name === 'amount') {
+      const cleanAmount = value.replace(/[^0-9.]/g, ''); // Only digits and a decimal point allowed
+      setFormData({
+        ...formData,
+        [name]: cleanAmount
+      });
+    }
+
+    // Default case for other fields
+    else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleDateChange = (newValue) => {

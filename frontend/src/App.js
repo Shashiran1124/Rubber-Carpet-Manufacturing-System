@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TestComponent from './components/TestComponent';
+import Heder from "./components/Heder";
 import Sidebar from "./components/Sidebar";
 import SalaryCreate from "./components/SalaryCreate";
 import SalaryView from "./components/SalaryView";
@@ -21,6 +22,7 @@ import ProfitAndLostView from "./components/ProfitAndLostView";
 function App() {
   return (
     <Router>
+        <Heder />
       <div style={{display: "flex"}}>
         <Sidebar/>
 

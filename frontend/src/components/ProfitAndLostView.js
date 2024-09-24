@@ -112,9 +112,9 @@ export default function ProfitAndLost() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell> Description</TableCell>
-                  <TableCell>Amount</TableCell>
+                  <TableCell  sx={{ backgroundColor: '#a5d6a7', color: 'white' }}>Date</TableCell>
+                  <TableCell  sx={{ backgroundColor: '#a5d6a7', color: 'white' }}> Description</TableCell>
+                  <TableCell  sx={{ backgroundColor: '#a5d6a7', color: 'white' }}>Amount</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -137,9 +137,9 @@ export default function ProfitAndLost() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell> Description</TableCell>
-                  <TableCell>Amount</TableCell>
+                  <TableCell  sx={{ backgroundColor: '#f28b82', color: 'white' }}>Date</TableCell>
+                  <TableCell  sx={{ backgroundColor: '#f28b82', color: 'white' }}> Description</TableCell>
+                  <TableCell  sx={{ backgroundColor: '#f28b82', color: 'white' }}>Amount</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
