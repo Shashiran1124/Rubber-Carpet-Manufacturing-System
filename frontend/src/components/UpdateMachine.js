@@ -141,6 +141,7 @@ const UpdateMachine = () => {
 								label="Next General Repair Date"
 								value={nextGeneralRepairDate}
 								onChange={handleDateChange}
+								disablePast//past valude inactive
 								renderInput={(params) => (
 									<TextField {...params} fullWidth margin="normal" error={!!error} helperText={error} required />
 								)}

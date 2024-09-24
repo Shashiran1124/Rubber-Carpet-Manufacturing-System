@@ -17,12 +17,12 @@ const RepairForm = () => {
 		repairStartDate: dayjs(new Date().toString()),
 		partName: "",
 		repairEndDate: dayjs(new Date().toString()),
-		discription: "", // Fixed typo: changed 'discription' to 'description'
+		discription: "",
 	});
 	const navigate = useNavigate();
 
 	const [errors, setErrors] = useState({});
-	const [discription, setDiscription] = useState("");
+
 	const validateForm = () => {
 		const newErrors = {};
 		const partNamePattern = /^[A-Za-z\s]+$/; // Only letters and spaces allowed
@@ -42,16 +42,26 @@ const RepairForm = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData({ ...formData, [name]: value });
+
+		// Regex patterns to prevent special characters
+		const partNamePattern = /^[A-Za-z\s]*$/; // Only letters and spaces
+		const descriptionPattern = /^[A-Za-z0-9\s]*$/; // Only letters, numbers, and spaces
+
+		if (name === "partName") {
+			if (partNamePattern.test(value)) {
+				setFormData({ ...formData, [name]: value });
+			}
+		} else if (name === "discription") {
+			if (descriptionPattern.test(value)) {
+				setFormData({ ...formData, [name]: value });
+			}
+		} else {
+			setFormData({ ...formData, [name]: value });
+		}
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
-		/*if (!validateForm()) {
-			alert("Validation failed");
-			return;
-		}*/
 
 		try {
 			await axios.post("http://localhost:8070/repair/add", formData);
@@ -62,7 +72,6 @@ const RepairForm = () => {
 				partName: "",
 				repairEndDate: dayjs(new Date().toString()),
 				description: "",
-				//navigate("single")
 			});
 			setTimeout(() => {
 				navigate("/machine/all");
@@ -91,7 +100,7 @@ const RepairForm = () => {
 							<DatePicker
 								label="Repair Start Date"
 								value={formData.repairStartDate}
-								disablePast //prop
+								disablePast
 								onChange={(newValue) => setFormData({ ...formData, repairStartDate: newValue })}
 								renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
 							/>

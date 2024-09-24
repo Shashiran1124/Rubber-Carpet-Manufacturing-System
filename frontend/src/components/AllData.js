@@ -95,7 +95,7 @@ const MachineList = () => {
 		<div className="container py-4">
 			<div className="row">
 				<div className="col">
-					<h3 className="mb-3">Machine List</h3>
+					<h2 className="mb-3">Machines</h2>
 				</div>
 			</div>
 			{loading ? (
@@ -119,6 +119,7 @@ const MachineList = () => {
 								margin="normal"
 								value={searchText}
 								onChange={handleSearchChange}
+								placeholder="Search machine ID..."
 							/>
 						</div>
 					</div>

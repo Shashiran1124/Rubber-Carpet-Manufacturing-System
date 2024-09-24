@@ -24,11 +24,24 @@ import { useNavigate } from "react-router-dom"; //
 const AddMachine = () => {
 	const [machineID, setMachineID] = useState("");
 	const [date, setDate] = useState(dayjs().format("YYYY-MM-DD"));
-	const [status, setStatus] = useState(""); // Removed validation error for status
+	const [status, setStatus] = useState(""); 
 	const [nextGeneralRepairDate, setNextGeneralRepairDate] = useState(null);
-	const [error, setError] = useState(""); // For repair date validation
+	const [error, setError] = useState(""); 
+	const [machineIDError, setMachineIDError] = useState(""); // For Machine ID validation
 
 	const navigate = useNavigate();
+
+	// Validate the New Machine ID (only alphanumeric characters allowed, no spaces)
+	const handleMachineIDChange = (e) => {
+		const value = e.target.value;
+		const regex = /^[a-zA-Z0-9]*$/; // Alphanumeric characters only, no spaces or special characters
+		if (regex.test(value)) {
+			setMachineID(value);
+			setMachineIDError(""); // Clear error if valid
+		} else {
+			setMachineIDError("Machine ID must be alphanumeric and contain no spaces or special characters.");
+		}
+	};
 
 	const handleDateChange = (date) => {
 		const today = dayjs().startOf("day");
@@ -45,6 +58,11 @@ const AddMachine = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		if (machineIDError) {
+			toast.error("Please fix the validation errors before submitting.");
+			return;
+		}
 
 		const machineData = {
 			machineID,
@@ -104,8 +122,10 @@ const AddMachine = () => {
 								variant="outlined"
 								margin="normal"
 								value={machineID}
-								onChange={(e) => setMachineID(e.target.value)}
+								onChange={handleMachineIDChange}
 								required
+								error={!!machineIDError} // Show error state if there's an error
+								helperText={machineIDError} // Display error message
 							/>
 							<TextField
 								fullWidth
@@ -131,6 +151,7 @@ const AddMachine = () => {
 							<DatePicker
 								label="Next General Repair Date"
 								value={nextGeneralRepairDate}
+								disablePast//
 								onChange={handleDateChange}
 								renderInput={(params) => (
 									<TextField {...params} fullWidth margin="normal" error={!!error} helperText={error} required />

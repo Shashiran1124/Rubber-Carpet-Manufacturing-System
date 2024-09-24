@@ -1,183 +1,87 @@
-import { useNavigate, useLocation } from "react-router-dom"; // useNavigate replaces useHistory
-import { Box, List, ListItem, Divider, ListItemText } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import AssessmentIcon from "@mui/icons-material/Assessment";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import { useState, useEffect } from "react";
+import React, { useState } from 'react';
+import { List, ListItem, ListItemText, Divider, Box } from "@mui/material";
+import { Home as HomeIcon, Assessment as AssessmentIcon, ListAlt as ListAltIcon } from '@mui/icons-material';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
-	const navigate = useNavigate(); // useNavigate instead of useHistory
-	const location = useLocation();
-	const [active, setActive] = useState(location.pathname);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [active, setActive] = useState(location.pathname);
 
-	useEffect(() => {
-		setActive(location.pathname); // This ensures active state is updated when the location changes
-	}, [location.pathname]);
+    const handleNavigation = (path) => {
+        setActive(path);
+        navigate(path);
+    };
 
-	const handleNavigation = (path) => {
-		setActive(path);
-		navigate(path); // use navigate instead of history.push
-	};
+    const isActive = (paths) => paths.includes(active);
 
-	const isActive = (paths) => paths.includes(active);
+    return (
+        <Box sx={{ width: "220px", backgroundColor: "#8D98A7", height: "230vh", paddingTop: "10px",borderRadius: "5px",border: "1.5px solid #000000" }}>
+            <List sx={{ padding: 0 }}>
+                
+                {/* Home */}
+                <ListItem 
+                    button 
+                    sx={{ justifyContent: 'center', padding: "20px ",width: "200px", marginRight:"2px", borderRadius: "6px",marginBottom: "60px"}} 
+                    onClick={() => handleNavigation('/')}
+                >
+                    <HomeIcon sx={{ color: isActive(['/']) ? '#FFF' : '#000',fontSize: "32px", marginRight: "2px" }} />
+                </ListItem>
+                <Divider sx={{ backgroundColor: "#fff" }} />
+                
+                {/* Machine add */}
+                <ListItem 
+                    button 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/machine/add']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
+                    onClick={() => handleNavigation('/machine/add')}
+                >
+                    <ListItemText primary="Add New Machine" sx={{ paddingLeft: "10px", color: isActive(['/machine/add']) ? '#FFF' : '#000' }} />
+                </ListItem>
+                <Divider sx={{ backgroundColor: "#FFF" }} />
+                
+                {/*machine all */}
+                <ListItem 
+                    button 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/machine/all']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
+                    onClick={() => handleNavigation('/machine/all')}
+                >
+                    <ListItemText primary="Machine and Record" sx={{ paddingLeft: "10px", color: isActive(['/machine/all']) ? '#FFF' : '#000' }} />
+                </ListItem>
+                <Divider sx={{ backgroundColor: "#FFF" }} />
+                
+                {/* machine parts*/}
+                <ListItem 
+                    button 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/Part/add','/DashOpForm']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
+                    onClick={() => handleNavigation('/Part/add')}
+                >
+                    <ListItemText primary="Machine part Buy" sx={{ paddingLeft: "10px", color: isActive(['/Part/add','/DashOpForm']) ? '#FFF' : '#000' }} />
+                </ListItem>
+                <Divider sx={{ backgroundColor: "#FFF" }} />
+                
+                
+                {/* view machine parts */}
+                <ListItem 
+                    button 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/Part/all']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
+                    onClick={() => handleNavigation('/Part/all')}
+                >
+                    <ListItemText primary="All Machine parts" sx={{ paddingLeft: "10px", color: isActive(['/Part/all']) ? '#FFFFFF' : '#000' }} />
+                </ListItem>
+                
+                {/* Cal 
+                <ListItem 
+                    button 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/DashCalFo']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
+                    onClick={() => handleNavigation('/DashCalFo')}
+                >
+                    <ListItemText primary=" Cal Monthly Sales Orders" sx={{ paddingLeft: "10px", color: isActive(['/DashCalFo']) ? '#FFF' : '#000' }} />
+                </ListItem>
+                <Divider sx={{ backgroundColor: "#FFF" }} /> */}
 
-	return (
-		<Box
-			sx={{
-				width: "250px",
-				backgroundColor: "#d7c2f4",
-				height: "113vh",
-				paddingTop: "10px",
-				borderRadius: "5px",
-				border: "2px solid #000000",
-			}}
-		>
-			<List sx={{ padding: 0 }}>
-				{/* Home */}
-				<ListItem
-					button
-					sx={{
-						justifyContent: "center",
-						padding: "20px 0",
-						width: "244px",
-						marginRight: "2px",
-						borderRadius: "6px",
-						border: "1px solid #7540a7",
-						marginBottom: "60px",
-					}}
-					onClick={() => handleNavigation("/")}
-				>
-					<HomeIcon sx={{ color: isActive(["/"]) ? "#7540a7" : "#000" }} />
-				</ListItem>
-				<Divider sx={{ backgroundColor: "#fff" }} />
-
-				{/* Reports */}
-				<ListItem
-					button
-					sx={{
-						padding: "15px 20px",
-						width: "244px",
-						marginRight: "2px",
-						borderRadius: "6px",
-						border: "2px solid #7540a7",
-						marginBottom: "4px",
-						backgroundColor: isActive(["/reports"]) ? "#7540a7" : "inherit",
-					}}
-					onClick={() => handleNavigation("/reports")}
-				>
-					<AssessmentIcon sx={{ color: isActive(["/reports"]) ? "#fff" : "#000" }} />
-					<ListItemText
-						primary="Reports"
-						sx={{
-							paddingLeft: "10px",
-							color: isActive(["/reports"]) ? "#fff" : "#000",
-						}}
-					/>
-				</ListItem>
-				<Divider sx={{ backgroundColor: "#fff" }} />
-
-				{/* Supplier and Raw Material Details */}
-				<ListItem
-					button
-					sx={{
-						padding: "15px 20px",
-						width: "244px",
-						marginRight: "2px",
-						borderRadius: "6px",
-						border: "2px solid #7540a7",
-						marginBottom: "4px",
-						backgroundColor: isActive(["/machine/all"]) ? "#7540a7" : "inherit",
-					}}
-					onClick={() => handleNavigation("/machine/all")}
-				>
-					<ListAltIcon
-						sx={{
-							color: isActive(["/machine/all"]) ? "#fff" : "#000",
-						}}
-					/>
-					<ListItemText
-						primary="All Machines"
-						sx={{
-							paddingLeft: "10px",
-							color: isActive(["/machine/all"]) ? "#fff" : "#000",
-						}}
-					/>
-				</ListItem>
-				<Divider sx={{ backgroundColor: "#fff" }} />
-
-				{/* Create An Order */}
-				<ListItem
-					button
-					sx={{
-						padding: "15px 20px",
-						width: "244px",
-						marginRight: "2px",
-						borderRadius: "6px",
-						border: "2px solid #7540a7",
-						marginBottom: "4px",
-						backgroundColor: isActive(["/machine/add"]) ? "#7540a7" : "inherit",
-					}}
-					onClick={() => handleNavigation("/machine/add")}
-				>
-					<ListItemText
-						primary="Add New Machine"
-						sx={{
-							paddingLeft: "10px",
-							color: isActive(["/machine/add"]) ? "#fff" : "#000",
-						}}
-					/>
-				</ListItem>
-				<Divider sx={{ backgroundColor: "#fff" }} />
-
-				{/* View Order Details */}
-				<ListItem
-					button
-					sx={{
-						padding: "15px 20px",
-						width: "244px",
-						marginRight: "2px",
-						borderRadius: "6px",
-						border: "2px solid #7540a7",
-						marginBottom: "4px",
-						backgroundColor: isActive(["/Part/add"]) ? "#7540a7" : "inherit",
-					}}
-					onClick={() => handleNavigation("/Part/add")}
-				>
-					<ListItemText
-						primary="Add New Buy Part"
-						sx={{
-							paddingLeft: "10px",
-							color: isActive(["/Part/add"]) ? "#fff" : "#000",
-						}}
-					/>
-				</ListItem>
-				<Divider sx={{ backgroundColor: "#fff" }} />
-
-				{/* Calculate Raw Material Costs */}
-				<ListItem
-					button
-					sx={{
-						padding: "15px 20px",
-						width: "244px",
-						marginRight: "2px",
-						borderRadius: "6px",
-						border: "2px solid #7540a7",
-						marginBottom: "4px",
-						backgroundColor: isActive(["/Part/all"]) ? "#7540a7" : "inherit",
-					}}
-					onClick={() => handleNavigation("/Part/all")}
-				>
-					<ListItemText
-						primary="View Buy Parts"
-						sx={{
-							paddingLeft: "10px",
-							color: isActive(["/Part/all"]) ? "#fff" : "#000",
-						}}
-					/>
-				</ListItem>
-			</List>
-		</Box>
-	);
+            </List>
+        </Box>
+    );
 };
 
 export default Sidebar;

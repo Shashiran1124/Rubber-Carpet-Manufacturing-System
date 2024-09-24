@@ -25,7 +25,11 @@ export default function BuyPartView() {
 
     const downloadPdf = () => {
         const doc = new jsPDF();
-        doc.text("Current Month Bought Parts", 14, 10);
+        doc.text("Brought Machine Parts", 14, 10);
+        doc.text("PRI Rubber Indrustry", 138, 10);
+        
+
+
 
         // AutoTable expects an array of rows and an array of headers
         const tableColumn = ["Date", "Description", "Amount"];
@@ -43,7 +47,7 @@ export default function BuyPartView() {
         doc.autoTable({
             head: [tableColumn],
             body: tableRows,
-            startY: 20, // Adjusts where the table starts
+            startY: 30, // Adjusts where the table starts
             headStyles: {
                 fillColor: [0, 0, 255],  // Blue background color for header
                 textColor: [255, 255, 255], // White text color for header

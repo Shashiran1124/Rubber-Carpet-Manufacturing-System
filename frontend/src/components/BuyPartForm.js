@@ -6,7 +6,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import axios from 'axios';  // Axios for making HTTP requests
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";//
+import { useNavigate } from "react-router-dom";
 
 const BuyPartForm = () => {
   // State to manage form data
@@ -18,26 +18,45 @@ const BuyPartForm = () => {
 
   // State for errors
   const [errors, setErrors] = useState({});
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   // Handle form input changes
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
 
-    // Validate amount field
-    if (e.target.name === 'amount') {
-      const amountRegex = /^[0-9]+$/;  // Regex to allow only numbers
-      if (!amountRegex.test(e.target.value)) {
+    // Regex patterns to validate input
+    const descriptionPattern = /^[A-Za-z0-9\s]*$/; // Only letters, numbers, and spaces allowed
+    const amountPattern = /^\d*$/; // Allow only positive digits
+
+    if (name === 'description') {
+      if (descriptionPattern.test(value)) {
+        setFormData({ ...formData, description: value });
+        setErrors((prevErrors) => ({ ...prevErrors, description: '' }));
+      } else {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          amount: 'Please enter a valid amount (only numbers).',
+          description: 'Description can only contain letters, numbers, and spaces.',
         }));
-      } else {
-        setErrors((prevErrors) => ({ ...prevErrors, amount: '' }));
       }
+    }
+
+    if (name === 'amount') {
+      if (amountPattern.test(value)) {
+        setFormData({ ...formData, amount: value });
+        setErrors((prevErrors) => ({ ...prevErrors, amount: '' }));
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          amount: 'Amount must be a positive number without spaces or special characters.',
+        }));
+      }
+    }
+
+    if (name !== 'description' && name !== 'amount') {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
     }
   };
 
@@ -55,11 +74,8 @@ const BuyPartForm = () => {
     setErrors({});
 
     // Check if there are any validation errors before submitting
-    if (formData.amount === '' || errors.amount) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        amount: 'Amount is required and must be valid.',
-      }));
+    if (formData.amount === '' || errors.amount || formData.description === '' || errors.description) {
+      toast.error('Please fill in all fields correctly before submitting.');
       return;
     }
 
@@ -73,10 +89,10 @@ const BuyPartForm = () => {
 
       // Log success message or show success notification
       console.log('Form submitted successfully:', response.data);
-      toast.success('buy part  entered successfully');
+      toast.success('Part purchased successfully');
       setTimeout(() => {
         navigate("/Part/all");
-        }, 2000); //2second delay
+      }, 2000); // 2-second delay
     } catch (error) {
       console.error('There was an error submitting the form:', error);
       toast.error('Failed to submit form');
@@ -86,7 +102,7 @@ const BuyPartForm = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box display="flex" height="100vh" justifyContent="center" alignItems="center">
-      <ToastContainer />
+        <ToastContainer />
         <Box sx={{ width: "80%", padding: "20px" }}>
           <Paper elevation={3} sx={{ padding: "20px" }}>
             <Grid container justifyContent="space-between">
