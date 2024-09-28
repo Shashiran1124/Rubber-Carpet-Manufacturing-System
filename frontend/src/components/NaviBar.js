@@ -3,21 +3,22 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ShareIcon from '@mui/icons-material/Share';
+import PRIImage from '../images/PRI.png'; 
 
 const Navbar = () => {
     return (
-        <AppBar position="static" sx={{ backgroundColor: "#FBFAFA", color: "#000000", boxShadow: "none" }}>
+        <AppBar position="static" sx={{ backgroundColor: "#ADB4BF", color: "#000000", boxShadow: "none",borderRadius: "5px",border: "1px solid #000000",height: "80px"  }}>
             <Toolbar>
                 <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: "bold" }}>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: "bold",fontSize:"20px",marginLeft:"30px" }}>
                         P.R.I Rubber Industries
                     </Typography>
                 </Box>
                 <Box sx={{ position: "relative", display: "inline-block" }}>
-                    <SearchIcon sx={{ position: "absolute", top: "8px", left: "8px", color: "#6a1b9a" }} />
+                    <SearchIcon sx={{ position: "absolute", top: "8px", left: "20px", color: "#6a1b9a" }} />
                     <InputBase
-                        placeholder="Search…"
-                        sx={{ pl: 4, pr: 2, backgroundColor: "#f4f4f4", borderRadius: "15px", paddingLeft: "30px" }}
+                        placeholder="search"
+                        sx={{ pl: 4, pr: 2, backgroundColor: "#A5ABAF", borderRadius: "15px", paddingLeft: "30px",fontSize:"14px" }}
                     />
                 </Box>
                 <IconButton edge="end" color="inherit">
@@ -29,7 +30,7 @@ const Navbar = () => {
                 <IconButton edge="end" color="inherit">
                     <SettingsIcon />
                 </IconButton>
-                <Avatar alt="User" src="/path-to-image" sx={{ marginLeft: 2 }} />
+                <Avatar alt="User" src={PRIImage} sx={{ marginLeft: 2,width: 70, height: 40 }} />
             </Toolbar>
         </AppBar>
     );

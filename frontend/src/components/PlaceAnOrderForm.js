@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import placeanorderImage from '../images/placeanorder.jpg';
+import TrackingImage from '../images/Tracking.jpg';
 
 export default function OrderForm() {
   const [formData, setFormData] = useState({
@@ -70,16 +70,17 @@ export default function OrderForm() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '89vh',
+      height: '100vh',
       backgroundColor: '#f7f7f7',
-      padding: '10px'
+      padding: '10px',
+      width: '100%',
     }}>
       <div style={{ marginRight: '20px' }}> 
-        <img src={placeanorderImage} alt="Order" style={{ width: '300px', height: '85vh',borderRadius: '10px' }} /> {/* Step 2: Add the image */}
+        <img src={TrackingImage} alt="Order" style={{ width: '315px', height: '95vh',borderRadius: '10px' }} /> {/* Step 2: Add the image */}
       </div>
       <div style={{
         backgroundColor: '#F1F1F1', 
-        padding: '20px 25px',
+        padding: '30px 40px',
         borderRadius: '8px',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         width: '100%',
@@ -89,7 +90,7 @@ export default function OrderForm() {
       }}>
         <h2 style={{
           textAlign: 'center',
-          marginBottom: '10px',
+          marginBottom: '50px',
           color: '#000',
           fontSize: '20px'
         }}>Place an Order</h2>
@@ -106,7 +107,7 @@ export default function OrderForm() {
               style={{
                 width: '100%',
                 padding: '8px',
-                border: '1px solid #ccc',
+                border: '1px solid #696767',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 color: '#000',
@@ -126,7 +127,7 @@ export default function OrderForm() {
               style={{
                 width: '100%',
                 padding: '8px',
-                border: '1px solid #ccc',
+                border: '1px solid #696767',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 color: '#000',
@@ -151,7 +152,7 @@ export default function OrderForm() {
               style={{
                 width: '100%',
                 padding: '4px',
-                border: '1px solid #ccc',
+                border: '1px solid #696767',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 color: '#000',
@@ -171,7 +172,7 @@ export default function OrderForm() {
               style={{
                 width: '100%',
                 padding: '8px',
-                border: '1px solid #ccc',
+                border: '1px solid #696767',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 color: '#000',
@@ -190,7 +191,7 @@ export default function OrderForm() {
               style={{
                 width: '100%',
                 padding: '4px',
-                border: '1px solid #ccc',
+                border: '1px solid #696767',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
                 color: '#000',

@@ -16,71 +16,39 @@ const Sidebar = () => {
     const isActive = (paths) => paths.includes(active);
 
     return (
-        <Box sx={{ width: "250px", backgroundColor: "#d7c2f4", height: "113vh", paddingTop: "10px" }}>
+        <Box sx={{ width: "220px", backgroundColor: "#8D98A7", height: "120vh", paddingTop: "10px",borderRadius: "5px",border: "1.5px solid #000000" }}>
             <List sx={{ padding: 0 }}>
                 
                 {/* Home */}
                 <ListItem 
                     button 
-                    sx={{ justifyContent: 'center', padding: "20px 0" }} 
+                    sx={{ justifyContent: 'center', padding: "20px ",width: "200px", marginRight:"2px", borderRadius: "6px",marginBottom: "60px"}} 
                     onClick={() => handleNavigation('/')}
                 >
-                    <HomeIcon sx={{ color: isActive(['/']) ? '#7540a7' : '#000' }} />
+                    <HomeIcon sx={{ color: isActive(['/']) ? '#FFF' : '#000',fontSize: "32px", marginRight: "2px" }} />
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#fff" }} />
                 
-                {/* Reports */}
-                <ListItem 
-                    button 
-                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/reports']) ? '#7540a7' : 'inherit' }} 
-                    onClick={() => handleNavigation('/reports')}
-                >
-                    <AssessmentIcon sx={{ color: isActive(['/reports']) ? '#fff' : '#000' }} />
-                    <ListItemText primary="Reports" sx={{ paddingLeft: "10px", color: isActive(['/reports']) ? '#fff' : '#000' }} />
-                </ListItem>
-                <Divider sx={{ backgroundColor: "#fff" }} />
                 
-                {/* Customer Registration*/}
-                <ListItem 
-                    button 
-                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/dashboardform', '/dashordertable']) ? '#7540a7' : 'inherit' }} 
-                    onClick={() => handleNavigation('/dashordertable')}
-                >
-                    <ListAltIcon sx={{ color: isActive(['/dashboardform', '/dashordertable']) ? '#fff' : '#000' }} />
-                    <ListItemText 
-                        primary="Customer Registration" 
-                        sx={{ paddingLeft: "10px", color: isActive(['/dashboardform', '/dashordertable']) ? '#fff' : '#000' }} 
-                    />
-                </ListItem>
-                <Divider sx={{ backgroundColor: "#fff" }} />
                 
                 {/* View and Update Orders */}
                 <ListItem 
                     button 
-                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/DashOrderForm']) ? '#7540a7' : 'inherit' }} 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/DashOrderForm']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
                     onClick={() => handleNavigation('/DashOrderForm')}
                 >
-                    <ListItemText primary="View and Update Orders" sx={{ paddingLeft: "10px", color: isActive(['/DashOrderForm']) ? '#fff' : '#000' }} />
+                    <ListItemText primary="Create an Order" sx={{ paddingLeft: "10px", color: isActive(['/DashOrderForm']) ? '#FFF' : '#000' }} />
                 </ListItem>
-                <Divider sx={{ backgroundColor: "#fff" }} />
+                <Divider sx={{ backgroundColor: "#FFF" }} />
                 
-                {/* Order Item Handling */}
-                <ListItem 
-                    button 
-                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/DashPlaceAnOrderForm']) ? '#7540a7' : 'inherit' }} 
-                    onClick={() => handleNavigation('/DashPlaceAnOrderForm')}
-                >
-                    <ListItemText primary="Order Item Handling" sx={{ paddingLeft: "10px", color: isActive(['/DashPlaceAnOrderForm']) ? '#fff' : '#000' }} />
-                </ListItem>
-                <Divider sx={{ backgroundColor: "#fff" }} />
                 
                 {/* Feedback Collection */}
                 <ListItem 
                     button 
-                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/DashFeedbackForm']) ? '#7540a7' : 'inherit' }} 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/DashFeedbackForm']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
                     onClick={() => handleNavigation('/DashFeedbackForm')}
                 >
-                    <ListItemText primary="Feedcback Collection" sx={{ paddingLeft: "10px", color: isActive(['/DashFeedbackForm']) ? '#fff' : '#000' }} />
+                    <ListItemText primary="Give Feedback" sx={{ paddingLeft: "10px", color: isActive(['/DashFeedbackForm']) ? '#FFFFFF' : '#000' }} />
                 </ListItem>
             </List>
         </Box>
