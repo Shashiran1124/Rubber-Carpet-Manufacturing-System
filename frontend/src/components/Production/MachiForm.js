@@ -1,0 +1,256 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import supplierImage from '../../images/33.png';
+
+export default function MachiForm() {
+
+  const navigate = useNavigate();
+  const location = useLocation(); // Access location to get passed supplier data
+  const [formData, setFormData] = useState({
+    mnum: '',
+    mdate: '',
+    mstime: '',
+    metime: '',
+    mteam: '' // This will hold the selected team value
+  });
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [allocationId, setAllocationId] = useState(null);
+
+  useEffect(() => {
+    if (location.state && location.state.allocations) {
+      const allocations = location.state.allocations;
+
+      // Convert the date to YYYY-MM-DD format
+      const formattedDate = allocations.mdate ? new Date(allocations.mdate).toISOString().split('T')[0] : '';
+
+      setFormData({
+        mnum: allocations.mnum,
+        mdate: formattedDate, // Set the formatted date
+        mstime: allocations.mstime,
+        metime: allocations.metime,
+        mteam: allocations.mteam,
+      });
+      setAllocationId(allocations._id);
+      setIsEditMode(true);
+    }
+  }, [location.state]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    let validValue = value;
+
+    // Validation for mnum: Numeric values only
+    if (name === 'mnum') {
+      validValue = value.replace(/[^0-9]/g, '');
+    }
+
+    // Validation for mteam is no longer needed as it will be controlled by dropdown
+
+    setFormData({
+      ...formData,
+      [name]: validValue
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const url = isEditMode
+        ? `http://localhost:8070/test3/update/${allocationId}`
+        : 'http://localhost:8070/test3/addmachi';
+      const method = isEditMode ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert(`Allocation ${isEditMode ? 'updated' : 'added'} successfully`);
+        navigate('/dashmachitable');
+      } else {
+        alert(`Failed to ${isEditMode ? 'update' : 'add'} allocation`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert(`An error occurred while ${isEditMode ? 'updating' : 'adding'} the allocation.`);
+    }
+  };
+
+  return (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      backgroundColor: '#f7f7f7',
+      padding: '10px'
+    }}>
+      <div style={{ marginRight: '20px' }}>
+        <img src={supplierImage} alt="Allocation" style={{ width: '450px', height: '74vh', borderRadius: '10px' }} />
+      </div>
+
+      <div style={{
+        backgroundColor: '#EDEDEE',
+        padding: '20px 40px',
+        borderRadius: '8px',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        width: '100%',
+        maxWidth: '450px',
+        border: '2px solid #000000',
+      }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Machine Allocation Form</h2>
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: '15px' }}>
+            <label htmlFor="mnum" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Machine Number:</label>
+            <input
+              type="text"
+              id="mnum"
+              name="mnum"
+              value={formData.mnum}
+              onChange={handleChange}
+              required
+              pattern="\d*"
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: '15px' }}>
+            <label htmlFor="mdate" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Date:</label>
+            <input
+              type="date"
+              id="mdate"
+              name="mdate"
+              value={formData.mdate}
+              onChange={handleChange}
+              required
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: '15px' }}>
+            <label htmlFor="mstime" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Start Time:</label>
+            <input
+              type="time"
+              id="mstime"
+              name="mstime"
+              value={formData.mstime}
+              onChange={handleChange}
+              required
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: '15px' }}>
+            <label htmlFor="metime" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>End Time:</label>
+            <input
+              type="time"
+              id="metime"
+              name="metime"
+              value={formData.metime}
+              onChange={handleChange}
+              required
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+          <div style={{ marginBottom: '20px' }}>
+            <label htmlFor="mteam" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Team Name:</label>
+            <select
+              id="mteam"
+              name="mteam"
+              value={formData.mteam}
+              onChange={handleChange}
+              required
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <option value="">Select Team</option>
+              <option value="a">Team A</option>
+              <option value="b">Team B</option>
+              <option value="c">Team C</option>
+            </select>
+          </div>
+          {/* Button container */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+            <button
+              type="submit"
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#007bff',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              {isEditMode ? 'Update' : 'Submit'}
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/dashmachitable')}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#28a745',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              Allocation Machine
+            </button>
+
+            <button
+              type="button"
+              onClick={() => navigate('/dashmachitable')}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#28a745',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              Available Machine
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
