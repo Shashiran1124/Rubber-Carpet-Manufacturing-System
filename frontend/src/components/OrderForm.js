@@ -22,7 +22,8 @@ export default function OrderForm() {
     if (location.state && location.state.order) {
       const order = location.state.order;
 
-      const formattedDate = order.dateOfOrder ? new Date(order.dateOfOrder).toISOString().split('T')[0]:'';
+      // Format date to 'YYYY-MM-DD' for the input field
+      const formattedDate = order.dateOfOrder ? new Date(order.dateOfOrder).toISOString().split('T')[0] : '';
 
       setFormData({
         dateOfOrder: formattedDate,
@@ -105,7 +106,7 @@ export default function OrderForm() {
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={TiersImage} alt="Order" style={{ width: '350px', height: '84vh', borderRadius: '10px' }} />
+        <img src={TiersImage} alt="Order" style={{ width: '360px', height: '94vh', borderRadius: '10px' }} />
       </div>
 
       <div style={{
@@ -128,6 +129,7 @@ export default function OrderForm() {
               value={formData.dateOfOrder}
               onChange={handleChange}
               required
+              min={new Date().toISOString().split('T')[0]}
               style={{
                 width: '100%',
                 padding: '10px',
@@ -243,33 +245,22 @@ export default function OrderForm() {
 
             </select>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <button
-              type="submit"
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#4CAF50',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer'
-              }}
-            >
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '20px'
+          }}>
+            <button type="submit" style={{
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              width: '100px'
+            }}>
               {isEditMode ? 'Update' : 'Create'}
-            </button>
-            <button
-              type="button"
-              onClick={() => navigate('/DashOFTable')}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#f44336',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer'
-              }}
-            >
-              View Table
             </button>
           </div>
         </form>

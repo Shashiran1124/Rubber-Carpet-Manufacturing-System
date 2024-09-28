@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
 import './index.css';
-import App from './App';
+
 import DashSupForm from './components/DashSupForm';
 import F1 from './components/F1';
 import Navbar from './components/NavBar';
@@ -25,6 +25,8 @@ import DashRMCtable from './components/DashRMCTable';
 import SupReport from './components/SupReport';
 
 import DashReport from './components/DashReport';
+
+import ReportTable from './components/ReportTable';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -56,6 +58,10 @@ root.render(
 
       <Route path='/SupReport' element={<SupReport/>}/>
       <Route path='/' element={<DashReport/>}/>
+
+      <Route path='/ReportTable' element={<ReportTable/>}/>
+
+      
 
       
     </Routes>

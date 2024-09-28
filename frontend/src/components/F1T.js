@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function F1T() {
   const [suppliers, setSuppliers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   // Function to fetch suppliers from the server
@@ -41,7 +42,6 @@ export default function F1T() {
 
       if (response.ok) {
         await fetchSuppliers(); // Refresh the table after deletion
-        
       } else {
         alert('Failed to delete supplier');
       }
@@ -51,30 +51,51 @@ export default function F1T() {
     }
   };
 
+  // Filter suppliers based on search query
+  const filteredSuppliers = suppliers.filter(supplier =>
+    supplier.companyName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h1 style={{ marginBottom: '20px', color: '#000000', textAlign: 'center' }}>Suppliers List</h1>
+      
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search by Company Name"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        style={{
+          padding: '10px',
+          width: '40%',
+          marginBottom: '20px',
+          borderRadius: '5px',
+          border: '1px solid #ccc',
+          fontSize: '16px',
+          marginLeft:'290px',
+        }}
+      />
+
       <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #000000' }}>
         <thead>
           <tr style={{ backgroundColor: '#f4f4f4', color: '#333' }}>
-            <th style={{ border: '1px solid #000000', padding: '12px' , backgroundColor: '#C7C7C7'}}>Company Name</th>
-            <th style={{ border: '1px solid #000000', padding: '12px',backgroundColor: '#C7C7C7' }}>Address</th>
-            <th style={{ border: '1px solid #000000', padding: '12px',backgroundColor: '#C7C7C7' }}>Contact Number</th>
-            <th style={{ border: '1px solid #000000', padding: '12px',backgroundColor: '#C7C7C7' }}>Material Type</th>
-            
-            <th style={{ border: '1px solid #000000', padding: '12px',backgroundColor: '#C7C7C7' }}>Quantity</th>
-            <th style={{ border: '1px solid #000000', padding: '12px',backgroundColor: '#C7C7C7' }}>Unit</th>
-            <th style={{ border: '1px solid #000000', padding: '12px',backgroundColor: '#C7C7C7'}}>Actions</th>
+            <th style={{ border: '1px solid #000000', padding: '12px', backgroundColor: '#C7C7C7' }}>Company Name</th>
+            <th style={{ border: '1px solid #000000', padding: '12px', backgroundColor: '#C7C7C7' }}>Address</th>
+            <th style={{ border: '1px solid #000000', padding: '12px', backgroundColor: '#C7C7C7' }}>Contact Number</th>
+            <th style={{ border: '1px solid #000000', padding: '12px', backgroundColor: '#C7C7C7' }}>Material Type</th>
+            <th style={{ border: '1px solid #000000', padding: '12px', backgroundColor: '#C7C7C7' }}>Quantity</th>
+            <th style={{ border: '1px solid #000000', padding: '12px', backgroundColor: '#C7C7C7' }}>Unit</th>
+            <th style={{ border: '1px solid #000000', padding: '12px', backgroundColor: '#C7C7C7' }}>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {suppliers.map((supplier) => (
+          {filteredSuppliers.map((supplier) => (
             <tr key={supplier._id}>
               <td style={{ border: '1px solid #000000', padding: '12px' }}>{supplier.companyName}</td>
               <td style={{ border: '1px solid #000000', padding: '12px' }}>{supplier.address}</td>
               <td style={{ border: '1px solid #000000', padding: '12px' }}>{supplier.contactNumber}</td>
               <td style={{ border: '1px solid #000000', padding: '12px' }}>{supplier.materialType}</td>
-              
               <td style={{ border: '1px solid #000000', padding: '12px' }}>{supplier.quantity}</td>
               <td style={{ border: '1px solid #000000', padding: '12px' }}>{supplier.unit}</td>
               <td style={{ border: '1px solid #000000', padding: '12px', textAlign: 'center' }}>

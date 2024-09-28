@@ -114,7 +114,7 @@ export default function RawMaterialCostForm() {
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={CostImage} alt="Cost" style={{ width: '350px', height: '85vh', borderRadius: '10px' }} />
+        <img src={CostImage} alt="Cost" style={{ width: '370px', height: '85vh', borderRadius: '10px' }} />
       </div>
       <div style={{
         backgroundColor: '#EDEDEE',

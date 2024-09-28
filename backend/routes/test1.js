@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Suporder = require("../models/Suporder");
-const Supplier = require("../models/Suporder");  // Correct path to model
+
 
 // Data insertion
 router.route("/addorder").post((req, res) => {
@@ -71,22 +71,24 @@ router.route("/update/:id").put(async (req, res) => {
 
 
 
-// Delete a supplier by ID
+
+// Delete an order by ID
 router.route("/delete/:id").delete((req, res) => {
     const id = req.params.id;
 
-    Supplier.findByIdAndDelete(id)
+    Suporder.findByIdAndDelete(id)  // Use the correct model
         .then((deletedSuporder) => {
             if (!deletedSuporder) {
                 return res.status(404).json({ message: "Order not found" });
             }
-           
+            res.json({ message: "Order deleted successfully" });  // Send success response
         })
         .catch((err) => {
             console.log(err);
             res.status(500).json({ error: "Error deleting order" });  // Send error response
         });
 });
+
 
 
 module.exports = router;

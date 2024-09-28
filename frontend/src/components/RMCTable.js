@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function RMCTable() {
   const [rawmaterials, setRawMaterials] = useState([]);
-  const [overallTotal, setOverallTotal] = useState(0); // State to hold the overall total cost
+  const [overallTotal, setOverallTotal] = useState(0);
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
   const navigate = useNavigate();
 
   // Fetch data from the server when the component mounts
@@ -43,13 +44,12 @@ export default function RMCTable() {
         const response = await fetch(`http://localhost:8070/test2/delete/${id}`, {
           method: 'DELETE',
         });
-  
+
         if (response.ok) {
-          // Awaiting the updated list from the backend after deletion
           const updatedResponse = await fetch('http://localhost:8070/test2/');
           if (updatedResponse.ok) {
             const updatedData = await updatedResponse.json();
-            setRawMaterials(updatedData);  // Setting the new data to trigger re-render
+            setRawMaterials(updatedData);
             alert('Record deleted successfully');
           } else {
             console.error('Failed to fetch updated data after deletion');
@@ -65,10 +65,32 @@ export default function RMCTable() {
       }
     }
   };
-  
+
+  // Filter raw materials based on the search query
+  const filteredRawMaterials = rawmaterials.filter((item) =>
+    item.rawMaterialType.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div style={{ padding: '20px' }}>
       <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Raw Material Cost Table</h2>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search by Raw Material Type..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)} // Update search query on change
+        style={{
+          padding: '10px',
+          width: '40%',
+          marginBottom: '20px',
+          border: '1px solid #ccc',
+          borderRadius: '5px',
+          marginLeft:'290px',
+        }}
+      />
+
       <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #000000' }}>
         <thead>
           <tr style={{ backgroundColor: '#f4f4f4', color: '#333' }}>
@@ -82,9 +104,9 @@ export default function RMCTable() {
           </tr>
         </thead>
         <tbody>
-          {rawmaterials.map((item) => (
+          {filteredRawMaterials.map((item) => (
             <tr key={item._id} style={{ borderBottom: '1px solid #ddd' }}>
-                <td style={{ border: '1px solid #000000', padding: '12px' }}>
+              <td style={{ border: '1px solid #000000', padding: '12px' }}>
                 {new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
               </td>
               <td style={{ padding: '12px', border: '1px solid #000000', textAlign: 'center' }}>{item.rawMaterialType}</td>
@@ -125,7 +147,7 @@ export default function RMCTable() {
           ))}
         </tbody>
       </table>
-      <div style={{ marginTop: '20px', textAlign: 'center', fontWeight: 'bold', fontSize: '16px' }}>
+      <div style={{ marginTop: '20px', textAlign: 'center', fontWeight: 'bold', fontSize: '20px', color: '#FF0000' }}>
         Overall Total: Rs. {overallTotal.toFixed(2)}
       </div>
     </div>

@@ -50,7 +50,7 @@ export default function SupplierForm() {
     if (name === 'companyName') {
       validValue = value.replace(/[^A-Za-z ]/g, '');
       if (!validValue) {
-        error = 'Please enter a valid company name';
+        error = '';
       }
     }
 
@@ -116,7 +116,7 @@ export default function SupplierForm() {
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={supplierImage} alt="Order" style={{ width: '350px', height: '84vh', borderRadius: '10px' }} />
+        <img src={supplierImage} alt="Order" style={{ width: '370px', height: '94vh', borderRadius: '10px' }} />
       </div>
 
       <div style={{
