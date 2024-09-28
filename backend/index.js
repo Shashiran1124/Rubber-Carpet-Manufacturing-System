@@ -39,6 +39,20 @@ const testRouter5 = require("./routes/proroutes/test5.js");
 app.use("/test5", testRouter5);
 
 
+const controller = require("./routes/disroutes/controller.js");
+app.use("/controller", controller);
+
+const controller1 = require("./routes/disroutes/controller1.js");
+app.use("/controller1", controller1);
+
+const controller2 = require("./routes/disroutes/controller2.js");
+app.use("/controller2", controller2);
+
+const controller3 = require("./routes/disroutes/controller3.js");
+app.use("/controller3", controller3);
+
+
+
 
 
 
