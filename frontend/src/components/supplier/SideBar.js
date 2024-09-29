@@ -32,13 +32,13 @@ const Sidebarr1 = () => {
                 {/* Reports */}
                 <ListItem 
                     button 
-                    sx={{ padding: "15px 20px",width:"244px",marginRight:"2px",borderRadius:"6px",border:"2px solid #000000",marginBottom:"4px", backgroundColor: isActive(['/', '/']) ? '#3498db' : 'inherit' }} 
-                    onClick={() => handleNavigation('/')}
+                    sx={{ padding: "15px 20px",width:"244px",marginRight:"2px",borderRadius:"6px",border:"2px solid #000000",marginBottom:"4px", backgroundColor: isActive(['/DashSupReport', '/DashSupReport']) ? '#3498db' : 'inherit' }} 
+                    onClick={() => handleNavigation('/DashSupReport')}
                 >
-                    <AssessmentIcon sx={{ color: isActive(['/DashReport', '/DashReport']) ? '#fff' : '#000' }} />
+                    <AssessmentIcon sx={{ color: isActive(['/DashSupReport', '/DashSupReport']) ? '#fff' : '#000' }} />
                     <ListItemText 
                         primary="Reports" 
-                        sx={{ paddingLeft: "10px", color: isActive(['/DashReport', '/DashReport']) ? '#fff' : '#000' }} 
+                        sx={{ paddingLeft: "10px", color: isActive(['/DashSupReport', '/DashSupReport']) ? '#fff' : '#000' }} 
                     />
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#fff" }} />
