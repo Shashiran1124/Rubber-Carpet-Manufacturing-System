@@ -23,7 +23,7 @@ const Sidebarr1 = () => {
                 <ListItem 
                     button 
                     sx={{ justifyContent: 'center', padding: "20px 0",width:"244px",marginRight:"2px",borderRadius:"6px",border:"1px solid #7540a7",marginBottom:"60px" }} 
-                    onClick={() => handleNavigation('/app')}
+                    onClick={() => handleNavigation('/')}
                 >
                     <HomeIcon sx={{ color: isActive(['/']) ? '#000' : '#000' }} />
                 </ListItem>

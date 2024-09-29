@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Button, TextField, Container, Box, Grid, Card, CardContent, CardMedia, List, ListItem, ListItemIcon, ListItemText, Link } from '@mui/material';
 import { Facebook, Twitter, Instagram, Search, Phone,  LocationOn, ArrowBack, ArrowForward, AddShoppingCart, Mail, AccessTime, LinkedIn, Pinterest } from '@mui/icons-material';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { keyframes } from '@mui/system';
 
 // Import your image
@@ -35,6 +35,11 @@ const textBounce = keyframes`
     transform: translateY(-100px);
   }
 `;
+
+
+
+    
+
 
 // Button hover animation
 const buttonHover11 = {
@@ -87,6 +92,11 @@ const buttonHover = {
 
 const StartupPage = () => {
   const navigate = useNavigate(); 
+
+  const handleNavigation = (path) => {
+    navigate(path);  // Navigate to the desired path
+  };
+
   return (
     <div>
       
@@ -317,7 +327,8 @@ const StartupPage = () => {
                     <Typography variant="body2" color="textSecondary">{product.description}</Typography>
                   )}
                   <Typography variant="h6" color="primary">{product.price}</Typography>
-                  <Button variant="contained" color="success" startIcon={<AddShoppingCart />} sx={{ marginTop: 2, borderRadius: '20px' }}>Add</Button>
+                  <Button variant="contained" color="success" startIcon={<AddShoppingCart />} sx={{ marginTop: 2, borderRadius: '20px' }} onClick={() => handleNavigation('/login')}>Add</Button>
+
                 </CardContent>
               </Card>
             </Grid>

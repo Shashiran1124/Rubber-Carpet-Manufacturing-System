@@ -78,7 +78,7 @@ const Sidebar = () => {
                         </ListItem>
                         <Divider sx={{ backgroundColor: "#ffffff" }} />
                         
-                        {/* Production Plane */}
+                        {/* Production Plan */}
                         <ListItem
                             button
                             sx={{ 
