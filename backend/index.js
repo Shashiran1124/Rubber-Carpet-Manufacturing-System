@@ -23,6 +23,7 @@ connection.once("open", ()=>{
     console.log("MongoDB Connection Success!");
 });
 
+//Hashan
 const testRouter = require("./routes/proroutes/test.js");
 app.use("/test", testRouter);
 
@@ -38,7 +39,7 @@ app.use("/test4", testRouter4);
 const testRouter5 = require("./routes/proroutes/test5.js");
 app.use("/test5", testRouter5);
 
-
+//Nishan
 const controller = require("./routes/disroutes/controller.js");
 app.use("/controller", controller);
 
@@ -51,7 +52,7 @@ app.use("/controller2", controller2);
 const controller3 = require("./routes/disroutes/controller3.js");
 app.use("/controller3", controller3);
 
-//Shashiya
+//Shashiran
 const suptestRouter = require("./routes/suproutes/suptest"); // Ensure this path is correct
 app.use("/suptest", suptestRouter);
 
@@ -60,6 +61,15 @@ app.use("/suptest1", suptestRouter1);
 
 const suptestRouter2 = require("./routes/suproutes/suptest2"); // Ensure this path is correct
 app.use("/suptest2", suptestRouter2);
+
+//Malindu
+const custestRouter = require('./routes/cusroutes/custest');
+const custest2Router = require('./routes/cusroutes/custest2');
+const custest3Router = require('./routes/cusroutes/custest3'); // Ensure this path is correct
+
+app.use('/custest', custestRouter);
+app.use('/cusfeedback', custest2Router);
+app.use('/cuscalculation', custest3Router); // Adjust route path as needed
 
 
 

@@ -48,31 +48,55 @@ import Dashcost from './components/distributor/user4';
 import DashReport from './components/distributor/DashReport';
 
 
-//Shashiya
+//Shashiran
 import DashSupForm from './components/supplier/DashSupForm';
 import F1 from './components/supplier/F1';
 import Navbarr1 from './components/supplier/NavBar';
 import Sidebarr1 from './components/supplier/SideBar';
 import F1T from './components/supplier/F1T';
-
-
 import RMCTable from './components/supplier/RMCTable';
-
 import OFTable from './components/supplier/OFTable';
 import DashOFTable from './components/supplier/DashOFTable';
-
 import DashOrderFormm from './components/supplier/DashOrderForm';
 import RawMaterialCostForm from './components/supplier/RawMaterialCostForm';
 import DashRawMaterialCostForm from './components/supplier/DashRawMaterialCostForm';
 import OrderFormm from './components/supplier/OrderForm';
 import DashF1T from './components/supplier/DashF1T';
-
 import DashRMCtable from './components/supplier/DashRMCTable';
 import SupReport from './components/supplier/SupReport';
-
 import DashReportt from './components/supplier/DashSupReport';
-
 import ReportTable from './components/supplier/ReportTable';
+
+
+//Malindu
+import NaviBar from './components/cusoperator/NaviBar';
+import SideBar from './components/cusoperator/SideBar';
+import DashCustomerForm from './components/cusoperator/DashCustomerForm';
+import OrderForm1 from './components/cusoperator/OrderForm1';
+import DashOrderFormm1 from './components/cusoperator/DashOrderFormm1'
+import PlaceAnOrderForm from './components/cusoperator/PlaceAnOrderForm'
+import DashPlaceAnOrderForm from './components/cusoperator/DashPlaceAnOrderForm'
+import FeedbackForm from './components/cusoperator/FeedbackForm'
+import DashFeedbackForm from './components/cusoperator/DashFeedbackForm'
+import OrderFormTable from './components/cusoperator/OrderFormTable';
+import CusDash from './components/cusoperator/cusDash';
+import FeedbackTable from './components/cusoperator/FTable';
+import Osidebar from './components/cusoperator/SB2';
+import Viewordertable from './components/cusoperator/OLT';
+
+import DashboardFormTable from './components/cusoperator/DashOrderFormTable';
+import Dashcusdashboard from './components/cusoperator/Dashcusdsh';
+import DashOLT from './components/cusoperator/DashOLT';
+import DashFeed from './components/cusoperator/DashFeed';
+import DashOpForm from './components/cusoperator/DashOpForm';
+import OperatorFeeedTable from './components/cusoperator/OfeedT';
+import SalesOrderForm from './components/cusoperator/CalFo';
+import DashCalFo from './components/cusoperator/DashCalFo';
+import CalTable from './components/cusoperator/CalTable';
+import Dashcal from './components/cusoperator/Dashcal';
+import RepTable from './components/cusoperator/Rep';
+import DashRep from './components/cusoperator/DashRep';
+import DashCReg from './components/cusoperator/DashCReg';
 
 
 
@@ -89,7 +113,7 @@ root.render(
   <AuthProvider>
     <Routes>
     
-      
+      {/*Hashan*/}
       <Route path='/NavBar' element={<Navbar/>}/>
       <Route path='/SideBar' element={<Sidebar/>}/> 
       <Route path='/OrderForm' element={<OrderForm/>}/> 
@@ -119,10 +143,7 @@ root.render(
       <Route path="/register" element={<RegisterPage />} /> {/* Registration page */}
 
 
-
-
-
-
+      {/*Nishan*/}
       <Route path='/NavBar' element={<Navbarr/>}/>
       <Route path='/SideBar' element={<Sidebarr/>}/>
       <Route path='/dashuser' element={<Dashuser/>}/>
@@ -137,32 +158,56 @@ root.render(
       <Route path='/dashreport' element={<DashReport/>}/>
 
 
-      {/*Shashiya*/}
+      {/*Shashiran*/}
       <Route path='/DashSupForm' element={<DashSupForm/>}/>
       <Route path='/F1' element={<F1/>}/>
       <Route path='/F1T' element={<F1T/>}/>
       <Route path='/NavBar' element={<Navbarr1/>}/>
       <Route path='/SideBar' element={<Sidebarr1/>}/>
       <Route path='/F1T' element={<F1T/>}/>
-
       <Route path='/DashOFTable' element={<DashOFTable/>}/>
-      
       <Route path='/OrderForm' element={<OrderFormm/>}/>
       <Route path='/OFTable' element={<OFTable/>}/>
       <Route path='/DashOrderForm' element={<DashOrderFormm/>}/>
       <Route path='/RawMaterialCostForm' element={<RawMaterialCostForm/>}/>
-      
       <Route path='/DashRawMaterialCostForm' element={<DashRawMaterialCostForm/>}/>
       <Route path='/DashF1T' element={<DashF1T/>}/>
-
       <Route path='/RMCTable' element={<RMCTable/>}/>
-
       <Route path='/DashRMCtable' element={<DashRMCtable/>}/>
-
       <Route path='/SupReport' element={<SupReport/>}/>
       <Route path='/DashSupReport' element={<DashReportt/>}/>
-
       <Route path='/ReportTable' element={<ReportTable/>}/>
+
+
+      {/*Malindu*/}
+        <Route path = '/NaviBar' element = {<NaviBar/>}/>
+        <Route path = '/SideBar' element = {<SideBar/>}/>
+        <Route path = '/DashCustomerForm' element = {<DashCustomerForm/>}/>
+        <Route path = '/OrderForm' element = {<OrderForm1/>}/>
+        <Route path = '/DashOrderFormm1' element = {<DashOrderFormm1/>}/>
+        <Route path = '/PlaceAnOrderForm' element = {<PlaceAnOrderForm/>}/>
+        <Route path = '/DashPlaceAnOrderForm' element = {<DashPlaceAnOrderForm/>}/>
+        <Route path = '/FeedbackForm' element = {<FeedbackForm/>}/>
+        <Route path = '/DashFeedbackForm' element = {<DashFeedbackForm/>}/>
+        <Route path = '/OrderFormTable' element = {<OrderFormTable/>}/>
+        <Route path = '/DashOrderFormTable' element = {<DashboardFormTable/>}/>
+        <Route path = '/cusDash' element = {<CusDash/>}/>
+        <Route path = '/Dashcusdsh' element = {<Dashcusdashboard/>}/>
+        <Route path = '/FTable' element = {<FeedbackTable/>}/>
+        <Route path = '/FTable' element = {<FeedbackTable/>}/>
+        <Route path = '/SB2' element = {<Osidebar/>}/>
+        <Route path = '/OLT' element = {<Viewordertable/>}/>
+        <Route path = '/DashOLT' element = {<DashOLT/>}/>
+        <Route path = '/DashFeed' element = {<DashFeed/>}/>
+        <Route path = '/DashOpForm' element = {<DashOpForm/>}/>
+        <Route path = '/OfeedT' element = {<OperatorFeeedTable/>}/>
+        <Route path = '/CalFo' element = {<SalesOrderForm/>}/>
+        <Route path = '/DashCalFo' element = {<DashCalFo/>}/>
+        <Route path = '/CalTable' element = {<CalTable/>}/>
+        <Route path = '/Dashcal' element = {<Dashcal/>}/>
+        <Route path = '/Rep' element = {<RepTable/>}/>
+        <Route path = '/DashRep' element = {<DashRep/>}/>
+        <Route path = '/DashCReg' element = {<DashCReg/>}/>
 
 
 

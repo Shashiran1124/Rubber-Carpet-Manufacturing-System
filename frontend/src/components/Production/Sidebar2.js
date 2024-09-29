@@ -78,7 +78,7 @@ const Sidebar2 = () => {
       <List sx={{ flexGrow: 1 }}> {/* Set flexGrow to 1 to ensure it fills the remaining space */}
         
       {(user?.email === 'malidu@email.com'|| user?.email === 'first5@email.com') && (
-        <StyledListItem button onClick={() => navigate('/dashboard')}>
+        <StyledListItem button onClick={() => navigate('/DashRep')}>
           <ListItemIcon sx={{ color: '#fff' }}>
             <HomeIcon />
           </ListItemIcon>
@@ -133,7 +133,7 @@ const Sidebar2 = () => {
         </StyledListItem>
          )}
 
-        {(user?.email === 'siumi@email.com' || user?.email === 'first5@email.com')&& (
+        {(user?.email === 'siyumi@email.com' || user?.email === 'first5@email.com')&& (
         <StyledListItem button onClick={() => navigate('/hr')}>
           <ListItemIcon sx={{ color: '#fff' }}>
             <PeopleIcon />
@@ -162,7 +162,7 @@ const Sidebar2 = () => {
          )}
 
        {(user?.email === 'cus@email.com' || user?.email === 'first5@email.com')&& (
-        <StyledListItem button onClick={() => navigate('/Order')}>
+        <StyledListItem button onClick={() => navigate('/Dashcusdsh')}>
           <ListItemIcon sx={{ color: '#fff' }}>
           <StorefrontIcon />
           </ListItemIcon>
