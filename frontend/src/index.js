@@ -48,6 +48,33 @@ import Dashcost from './components/distributor/user4';
 import DashReport from './components/distributor/DashReport';
 
 
+//Shashiya
+import DashSupForm from './components/supplier/DashSupForm';
+import F1 from './components/supplier/F1';
+import Navbarr1 from './components/supplier/NavBar';
+import Sidebarr1 from './components/supplier/SideBar';
+import F1T from './components/supplier/F1T';
+
+
+import RMCTable from './components/supplier/RMCTable';
+
+import OFTable from './components/supplier/OFTable';
+import DashOFTable from './components/supplier/DashOFTable';
+
+import DashOrderFormm from './components/supplier/DashOrderForm';
+import RawMaterialCostForm from './components/supplier/RawMaterialCostForm';
+import DashRawMaterialCostForm from './components/supplier/DashRawMaterialCostForm';
+import OrderFormm from './components/supplier/OrderForm';
+import DashF1T from './components/supplier/DashF1T';
+
+import DashRMCtable from './components/supplier/DashRMCTable';
+import SupReport from './components/supplier/SupReport';
+
+import DashReportt from './components/supplier/DashSupReport';
+
+import ReportTable from './components/supplier/ReportTable';
+
+
 
 
 
@@ -108,6 +135,34 @@ root.render(
       <Route path='/dashcost' element={<Dashcost/>}/>
       <Route path='/dashcosttable' element={<DashCostTable/>}/>
       <Route path='/dashreport' element={<DashReport/>}/>
+
+
+      {/*Shashiya*/}
+      <Route path='/DashSupForm' element={<DashSupForm/>}/>
+      <Route path='/F1' element={<F1/>}/>
+      <Route path='/F1T' element={<F1T/>}/>
+      <Route path='/NavBar' element={<Navbarr1/>}/>
+      <Route path='/SideBar' element={<Sidebarr1/>}/>
+      <Route path='/F1T' element={<F1T/>}/>
+
+      <Route path='/DashOFTable' element={<DashOFTable/>}/>
+      
+      <Route path='/OrderForm' element={<OrderFormm/>}/>
+      <Route path='/OFTable' element={<OFTable/>}/>
+      <Route path='/DashOrderForm' element={<DashOrderFormm/>}/>
+      <Route path='/RawMaterialCostForm' element={<RawMaterialCostForm/>}/>
+      
+      <Route path='/DashRawMaterialCostForm' element={<DashRawMaterialCostForm/>}/>
+      <Route path='/DashF1T' element={<DashF1T/>}/>
+
+      <Route path='/RMCTable' element={<RMCTable/>}/>
+
+      <Route path='/DashRMCtable' element={<DashRMCtable/>}/>
+
+      <Route path='/SupReport' element={<SupReport/>}/>
+      <Route path='/DashSupReport' element={<DashReportt/>}/>
+
+      <Route path='/ReportTable' element={<ReportTable/>}/>
 
 
 

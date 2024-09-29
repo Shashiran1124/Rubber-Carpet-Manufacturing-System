@@ -51,6 +51,16 @@ app.use("/controller2", controller2);
 const controller3 = require("./routes/disroutes/controller3.js");
 app.use("/controller3", controller3);
 
+//Shashiya
+const suptestRouter = require("./routes/suproutes/suptest"); // Ensure this path is correct
+app.use("/suptest", suptestRouter);
+
+const suptestRouter1 = require("./routes/suproutes/suptest1"); // Ensure this path is correct
+app.use("/suptest1", suptestRouter1);
+
+const suptestRouter2 = require("./routes/suproutes/suptest2"); // Ensure this path is correct
+app.use("/suptest2", suptestRouter2);
+
 
 
 

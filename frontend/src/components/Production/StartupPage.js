@@ -119,6 +119,7 @@ const StartupPage = () => {
                 border: '2px solid #7540a7',
                 borderRadius: '30px',
                 padding: '10px 20px',
+                width:'88px',
                 backgroundColor: '#7540a7',
                 color: '#fff',
                 transition: '0.3s',
