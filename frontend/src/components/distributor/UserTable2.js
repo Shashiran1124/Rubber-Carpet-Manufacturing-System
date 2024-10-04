@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 export default function UserTable2() {
   const [orders, setOrders] = useState([]);
@@ -113,33 +116,12 @@ export default function UserTable2() {
                   </a>
                 </td>
                 <td style={{ border: '1px solid #000000', padding: '12px', textAlign: 'center' }}>
-                  <button
-                    onClick={() => handleUpdate(order)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#007bff',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer',
-                      marginRight: '8px'
-                    }}
-                  >
-                    Update
-                  </button>
-                  <button
-                    onClick={() => handleDelete(order._id)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#dc3545',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    Delete
-                  </button>
+                  <IconButton onClick={() => handleUpdate(order)} style={{ color: '#28a745' }}>
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton onClick={() => handleDelete(order._id)} style={{ color: '#dc3545' }}>
+                    <DeleteIcon />
+                  </IconButton>
                 </td>
               </tr>
             ))
