@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Welcome to Human Resource Management</h1>
-        <button className='employee-button' onClick={() => navigate('/employees')}>Add Employees</button>
+        <button className='employee-button' onClick={() => navigate('/Employees')}>Add Employees</button>
       </header>
     </div>
   );

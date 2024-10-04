@@ -19,13 +19,20 @@ mongoose.connect(URL, {
 });
 
 const connection = mongoose.connection;
-connection.once("open", ()=>{
+connection.once("open", () => {
     console.log("MongoDB Connection Success!");
 });
 
+// Import routers
 const testRouter = require("./routes/test.js");
-app.use("/test", testRouter);
+const empFeedbackRouter = require("./routes/empfeedback"); // Adjust path if necessary
+const empsalaryRouter = require("./routes/empsalary"); // Import the new empsalary router
 
-app.listen(PORT, ()=>{
+// Use routers
+app.use("/test", testRouter);
+app.use("/feedback", empFeedbackRouter); // Use the feedback routes
+app.use("/salary", empsalaryRouter); // Use the salary routes
+
+app.listen(PORT, () => {
     console.log(`Server is up and running on PORT : ${PORT}`);
 });
