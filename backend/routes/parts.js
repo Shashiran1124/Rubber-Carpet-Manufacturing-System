@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Part = require("../models/Part");
+const momentController = require("moment");
 
 // Add buy part
 router.post("/add", async (req, res) => {
@@ -20,16 +21,34 @@ router.post("/add", async (req, res) => {
 });
 
 // Get All  Entries
-router.get("/all", async (req, res) => {
+router.post("/all", async (req, res) => {
 	try {
-		const listOfPartDetails = await Part.find({});
+		console.log("Incoming request body:", req.body);
+
+		const { startDate, endDate } = req.body;
+
+		console.log("Start Date:", startDate);
+		console.log("End Date:", endDate);
+
+		const start = new Date(startDate);
+		const end = new Date(endDate);
+
+		console.log("Converted Start Date:", start);
+		console.log("Converted End Date:", end);
+
+		const listOfPartDetails = await Part.find({
+			date: {
+				$gte: start,
+				$lte: end,
+			},
+		});
 
 		let partContainer = [];
 		let totalAmount = 0;
 
 		for (var part of listOfPartDetails) {
 			partContainer.push({
-				date: part.date.toString(),
+				date: momentController(part).format("MMMM Do YYYY"),
 				description: part.description ?? "",
 				amount: part.amount,
 			});
@@ -42,9 +61,11 @@ router.get("/all", async (req, res) => {
 			description: "Total Amount",
 			amount: totalAmount,
 		});
+		console.log("Final partContainer:", partContainer);
 
 		res.status(200).json(partContainer);
 	} catch (error) {
+		console.error("An error occurred while fetching part details:", error);
 		res.status(500).json({ message: error.message });
 	}
 });
