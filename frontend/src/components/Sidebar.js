@@ -29,7 +29,7 @@ const Sidebar = () => {
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#fff" }} />
                 
-                {/* Reports */}
+                {/* Reports 
                 <ListItem 
                     button 
                     sx={{ padding: "15px 20px", backgroundColor: isActive(['/DashRep']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
@@ -37,7 +37,7 @@ const Sidebar = () => {
                 >
                     <ListItemText primary="Reports" sx={{ paddingLeft: "10px", color: isActive(['/DashRep']) ? '#FFF' : '#000' }} />
                 </ListItem>
-                <Divider sx={{ backgroundColor: "#FFF" }} />
+                <Divider sx={{ backgroundColor: "#FFF" }} />*/}
                 
                 {/* salary create*/}
                 <ListItem 

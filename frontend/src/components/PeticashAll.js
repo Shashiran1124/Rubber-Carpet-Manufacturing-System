@@ -30,11 +30,22 @@ export default function PettycashAll() {
     const downloadPDF = () => {
         const doc = new jsPDF();
 
-        doc.setFontSize(18);  // Set font size for the title
-        doc.text("Petty Cash", 14, 22);  // Add title at x: 14, y: 22 (position coordinates)
-
-        doc.setFontSize(18);  // Set a smaller font size for the company name
-        doc.text("PRI Rubber Indrustry", 138, 22);  // Add company name at x: 120 (adjust as necessary), y: 22
+        doc.setFontSize(18);
+        doc.text("PRI Rubber Indrustry", 14, 10);
+        doc.setFontSize(15);
+        doc.text("Petty Cash", 170, 10);
+        // Company information at the top of the document
+        doc.setFontSize(10);
+        doc.text("PRI Rubber Indrustry", 14, 16);
+        doc.text("Biyagama", 14, 20);
+        doc.text("Sri Lanka", 14, 24);
+        doc.text('Tell: +94 235689235', 14,28); // Phone number
+        doc.text('Email:', 14,32); // Email label
+        // Set text color to black for the email address
+        doc.setTextColor(0, 0, 255); // RGB for blue
+        doc.text('prirubberindrustry@gmail.com', 24, 32); // Email address
+        // Reset text color to black for subsequent text
+        doc.setTextColor(0, 0, 0); // Reset to black
     
 
         const tableColumn = ["Date", "Description", "Amount"];
@@ -52,7 +63,7 @@ export default function PettycashAll() {
         doc.autoTable({
             head: [tableColumn],
             body: tableRows,
-            startY:30,
+            startY:35,
             handleStyle:{
                 fillColor:[0,0,255],
                 textCollor:[255,255,255],
@@ -60,6 +71,17 @@ export default function PettycashAll() {
             }
 
         });
+        const finalY = doc.autoTable.previous.finalY + 20;
+
+        
+        doc.text('...............................................', 14, finalY ); 
+        doc.setFontSize(12);
+        doc.text('Finane Manager', 14, finalY + 10); // Placeholder for position
+    
+        // Date and signature line at the bottom
+        doc.setFontSize(10);
+        const currentDate = new Date().toLocaleDateString();
+        doc.text(`Date: ${currentDate}`, 14, finalY + 15); // Display current date
 
         doc.save("pettycash_data.pdf");
     };
