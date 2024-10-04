@@ -57,10 +57,10 @@ const Sidebarhr = () => {
                 {/* Employee  Feedback */}
                 <ListItem 
                     button 
-                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/Feedback']) ? '#191919' : 'inherit', borderRadius: "6px",width: "220px",border: "1.5px solid #000000",  marginTop: "8px", marginBottom: "8px"  }} 
-                    onClick={() => handleNavigation('/Feedback')}
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/FeedbackTable']) ? '#191919' : 'inherit', borderRadius: "6px",width: "220px",border: "1.5px solid #000000",  marginTop: "8px", marginBottom: "8px"  }} 
+                    onClick={() => handleNavigation('/FeedbackTable')}
                 >
-                    <ListItemText primary="Employee Feedback" sx={{ paddingLeft: "10px", color: isActive(['/Feedback']) ? '#fff' : '#000' }} />
+                    <ListItemText primary="Employee Feedback" sx={{ paddingLeft: "10px", color: isActive(['/FeedbackTable']) ? '#fff' : '#000' }} />
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#fff" }} />
                 
