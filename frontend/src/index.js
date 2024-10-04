@@ -117,6 +117,22 @@ import DashReleRawform from './components/Inventory/DashReleRawform';
 import DashReleRawtable from './components/Inventory/DashReleRawtable';
 
 
+//siyumi
+
+import Employees from './components/HumanResource/Employees';
+import EmployeeForm from './components/HumanResource/EmployeeForm';
+import EmployeeTable from './components/HumanResource/EmployeeTable';
+import Navbarhr from './components/HumanResource/NavBar';
+import Sidebarhr from './components/HumanResource/SideBar';
+import FeedbackFormhr from './components/HumanResource/FeedbackForm';
+import Feedback from './components/HumanResource/Feedback';
+import FeedbackTablehr from './components/HumanResource/FeedbackTable';
+import SalaryManagementForm from './components/HumanResource/SalaryManagementForm'; 
+import Salary from './components/HumanResource/Salary';
+import SalaryManagementTable from './components/HumanResource/SalaryManagementTable';
+import Reporthr from './components/HumanResource/Report';
+
+
 
 
 
@@ -243,8 +259,20 @@ root.render(
         <Route path = '/dashrelerawform' element = {<DashReleRawform/>}/>
         <Route path = '/dashrelerawtable' element = {<DashReleRawtable/>}/>
 
+         {/*siyumi*/}
+         <Route path='/Employees' element={<Employees />} />
+      <Route path='/EmployeeForm' element={<EmployeeForm />} />
+      <Route path='/EmployeeTable' element={<EmployeeTable />} />
+      <Route path='/NavBar' element={<Navbarhr />} />
+      <Route path='/SideBar' element={<Sidebarhr />} />
+      <Route path='/Feedback' element={<Feedback />} />
+      <Route path='/FeedbackForm' element={<FeedbackFormhr />} />
+      <Route path='/FeedbackTable' element={<FeedbackTablehr />} />
+      <Route path='/SalaryManagementForm' element={<SalaryManagementForm />} />
+      <Route path='/SalaryManagementTable' element={<SalaryManagementTable />} />
+      <Route path='/Salary' element={<Salary />} />
+      <Route path='/Reporthr' element={<Reporthr />} />
 
-     
 
     </Routes>
     </AuthProvider>
