@@ -87,7 +87,7 @@ const Sidebar2 = () => {
          )}
 
         {(user?.email === 'nishitha@email.com'|| user?.email === 'first5@email.com') && (
-        <StyledListItem button onClick={() => navigate('/inventory')}>
+        <StyledListItem button onClick={() => navigate('/Dashreportin')}>
           <ListItemIcon sx={{ color: '#fff' }}>
             <InventoryIcon />
           </ListItemIcon>

@@ -99,7 +99,22 @@ import DashRep from './components/cusoperator/DashRep';
 import DashCReg from './components/cusoperator/DashCReg';
 
 
+//nishitha
 
+import InForm from './components/Inventory/InForm'
+import Navbarin from './components/Inventory/NavBar';
+import Sidebarin from './components/Inventory/SideBar';
+import DashSupFormin from './components/Inventory/DashInForm';
+import InventoryFormTable from './components/Inventory/InventoryFormTable';
+import DashTable from './components/Inventory/DashTable';
+import Dashreport from './components/Inventory/Dashreport';
+import Report from './components/Inventory/report';
+import Dashreinform from './components/Inventory/Dashreinform';
+import DashreinTable from './components/Inventory/Dashreintable';
+import DashReceRawform from './components/Inventory/DashReceRawform';
+import DashReceRawtable from './components/Inventory/DashReceRawtable';
+import DashReleRawform from './components/Inventory/DashReleRawform';
+import DashReleRawtable from './components/Inventory/DashReleRawtable';
 
 
 
@@ -212,8 +227,21 @@ root.render(
 
 
 
-      
-   
+        {/*nishitha*/}
+        <Route path = '/DashInForm' element = {<DashSupFormin/>}/>
+        <Route path = '/InForm' element = {<InForm/>}/>
+        <Route path = '/NavBar' element = {<Navbarin/>}/>
+        <Route path = '/SideBar' element = {<Sidebarin/>}/>
+        <Route path = '/Inventoryformtable' element = {<InventoryFormTable/>}/>
+        <Route path = '/dashtable' element = {<DashTable/>}/>
+        <Route path = '/Dashreportin' element = {<Dashreport/>}/>
+        <Route path="/report" element={<Report />} />
+        <Route path = '/dashreinform' element = {<Dashreinform/>}/>
+        <Route path = '/dashreinTable' element = {<DashreinTable/>}/>
+        <Route path = '/dashdecerawform' element = {<DashReceRawform/>}/>
+        <Route path = '/dashrecerawtable' element = {<DashReceRawtable/>}/>
+        <Route path = '/dashrelerawform' element = {<DashReleRawform/>}/>
+        <Route path = '/dashrelerawtable' element = {<DashReleRawtable/>}/>
 
 
      

@@ -72,7 +72,18 @@ app.use('/cusfeedback', custest2Router);
 app.use('/cuscalculation', custest3Router); // Adjust route path as needed
 
 
+//nishitha
+const testRouterin = require("./routes/inventory/inventoryroute.js");
+app.use("/inventoryroute", testRouterin);
 
+const testRouter2in = require("./routes/inventory/releaseInventoryRoutes.js");
+app.use("/releaseInventoryRoutes", testRouter2in);
+
+const testRouter3in = require("./routes/inventory/receiveRawMaterialsRoutes.js");
+app.use("/receiveRawMaterialsRoutes", testRouter3in);
+
+const testRouter4in = require("./routes/inventory/releaseRawMaterialsRoutes.js");
+app.use("/releaseRawMaterialsRoutes", testRouter4in);
 
 
 
