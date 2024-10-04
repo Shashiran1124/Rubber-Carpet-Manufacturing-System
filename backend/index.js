@@ -72,8 +72,30 @@ app.use('/cusfeedback', custest2Router);
 app.use('/cuscalculation', custest3Router); // Adjust route path as needed
 
 
+//nishitha
+const testRouterin = require("./routes/inventory/inventoryroute.js");
+app.use("/inventoryroute", testRouterin);
+
+const testRouter2in = require("./routes/inventory/releaseInventoryRoutes.js");
+app.use("/releaseInventoryRoutes", testRouter2in);
+
+const testRouter3in = require("./routes/inventory/receiveRawMaterialsRoutes.js");
+app.use("/receiveRawMaterialsRoutes", testRouter3in);
+
+const testRouter4in = require("./routes/inventory/releaseRawMaterialsRoutes.js");
+app.use("/releaseRawMaterialsRoutes", testRouter4in);
 
 
+//siyumi
+// Import routers
+const testRouterhr = require("./routes/hrroutes/hrtest.js");
+const empFeedbackRouter = require("./routes/hrroutes/empfeedback.js"); // Adjust path if necessary
+const empsalaryRouter = require("./routes/hrroutes/empsalary.js"); // Import the new empsalary router
+
+// Use routers
+app.use("/hrtest", testRouterhr);
+app.use("/feedback", empFeedbackRouter); // Use the feedback routes
+app.use("/salary", empsalaryRouter); // Use the salary routes
 
 
 
