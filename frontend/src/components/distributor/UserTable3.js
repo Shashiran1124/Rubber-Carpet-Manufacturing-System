@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function UserTable3() {
   const [kpis, setKPIs] = useState([]);
@@ -111,35 +114,20 @@ export default function UserTable3() {
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{kpi.Responsible_Department}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{kpi.Comments}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px', textAlign: 'center' }}>
-                  <button
+                  <IconButton
                     onClick={() => handleUpdate(kpi)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#007bff',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer',
-                      marginRight: '8px',
-                      marginBottom: '8px'
-
-                    }}
+                    style={{ color: 'green' }}
+                    aria-label="edit"
                   >
-                    Update
-                  </button>
-                  <button
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
                     onClick={() => handleDelete(kpi._id)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#dc3545',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer'
-                    }}
+                    style={{ color: 'red' }}
+                    aria-label="delete"
                   >
-                    Delete
-                  </button>
+                    <DeleteIcon />
+                  </IconButton>
                 </td>
               </tr>
             ))
