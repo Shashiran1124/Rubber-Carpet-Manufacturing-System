@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Grid, Paper } from '@mui/material';
 import { Pie } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 
@@ -16,6 +16,8 @@ export default function Reports2() {
     'Rubber carpet tile': 0,
     'Rubber runner mats': 0,
   });
+
+  const [totalQuantity, setTotalQuantity] = useState(0); // State to store the total quantity
 
   // Function to fetch order data from the server
   const fetchOrderData = async () => {
@@ -37,7 +39,7 @@ export default function Reports2() {
     fetchOrderData();
   }, []);
 
-  // Update category sums whenever orderData changes
+  // Update category sums and total quantity whenever orderData changes
   useEffect(() => {
     const calculateSums = () => {
       const sums = {
@@ -49,13 +51,17 @@ export default function Reports2() {
         'Rubber runner mats': 0,
       };
 
+      let totalQty = 0;
+
       orderData.forEach(order => {
         if (sums.hasOwnProperty(order.name)) {
           sums[order.name] += order.qty;
         }
+        totalQty += order.qty; // Calculate the total quantity
       });
 
       setCategorySums(sums);
+      setTotalQuantity(totalQty); // Set total quantity
     };
 
     calculateSums();
@@ -94,9 +100,49 @@ export default function Reports2() {
         Production Summary Report
       </Typography>
 
+      {/* Pie Chart */}
       <Box sx={{ maxWidth: 600, margin: '0 auto' }}>
         <Pie data={pieChartData} />
       </Box>
+
+      {/* Product Summary */}
+      <Typography
+        variant="h4"
+        sx={{ marginTop: '30px', color: '#333', textAlign: 'center', fontWeight: 'bold' }}
+      >
+        Product Summary
+      </Typography>
+
+      {/* Product List and Quantities */}
+      <Grid container spacing={2} sx={{ marginTop: '20px' }}>
+        {Object.entries(categorySums).map(([product, quantity], index) => {
+          const percentage = totalQuantity > 0 ? ((quantity / totalQuantity) * 100).toFixed(2) : 0; // Calculate percentage
+
+          return (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Paper
+                sx={{
+                  padding: '20px',
+                  backgroundColor: '#fff',
+                  boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                  borderRadius: '10px',
+                  textAlign: 'center',
+                }}
+              >
+                <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#555' }}>
+                  {product}
+                </Typography>
+                <Typography variant="h5" sx={{ color: '#333', marginTop: '10px' }}>
+                  Total Quantity: {quantity}
+                </Typography>
+                <Typography variant="h6" sx={{ color: '#777', marginTop: '5px' }}>
+                  Percentage: {percentage}%
+                </Typography>
+              </Paper>
+            </Grid>
+          );
+        })}
+      </Grid>
     </Box>
   );
 }
