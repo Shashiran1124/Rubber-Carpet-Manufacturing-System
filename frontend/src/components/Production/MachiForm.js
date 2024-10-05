@@ -3,17 +3,17 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import supplierImage from '../../images/33.png';
 
 export default function MachiForm() {
-
   const navigate = useNavigate();
-  const location = useLocation(); // Access location to get passed supplier data
+  const location = useLocation();
   const [formData, setFormData] = useState({
     mnum: '',
     mdate: '',
     mstime: '',
     metime: '',
-    mteam: '' // This will hold the selected team value
+    mteam: ''
   });
 
+  const [errors, setErrors] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [allocationId, setAllocationId] = useState(null);
 
@@ -26,7 +26,7 @@ export default function MachiForm() {
 
       setFormData({
         mnum: allocations.mnum,
-        mdate: formattedDate, // Set the formatted date
+        mdate: formattedDate,
         mstime: allocations.mstime,
         metime: allocations.metime,
         mteam: allocations.mteam,
@@ -39,23 +39,52 @@ export default function MachiForm() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    let validValue = value;
-
-    // Validation for mnum: Numeric values only
-    if (name === 'mnum') {
-      validValue = value.replace(/[^0-9]/g, '');
-    }
-
-    // Validation for mteam is no longer needed as it will be controlled by dropdown
-
     setFormData({
       ...formData,
-      [name]: validValue
+      [name]: value
     });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    const currentDate = new Date().toISOString().split('T')[0]; // Today's date in YYYY-MM-DD
+
+    // Validate date
+    if (!formData.mdate) {
+      newErrors.mdate = 'Date is required';
+    } else if (formData.mdate < currentDate) {
+      newErrors.mdate = 'Date cannot be in the past';
+    }
+
+    // Validate time
+    if (!formData.mstime) {
+      newErrors.mstime = 'Start Time is required';
+    }
+    if (!formData.metime) {
+      newErrors.metime = 'End Time is required';
+    } else if (formData.mstime && formData.metime) {
+      const startTime = new Date(`1970-01-01T${formData.mstime}`);
+      const endTime = new Date(`1970-01-01T${formData.metime}`);
+      if (endTime <= startTime) {
+        newErrors.metime = 'End Time must be after Start Time';
+      }
+    }
+
+    if (!formData.mteam) {
+      newErrors.mteam = 'Team Name is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
     try {
       const url = isEditMode
         ? `http://localhost:8070/test3/update/${allocationId}`
@@ -82,6 +111,8 @@ export default function MachiForm() {
     }
   };
 
+  const currentDate = new Date().toISOString().split('T')[0]; // Today's date in YYYY-MM-DD
+
   return (
     <div style={{
       display: 'flex',
@@ -107,7 +138,7 @@ export default function MachiForm() {
         <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Machine Allocation Form</h2>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="mnum" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Machine Number:</label>
+            <label htmlFor="mnum" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Machine Name:</label>
             <input
               type="text"
               id="mnum"
@@ -134,6 +165,7 @@ export default function MachiForm() {
               value={formData.mdate}
               onChange={handleChange}
               required
+              min={currentDate} // Prevent past dates
               style={{
                 width: '100%',
                 padding: '10px',
@@ -142,6 +174,7 @@ export default function MachiForm() {
                 boxSizing: 'border-box'
               }}
             />
+            {errors.mdate && <div style={{ color: 'red', fontSize: '12px' }}>{errors.mdate}</div>}
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="mstime" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Start Time:</label>
@@ -160,6 +193,7 @@ export default function MachiForm() {
                 boxSizing: 'border-box'
               }}
             />
+            {errors.mstime && <div style={{ color: 'red', fontSize: '12px' }}>{errors.mstime}</div>}
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="metime" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>End Time:</label>
@@ -178,6 +212,7 @@ export default function MachiForm() {
                 boxSizing: 'border-box'
               }}
             />
+            {errors.metime && <div style={{ color: 'red', fontSize: '12px' }}>{errors.metime}</div>}
           </div>
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="mteam" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Team Name:</label>
@@ -196,9 +231,9 @@ export default function MachiForm() {
               }}
             >
               <option value="">Select Team</option>
-              <option value="a">Team A</option>
-              <option value="b">Team B</option>
-              <option value="c">Team C</option>
+              <option value="Team A">Team A</option>
+              <option value="Team B">Team B</option>
+              <option value="Team C">Team C</option>
             </select>
           </div>
           {/* Button container */}
