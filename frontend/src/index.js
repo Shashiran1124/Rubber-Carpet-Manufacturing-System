@@ -31,6 +31,7 @@ import LoginPage from './components/Production/LoginPage';
 import RegisterPage from './components/Production/RegisterPage';
 import { AuthProvider } from './context/AuthContext';
 import Home from './components/Production/Home';
+import Dashstocklevel from './components/Production/Dashstocklevel';
 
 
 
@@ -136,6 +137,7 @@ import Reporthr from './components/HumanResource/Report';
 
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -172,6 +174,7 @@ root.render(
       <Route path='/' element={<StartupPage/>}/> 
       <Route path="/login" element={<LoginPage />} /> {/* Login page */}
       <Route path="/register" element={<RegisterPage />} /> {/* Registration page */}
+      <Route path="/dashstocklevel" element={<Dashstocklevel />} /> 
 
 
       {/*Nishan*/}

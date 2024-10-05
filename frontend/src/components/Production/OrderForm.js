@@ -326,7 +326,7 @@ export default function OrderForm() {
             </button>
             <button
               type="button"
-              onClick={() => navigate('/dashdrdertable')}
+              onClick={() => navigate('/dashstocklevel')}
               style={{
                 padding: '10px 20px',
                 backgroundColor: '#28a745',

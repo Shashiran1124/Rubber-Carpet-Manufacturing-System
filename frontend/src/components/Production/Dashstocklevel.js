@@ -1,14 +1,18 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import FeedbackForm from "./FeedbackForm";  // Import your FeedbackForm component
-import Navbar from "./NavBar";              // Import the Navbar component
-import EmpSidebar from "../Production/EmpSideBar";
+import Sidebar from "./SideBar";
+import Navbar from "./NavBar";
+import Report from "../Inventory/report";
 
-const Feedback = () => {
+
+
+
+
+const Dashstocklevel = () => {
     return (
         <Grid container>
             <Grid item>
-                <EmpSidebar />
+                <Sidebar />
             </Grid>
             <Grid item xs>
                 <Navbar />
@@ -19,7 +23,7 @@ const Feedback = () => {
                         minHeight: "100vh" 
                     }}
                 >
-                    <FeedbackForm />   {/* Use the FeedbackForm component */}
+                    < Report/>
                 </Box>
             </Grid>
         </Grid>
@@ -27,4 +31,4 @@ const Feedback = () => {
 };
 
 // Ensure the export statement matches the component name
-export default Feedback;
+export default Dashstocklevel;
