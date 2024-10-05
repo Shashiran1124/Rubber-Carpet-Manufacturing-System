@@ -92,8 +92,8 @@ export default function UserTable() {
             <th style={{ border: '1px solid #000000', padding: '12px' }}>Number of Packages</th>
             <th style={{ border: '1px solid #000000', padding: '12px' }}>Drop-off Location</th>
             <th style={{ border: '1px solid #000000', padding: '12px' }}>Vehicle Number</th>
-            <th style={{ border: '1px solid #000000', padding: '12px' }}>Pickup Date and Time</th>
-            <th style={{ border: '1px solid #000000', padding: '12px' }}>Drop-off Date and Time</th>
+            <th style={{ border: '1px solid #000000', padding: '12px' }}>Pickup Date</th>
+            <th style={{ border: '1px solid #000000', padding: '12px' }}>Drop-off Date</th>
             <th style={{ border: '1px solid #000000', padding: '12px' }}>Tracking Number</th>
             <th style={{ border: '1px solid #000000', padding: '12px' }}>Actions</th>
           </tr>
@@ -107,8 +107,8 @@ export default function UserTable() {
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Number_of_Packages}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Drop_off_Location}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Vehicle_Number}</td>
-                <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Pickup_Date_and_Time).toLocaleString()}</td>
-                <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Drop_off_Date_and_Time).toLocaleString()}</td>
+                <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Pickup_Date_and_Time).toLocaleDateString()}</td>
+                <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Drop_off_Date_and_Time).toLocaleDateString()}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Tracking_Number}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px', textAlign: 'center' }}>
                   <IconButton
@@ -138,8 +138,8 @@ export default function UserTable() {
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Number_of_Packages}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Drop_off_Location}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Vehicle_Number}</td>
-                <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Pickup_Date_and_Time).toLocaleString()}</td>
-                <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Drop_off_Date_and_Time).toLocaleString()}</td>
+                <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Pickup_Date_and_Time).toLocaleDateString()}</td>
+                <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Drop_off_Date_and_Time).toLocaleDateString()}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Tracking_Number}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px', textAlign: 'center' }}>
                   <IconButton

@@ -41,7 +41,7 @@ export default function TransportForm() {
   const formatDateForInput = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
-    return date.toISOString().slice(0, 16); // Format: YYYY-MM-DDTHH:MM
+    return date.toISOString().slice(0, 10); // Format: YYYY-MM-DD
   };
 
   const handleChange = (e) => {
@@ -224,11 +224,11 @@ export default function TransportForm() {
             />
           </div>
 
-          {/* Pickup Date and Time Field */}
+          {/* Pickup Date Field */}
           <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Pickup_Date_and_Time" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Pickup Date and Time:</label>
+            <label htmlFor="Pickup_Date_and_Time" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Pickup Date:</label>
             <input
-              type="datetime-local"
+              type="date"
               id="Pickup_Date_and_Time"
               name="Pickup_Date_and_Time"
               value={formData.Pickup_Date_and_Time}
@@ -244,17 +244,16 @@ export default function TransportForm() {
             />
           </div>
 
-          {/* Drop-off Date and Time Field */}
+          {/* Drop-off Date Field */}
           <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Drop_off_Date_and_Time" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Drop-off Date and Time:</label>
+            <label htmlFor="Drop_off_Date_and_Time" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Drop-off Date:</label>
             <input
-              type="datetime-local"
+              type="date"
               id="Drop_off_Date_and_Time"
               name="Drop_off_Date_and_Time"
               value={formData.Drop_off_Date_and_Time}
               onChange={handleChange}
               required
-              min={formData.Pickup_Date_and_Time} // Set min to pickup date and time
               style={{
                 width: '100%',
                 padding: '10px',
@@ -286,37 +285,34 @@ export default function TransportForm() {
             />
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-            <button
-              type="submit"
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#4CAF50',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer'
-              }}
-            >
-              {isEditMode ? 'Update Transport' : 'Add Transport'}
-            </button>
+          {/* Submit Button */}
+          <button type="submit" style={{
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            padding: '10px 15px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            width: '100%',
+            fontSize: '16px'
+          }}>
+            {isEditMode ? 'Update Transport' : 'Add Transport'}
+          </button>
 
-            {/* New View Table Button */}
-            <button
-              type="button"
-              onClick={handleViewTable}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#007bff',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer'
-              }}
-            >
-              View Table
-            </button>
-          </div>
+          {/* View Table Button */}
+          <button type="button" onClick={handleViewTable} style={{
+            backgroundColor: '#2196F3',
+            color: 'white',
+            padding: '10px 15px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            width: '100%',
+            fontSize: '16px',
+            marginTop: '10px'
+          }}>
+            View Transport Table
+          </button>
         </form>
       </div>
     </div>
