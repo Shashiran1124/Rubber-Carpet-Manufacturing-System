@@ -80,6 +80,18 @@ const Sidebar = () => {
                     <ListItemText primary="Cost Category" sx={{ color: isActive(['/dashcost']) ? '#FFF' : '#000' }} />
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#FFF" }} />
+
+
+                {/* View Order */}
+                <ListItem 
+                    button 
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/dashordertabledis']) ? '#191919' : 'inherit', borderRadius: "6px", width: "220px", border: "2px solid #000000", marginBottom: "4px" }} 
+                    onClick={() => handleNavigation('/dashordertabledis')}
+                >
+                    <ListAltIcon sx={{ color: isActive(['/dashordertabledis']) ? '#FFF' : '#000', marginRight: "10px" }} />
+                    <ListItemText primary="View Order" sx={{ color: isActive(['/dashordertabledis']) ? '#FFF' : '#000' }} />
+                </ListItem>
+                <Divider sx={{ backgroundColor: "#FFF" }} />
                 
             </List>
         </Box>

@@ -47,6 +47,7 @@ import DashKpiTable from './components/distributor/DashKpiTable';
 import DashCostTable from './components/distributor/DashCostTable';
 import Dashcost from './components/distributor/user4';
 import DashReport from './components/distributor/DashReport';
+import DashOrderTabledis from './components/distributor/DashOrderViewdis';
 
 
 //Shashiran
@@ -138,6 +139,7 @@ import Reporthr from './components/HumanResource/Report';
 
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -190,6 +192,7 @@ root.render(
       <Route path='/dashcost' element={<Dashcost/>}/>
       <Route path='/dashcosttable' element={<DashCostTable/>}/>
       <Route path='/dashreport' element={<DashReport/>}/>
+      <Route path='/dashordertabledis' element={<DashOrderTabledis/>}/>
 
 
       {/*Shashiran*/}
