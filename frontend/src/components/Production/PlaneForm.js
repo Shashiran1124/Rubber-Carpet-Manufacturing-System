@@ -3,21 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import supplierImage from '../../images/22.png';
 
 export default function OrderForm() {
-
   const navigate = useNavigate();
   const location = useLocation();
 
-  const shiftOptions = [
-    'Day',
-    'Night',
-    'Swing'
-  ];
-
-  const teamOptions = [
-    'Team A',
-    'Team B',
-    'Team C'
-  ];
+  const shiftOptions = ['Day', 'Night', 'Swing'];
+  const teamOptions = ['Team A', 'Team B', 'Team C'];
 
   const [formData, setFormData] = useState({
     pnum: '',
@@ -37,14 +27,14 @@ export default function OrderForm() {
       const Plan = location.state.Plan;
       const formattedDate = new Date(Plan.psdate).toISOString().split('T')[0]; // Convert to YYYY-MM-DD
 
-    setFormData({
-      pnum: Plan.pnum,
-      psdate: formattedDate,  // Use formatted date
-      pstime: Plan.pstime,
-      petime: Plan.petime,
-      pshift: Plan.pshift,
-      pteam: Plan.pteam,
-    });
+      setFormData({
+        pnum: Plan.pnum,
+        psdate: formattedDate, // Use formatted date
+        pstime: Plan.pstime,
+        petime: Plan.petime,
+        pshift: Plan.pshift,
+        pteam: Plan.pteam,
+      });
       setSupplierId(Plan._id);
       setIsEditMode(true);
     }
@@ -67,11 +57,17 @@ export default function OrderForm() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.pnum) {
-      newErrors.pnum = 'Order Number is required';
-    }
+    const currentDate = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD
+
+    // Date validation
     if (!formData.psdate) {
       newErrors.psdate = 'Start Date is required';
+    } else if (formData.psdate < currentDate) {
+      newErrors.psdate = 'Start Date cannot be in the past';
+    }
+
+    if (!formData.pnum) {
+      newErrors.pnum = 'Order Number is required';
     }
     if (!formData.pstime) {
       newErrors.pstime = 'Start Time is required';
@@ -85,14 +81,23 @@ export default function OrderForm() {
     if (!formData.pteam) {
       newErrors.pteam = 'Team is required';
     }
-    
+
+    // End time validation
+    if (formData.pstime && formData.petime) {
+      const startTime = new Date(`1970-01-01T${formData.pstime}`);
+      const endTime = new Date(`1970-01-01T${formData.petime}`);
+      if (endTime <= startTime) {
+        newErrors.petime = 'End Time must be after Start Time';
+      }
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -123,6 +128,9 @@ export default function OrderForm() {
     }
   };
 
+  // Get today's date for min attribute
+  const currentDate = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD
+
   return (
     <div style={{
       display: 'flex',
@@ -132,7 +140,6 @@ export default function OrderForm() {
       backgroundColor: '#f7f7f7',
       padding: '10px'
     }}>
-
       <div style={{ marginRight: '20px' }}>
         <img src={supplierImage} alt="Order" style={{ width: '450px', height: '80vh', borderRadius: '10px' }} />
       </div>
@@ -177,6 +184,7 @@ export default function OrderForm() {
               value={formData.psdate}
               onChange={handleChange}
               required
+              min={currentDate} // Prevent past dates
               style={{
                 width: '100%',
                 padding: '10px',
@@ -217,6 +225,7 @@ export default function OrderForm() {
               value={formData.petime}
               onChange={handleChange}
               required
+              min={formData.pstime ? formData.pstime : undefined} // Set minimum time based on start time
               style={{
                 width: '100%',
                 padding: '10px',

@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import supplierImage from '../../images/11.png';
 
 export default function OrderForm() {
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,6 +21,12 @@ export default function OrderForm() {
     'Rubber gasket',
     'Rubber mats',
     'Rubber belt'
+  ];
+
+  const sizeOptions = [
+    'Small',
+    'Medium',
+    'Large'
   ];
 
   const [formData, setFormData] = useState({
@@ -229,8 +234,7 @@ export default function OrderForm() {
 
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="size" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Size:</label>
-            <input
-              type="text"
+            <select
               id="size"
               name="size"
               value={formData.size}
@@ -241,9 +245,15 @@ export default function OrderForm() {
                 padding: '10px',
                 border: errors.size ? '1px solid red' : '1px solid #ccc',
                 borderRadius: '5px',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                backgroundColor: '#fff'
               }}
-            />
+            >
+              <option value="" disabled>Select Size</option>
+              {sizeOptions.map((size, index) => (
+                <option key={index} value={size}>{size}</option>
+              ))}
+            </select>
             {errors.size && <div style={{ color: 'red', fontSize: '12px' }}>{errors.size}</div>}
           </div>
 

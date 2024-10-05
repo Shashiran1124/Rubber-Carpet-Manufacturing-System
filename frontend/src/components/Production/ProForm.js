@@ -3,9 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import progressImage from '../../images/44.png';
 
 export default function ProForm() {
-
   const navigate = useNavigate();
-  const location = useLocation(); // Access location to get passed progress data
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     lname: '',
@@ -17,6 +16,7 @@ export default function ProForm() {
     lDefectiveunit: ''
   });
 
+  const [errors, setErrors] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [progressId, setProgressId] = useState(null);
 
@@ -42,14 +42,44 @@ export default function ProForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Validate input for good units and defective units
+    let validValue = value;
+    if (name === 'lgoodunit' || name === 'lDefectiveunit') {
+      validValue = value.replace(/[^0-9]/g, ''); // Only allow positive integers
+    }
+
     setFormData({
       ...formData,
-      [name]: value
+      [name]: validValue
     });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    // Validate that good units and defective units are non-negative integers
+    if (!formData.lgoodunit || parseInt(formData.lgoodunit, 10) < 0) {
+      newErrors.lgoodunit = 'Good Units must be a non-negative integer';
+    }
+
+    if (!formData.lDefectiveunit || parseInt(formData.lDefectiveunit, 10) < 0) {
+      newErrors.lDefectiveunit = 'Defective Units must be a non-negative integer';
+    }
+
+    // Validate other fields as necessary
+    // ... (Other validations can be added here)
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
     try {
       const url = isEditMode
         ? `http://localhost:8070/test4/update/${progressId}`
@@ -102,7 +132,6 @@ export default function ProForm() {
       }}>
         <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Production Progress Form</h2>
         <form onSubmit={handleSubmit}>
-          {/* Form fields here */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="lname" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Line Name:</label>
             <input
@@ -121,8 +150,7 @@ export default function ProForm() {
               }}
             />
           </div>
-          
-          {/* Percentage selection for each stage */}
+
           {['lmaterial', 'lcutting', 'lmolding', 'lVulcanization'].map((field) => (
             <div key={field} style={{ marginBottom: '15px' }}>
               <label htmlFor={field} style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>{field.replace('l', '')}:</label>
@@ -150,7 +178,6 @@ export default function ProForm() {
             </div>
           ))}
 
-          {/* Input fields for good and defective units */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="lgoodunit" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Good Units:</label>
             <input
@@ -160,6 +187,7 @@ export default function ProForm() {
               value={formData.lgoodunit}
               onChange={handleChange}
               required
+              min="0" // Ensure that only positive numbers can be input
               style={{
                 width: '100%',
                 padding: '10px',
@@ -168,6 +196,7 @@ export default function ProForm() {
                 boxSizing: 'border-box'
               }}
             />
+            {errors.lgoodunit && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lgoodunit}</div>} {/* Error message */}
           </div>
 
           <div style={{ marginBottom: '15px' }}>
@@ -179,6 +208,7 @@ export default function ProForm() {
               value={formData.lDefectiveunit}
               onChange={handleChange}
               required
+              min="0" // Ensure that only positive numbers can be input
               style={{
                 width: '100%',
                 padding: '10px',
@@ -187,9 +217,9 @@ export default function ProForm() {
                 boxSizing: 'border-box'
               }}
             />
+            {errors.lDefectiveunit && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lDefectiveunit}</div>} {/* Error message */}
           </div>
 
-          {/* Button container */}
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
             <button
               type="submit"
