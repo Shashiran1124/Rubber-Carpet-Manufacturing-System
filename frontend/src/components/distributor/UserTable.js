@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function UserTable() {
   const [transports, setTransports] = useState([]);
@@ -108,33 +111,18 @@ export default function UserTable() {
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Drop_off_Date_and_Time).toLocaleString()}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Tracking_Number}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px', textAlign: 'center' }}>
-                  <button
+                  <IconButton
                     onClick={() => handleUpdate(transport)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#007bff',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer',
-                      marginRight: '8px'
-                    }}
+                    style={{ color: '#28a745', marginRight: '8px' }} // Changed edit icon color to green
                   >
-                    Update
-                  </button>
-                  <button
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
                     onClick={() => handleDelete(transport._id)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#dc3545',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer'
-                    }}
+                    style={{ color: '#dc3545' }}
                   >
-                    Delete
-                  </button>
+                    <DeleteIcon />
+                  </IconButton>
                 </td>
               </tr>
             ))
@@ -154,33 +142,18 @@ export default function UserTable() {
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{new Date(transport.Drop_off_Date_and_Time).toLocaleString()}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px' }}>{transport.Tracking_Number}</td>
                 <td style={{ border: '1px solid #000000', padding: '12px', textAlign: 'center' }}>
-                  <button
+                  <IconButton
                     onClick={() => handleUpdate(transport)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#007bff',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer',
-                      marginRight: '8px'
-                    }}
+                    style={{ color: '#28a745', marginRight: '8px' }} // Changed edit icon color to green
                   >
-                    Update
-                  </button>
-                  <button
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
                     onClick={() => handleDelete(transport._id)}
-                    style={{
-                      padding: '8px 12px',
-                      backgroundColor: '#dc3545',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '5px',
-                      cursor: 'pointer'
-                    }}
+                    style={{ color: '#dc3545' }}
                   >
-                    Delete
-                  </button>
+                    <DeleteIcon />
+                  </IconButton>
                 </td>
               </tr>
             ))
