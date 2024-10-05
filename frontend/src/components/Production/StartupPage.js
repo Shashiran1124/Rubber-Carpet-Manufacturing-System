@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect
+
 import { AppBar, Toolbar, IconButton, Typography, Button, TextField, Container, Box, Grid, Card, CardContent, CardMedia, List, ListItem, ListItemIcon, ListItemText, Link } from '@mui/material';
 import { Facebook, Twitter, Instagram, Search, Phone,  LocationOn, ArrowBack, ArrowForward, AddShoppingCart, Mail, AccessTime, LinkedIn, Pinterest } from '@mui/icons-material';
 
@@ -6,7 +7,9 @@ import { useNavigate} from 'react-router-dom';
 import { keyframes } from '@mui/system';
 
 // Import your image
-import backgroundImage from '../../images/back5.jpeg';
+import backgroundImage1 from '../../images/back5.jpeg';
+import backgroundImage2 from '../../images/back6.jpeg';
+import backgroundImage3 from '../../images/back8.png';
 import logo from '../../images/logo.png';
 
 import img1 from '../../images/inventory_rubber_mats.jpeg';
@@ -92,6 +95,31 @@ const buttonHover = {
 
 const StartupPage = () => {
   const navigate = useNavigate(); 
+
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const backgroundImages = [backgroundImage1, backgroundImage2, backgroundImage3];
+
+  // Automatically change background image every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+    }, 2000);
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, []);
+
+  const handlePreviousImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? backgroundImages.length - 1 : prevIndex - 1));
+  };
+
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
+  };
+
+  
+
+
 
   const handleNavigation = (path) => {
     navigate(path);  // Navigate to the desired path
@@ -232,7 +260,7 @@ const StartupPage = () => {
       <Box 
         position="relative"
         sx={{ 
-          backgroundImage: `url(${backgroundImage})`, 
+          backgroundImage: `url(${backgroundImages[currentImageIndex]})`, 
           backgroundSize: 'cover', 
           backgroundPosition: 'center', 
           height: '65vh', 
@@ -284,8 +312,9 @@ const StartupPage = () => {
           </Typography>
         </Box>
 
-        {/* Carousel Buttons */}
-        <IconButton 
+         {/* Carousel Buttons */}
+         <IconButton 
+          onClick={handlePreviousImage}
           sx={{ 
             position: 'absolute', 
             top: '50%', 
@@ -293,12 +322,13 @@ const StartupPage = () => {
             color: '#fff', 
             zIndex: 2, 
             backgroundColor: 'rgba(0, 0, 0, 0.3)', 
-            ...buttonHover11
+            '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.5)' }
           }}
         >
           <ArrowBack fontSize="large" />
         </IconButton>
         <IconButton 
+          onClick={handleNextImage}
           sx={{ 
             position: 'absolute', 
             top: '50%', 
@@ -306,7 +336,7 @@ const StartupPage = () => {
             color: '#fff', 
             zIndex: 2, 
             backgroundColor: 'rgba(0, 0, 0, 0.3)', 
-            ...buttonHover11 
+            '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.5)' }
           }}
         >
           <ArrowForward fontSize="large" />

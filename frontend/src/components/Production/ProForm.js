@@ -7,7 +7,7 @@ export default function ProForm() {
   const location = useLocation();
 
   const [formData, setFormData] = useState({
-    lname: '',
+    lname: '',  // Change this to a dropdown later
     lmaterial: '',
     lcutting: '',
     lmolding: '',
@@ -57,7 +57,6 @@ export default function ProForm() {
 
   const validateForm = () => {
     const newErrors = {};
-    // Validate that good units and defective units are non-negative integers
     if (!formData.lgoodunit || parseInt(formData.lgoodunit, 10) < 0) {
       newErrors.lgoodunit = 'Good Units must be a non-negative integer';
     }
@@ -66,16 +65,13 @@ export default function ProForm() {
       newErrors.lDefectiveunit = 'Defective Units must be a non-negative integer';
     }
 
-    // Validate other fields as necessary
-    // ... (Other validations can be added here)
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -132,10 +128,11 @@ export default function ProForm() {
       }}>
         <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Production Progress Form</h2>
         <form onSubmit={handleSubmit}>
+          
+          {/* Line Name Dropdown */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="lname" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Line Name:</label>
-            <input
-              type="text"
+            <select
               id="lname"
               name="lname"
               value={formData.lname}
@@ -148,9 +145,18 @@ export default function ProForm() {
                 borderRadius: '5px',
                 boxSizing: 'border-box'
               }}
-            />
+            >
+              <option value="">Select Line Name</option>
+              <option value="Line 1">Line 1</option>
+              <option value="Line 2">Line 2</option>
+              <option value="Line 3">Line 3</option>
+              <option value="Line 4">Line 4</option>
+              <option value="Line 5">Line 5</option>
+              <option value="Line 6">Line 6</option>
+            </select>
           </div>
 
+          {/* Other form fields */}
           {['lmaterial', 'lcutting', 'lmolding', 'lVulcanization'].map((field) => (
             <div key={field} style={{ marginBottom: '15px' }}>
               <label htmlFor={field} style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>{field.replace('l', '')}:</label>
@@ -178,6 +184,7 @@ export default function ProForm() {
             </div>
           ))}
 
+          {/* Good Units */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="lgoodunit" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Good Units:</label>
             <input
@@ -187,7 +194,7 @@ export default function ProForm() {
               value={formData.lgoodunit}
               onChange={handleChange}
               required
-              min="0" // Ensure that only positive numbers can be input
+              min="0"
               style={{
                 width: '100%',
                 padding: '10px',
@@ -196,9 +203,10 @@ export default function ProForm() {
                 boxSizing: 'border-box'
               }}
             />
-            {errors.lgoodunit && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lgoodunit}</div>} {/* Error message */}
+            {errors.lgoodunit && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lgoodunit}</div>}
           </div>
 
+          {/* Defective Units */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="lDefectiveunit" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Defective Units:</label>
             <input
@@ -208,7 +216,7 @@ export default function ProForm() {
               value={formData.lDefectiveunit}
               onChange={handleChange}
               required
-              min="0" // Ensure that only positive numbers can be input
+              min="0"
               style={{
                 width: '100%',
                 padding: '10px',
@@ -217,7 +225,7 @@ export default function ProForm() {
                 boxSizing: 'border-box'
               }}
             />
-            {errors.lDefectiveunit && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lDefectiveunit}</div>} {/* Error message */}
+            {errors.lDefectiveunit && <div style={{ color: 'red', fontSize: '12px' }}>{errors.lDefectiveunit}</div>}
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
