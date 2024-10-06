@@ -2,6 +2,8 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; // Corrected import
+import dayjs from "dayjs";
+
 
 export default function SingleMachineView() {
 	const [machineData, setMachineData] = useState([]);

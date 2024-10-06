@@ -48,7 +48,7 @@ router.post("/all", async (req, res) => {
 
 		for (var part of listOfPartDetails) {
 			partContainer.push({
-				date: momentController(part).format("MMMM Do YYYY"),
+				date: momentController(part.date).format("MMMM Do YYYY"),
 				description: part.description ?? "",
 				amount: part.amount,
 			});

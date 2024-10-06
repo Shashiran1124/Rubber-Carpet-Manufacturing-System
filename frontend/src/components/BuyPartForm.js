@@ -118,8 +118,6 @@ const BuyPartForm = () => {
               <DatePicker
                 label="Date"
                 value={formData.date}
-                disableFuture//
-                disablePast//
                 onChange={(newValue) => handleDateChange('date', newValue)}
                 renderInput={(params) => (
                   <TextField

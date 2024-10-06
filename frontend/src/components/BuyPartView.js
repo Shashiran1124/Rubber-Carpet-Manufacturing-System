@@ -58,13 +58,13 @@ export default function BuyPartView() {
         doc.setFontSize(18);
         doc.text("PRI Rubber Indrustry", 14, 10);
         doc.setFontSize(15);
-        doc.text("Brought Machine Parts", 138, 10);
+        doc.text("Brought Machine Parts", 138, 32);
         // Company information at the top of the document
         doc.setFontSize(10);
         doc.text("PRI Rubber Indrustry", 14, 16);
-        doc.text("Biyagama", 14, 20);
-        doc.text("Sri Lanka", 14, 24);
-        doc.text('Tell: +94 235689235', 14,28); // Phone number
+        doc.text("Biyagama,", 14, 20);
+        doc.text("Sri Lanka.", 14, 24);
+        doc.text('Tell: +94 22233322', 14,28); // Phone number
         doc.text('Email:', 14,32); // Email label
         // Set text color to black for the email address
         doc.setTextColor(0, 0, 255); // RGB for blue

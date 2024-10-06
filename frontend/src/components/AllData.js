@@ -19,6 +19,7 @@ import Button from "@mui/material/Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const MachineList = () => {
 	const [machines, setMachines] = useState([]);
 	const [loading, setLoading] = useState(true);
