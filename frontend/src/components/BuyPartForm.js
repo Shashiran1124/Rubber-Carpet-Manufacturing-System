@@ -26,7 +26,7 @@ const BuyPartForm = () => {
 
     // Regex patterns to validate input
     const descriptionPattern = /^[A-Za-z0-9\s]*$/; // Only letters, numbers, and spaces allowed
-    const amountPattern = /^\d*$/; // Allow only positive digits
+    const amountPattern = /^\d*\.?\d{0,2}$/; // Allow digits with optional decimal point and up to 2 decimal places
 
     if (name === 'description') {
       if (descriptionPattern.test(value)) {
@@ -47,7 +47,7 @@ const BuyPartForm = () => {
       } else {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          amount: 'Amount must be a positive number without spaces or special characters.',
+          amount: 'Amount must be a positive number with up to two decimal places.',
         }));
       }
     }
@@ -118,6 +118,8 @@ const BuyPartForm = () => {
               <DatePicker
                 label="Date"
                 value={formData.date}
+                disableFuture//
+                disablePast//
                 onChange={(newValue) => handleDateChange('date', newValue)}
                 renderInput={(params) => (
                   <TextField

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Switch is now Routes
 import Head from "./components/Head"; // nave bar
 import Sidebar from "./components/Sidebar";
-import TestComponent from "./components/TestComponent";
+//import TestComponent from "./components/TestComponent";
 import MachineRegister from "./components/MachineRegister";
 import AllData from "./components/AllData";
 import UpdateMachine from "./components/UpdateMachine";
@@ -23,7 +23,7 @@ function App() {
 
 				<div style={{ flex: 1, padding: "20px" }}>
 					<Routes>
-						<Route path="/" element={<TestComponent />} />
+						{/*<Route path="/" element={<TestComponent />} />*/}
 						<Route path="/machine/add" element={<MachineRegister />} />
 						<Route path="/machine/all" element={<AllData />} />
 						<Route path="/machine/update/:id" element={<UpdateMachine />} />
