@@ -125,7 +125,7 @@ const Sidebar2 = () => {
           )}
 
         {(user?.email === 'nawodya@email.com'|| user?.email === 'first5@email.com') && (
-        <StyledListItem button onClick={() => navigate('/repair')}>
+        <StyledListItem button onClick={() => navigate('/machine/all')}>
           <ListItemIcon sx={{ color: '#fff' }}>
             <RepairIcon />
           </ListItemIcon>
