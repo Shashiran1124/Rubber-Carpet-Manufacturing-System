@@ -136,7 +136,7 @@ export default function BuyPartView() {
                          variant="contained"
                           sx={{
                             backgroundColor: "yellow",
-                            color: "#fff",
+                            color: "#000",
                             marginTop: "10px",
                           }}
                          type="button"
