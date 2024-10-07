@@ -60,24 +60,18 @@ export default function CustomerRegistrationTable() {
       <table style={{ width: '97%', borderCollapse: 'collapse', border: '1.5px solid #000000', fontSize: '14px', margin: '0 auto' }}>
         <thead>
           <tr style={{ backgroundColor: '#f4f4f4', color: '#333' }}>
-            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>First Name</th>
-            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Last Name</th>
-            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Registration Date</th>
-            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Contact Number</th>
-            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Address</th>
+            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Customer Name</th>
+            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Email </th>
+            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Password</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7', width: '170px' }}>Actions</th>
           </tr>
         </thead>
         <tbody>
           {customers.map((customer) => (
             <tr key={customer._id} style={{ backgroundColor: searchId === customer._id ? '#d3d3d3' : 'transparent' }}>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{customer.firstName}</td>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{customer.lastName}</td>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>
-                {new Date(customer.date).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
-              </td>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{customer.contactNumber}</td>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{customer.address}</td>
+              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{customer.customerName}</td>
+              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{customer.email}</td>
+              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{customer.password}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px', textAlign: 'center' }}>
                 <button
                   onClick={() => handleUpdate(customer)}

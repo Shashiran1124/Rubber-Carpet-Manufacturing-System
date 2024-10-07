@@ -8,6 +8,7 @@ export default function CusOpForm() {
   
   const [formData, setFormData] = useState({
     customerName: '',
+    orderNumber:'',
     orderDate: '',
     contactNumber: '',
     productCatalog: '',
@@ -26,6 +27,7 @@ export default function CusOpForm() {
 
       setFormData({
         customerName: order.customerName,
+        orderNumber:order.orderNumber,
         orderDate: formattedDate,
         contactNumber: order.contactNumber,
         productCatalog: order.productCatalog,
@@ -45,6 +47,12 @@ export default function CusOpForm() {
     if (name === 'customerName') {
       // Remove any numeric characters from the input value
       const filteredValue = value.replace(/[0-9]/g, '');
+      setFormData({
+        ...formData,
+        [name]: filteredValue,
+      });
+    }else if (name === 'orderNumber') {
+      const filteredValue = value.replace(/\D/g, ''); // Only allow integer numbers
       setFormData({
         ...formData,
         [name]: filteredValue,
@@ -157,6 +165,27 @@ export default function CusOpForm() {
               </div>
             )}
           </div>
+           {/* New Order Number input field */}
+           <div style={{ marginBottom: '8px' }}>
+        <label htmlFor="orderNumber" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Order Number:</label>
+        <input
+          type="text"
+          id="orderNumber"
+          name="orderNumber"
+          value={formData.orderNumber}
+          onChange={handleChange}
+          required
+          style={{
+            width: '100%',
+            padding: '8px',
+            border: '1px solid #696767',
+            borderRadius: '8px',
+            boxSizing: 'border-box',
+            color: '#000',
+            fontSize: '14px'
+          }}
+        />
+         </div>
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="orderDate" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Order Date:</label>
             <input

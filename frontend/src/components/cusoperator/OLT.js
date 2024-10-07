@@ -56,8 +56,8 @@ export default function ViewOrderTable() {
   );
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f7f7f7', minHeight: '170vh', display: 'flex', flexDirection: 'column' }}>
-      <h1 style={{ marginBottom: '40px', marginLeft: '380px', color: '#000000', fontSize: '22px' }}>List of the Orders</h1>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#ffffff', minHeight: '170vh', display: 'flex', flexDirection: 'column' }}>
+      <h1 style={{ marginBottom: '40px', marginLeft: '460px', color: '#000000', fontSize: '22px' }}>List of the Orders</h1>
 
       {/* Search Input */}
       <div style={{ marginBottom: '20px', textAlign: 'center' }}>
@@ -80,6 +80,7 @@ export default function ViewOrderTable() {
         <thead>
           <tr style={{ backgroundColor: '#f4f4f4', color: '#333' }}>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Customer Name</th>
+            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Order Number</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Order Date</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Contact Number</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Product Catalog</th>
@@ -93,6 +94,7 @@ export default function ViewOrderTable() {
           {filteredOrders.map((order) => (
             <tr key={order._id}>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.customerName}</td>
+              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.orderNumber}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>
   {new Date(new Date(order.orderDate).getTime() + new Date(order.orderDate).getTimezoneOffset() * 60000).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
 </td>
