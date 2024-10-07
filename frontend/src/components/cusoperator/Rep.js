@@ -3,21 +3,25 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import PRIImage from '../../images/PRI.png'; 
 
 // Register components to use with Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQuantityBarChartData }) => {
   return (
-    <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#F5F5F5', minHeight: '80vh', width:'90%' }}>
-      <h1 style={{ marginBottom: '40px', textAlign: 'center', color: '#000000', fontSize: '32px', fontFamily: 'Dancing Script, cursive' }}>
+    <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#F5F5F5', minHeight: '80vh', width:'90%', border: '3.5px solid black' }}>
+      <div style={{ marginLeft: '450px' }}>
+        <img src={PRIImage} alt="PRI" style={{ width: '130px', height: '15vh', borderRadius: '10px' }} />
+      </div>
+      <h1 style={{ marginBottom: '40px', textAlign: 'center', color: '#000000', fontSize: '28px', fontFamily: 'Dancing Script, cursive' }}>
         PRI Rubber Industries
       </h1>
-      <h1 style={{ marginBottom: '40px', textAlign: 'center', color: '#696969', fontSize: '26px',  }}>
+      <h1 style={{ marginBottom: '40px', textAlign: 'center', color: '#696969', fontSize: '20px',  }}>
         Monthly Income Report (2024)
       </h1>
       
-      <div style={{ marginBottom: '40px', textAlign: 'center', backgroundColor: '#E6E6FA', padding: '20px', borderRadius: '26px', }}>
+      <div style={{ marginBottom: '40px', textAlign: 'center', backgroundColor: '#E6E6FA', padding: '20px', borderRadius: '26px' }}>
         <h2 style={{ color: '#8A2BE2', fontSize: '20px' }}>Summary</h2>
         <p style={{ color: '#FF0000' }}><strong>Total Sales:</strong> Rs {summary.totalSales.toFixed(2)}</p>
         <p style={{ color: '#FF0000' }}><strong>Total Quantity Sold:</strong> {summary.totalQuantity}</p>
@@ -30,7 +34,7 @@ const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQua
           <h2 style={{ marginBottom: '20px', color: '#8A2BE2', fontSize: '18px', textAlign: 'center',marginLeft:'290px' }}>Sales Data by Month</h2>
           <table style={{ width: '100%', borderCollapse: 'collapse', border: '1.5px solid #000000', fontSize: '14px',marginLeft:'150px' }}>
             <thead>
-              <tr style={{ backgroundColor: '#8A2BE2', color: '#FFFFFF' }}>
+              <tr style={{ backgroundColor: '#0000FF', color: '#FFFFFF' }}>
                 <th style={{ padding: '10px', border: '1px solid #000000' }}>Month</th>
                 <th style={{ padding: '10px', border: '1px solid #000000', }}>Total Sales</th>
                 <th style={{ padding: '10px', border: '1px solid #000000',width:'80px' }}>Total Quantity</th>
@@ -69,6 +73,25 @@ const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQua
             scales: { x: { ticks: { color: 'rgba(0, 0, 0, 1)' }, grid: { color: 'rgba(0, 0, 0, 0.2)' }},
                       y: { ticks: { color: 'rgba(0, 0, 0, 1)' }, grid: { color: 'rgba(0, 0, 0, 0.2)' }, beginAtZero: true }},
           }} />
+      </div>
+      <div style={{ height: '50px',width: '25%', marginTop: '50px', borderTop: '2px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px' }}>
+        <p style={{ margin: 0 }}>Customer Manager </p>
+        <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
+        
+
+      </div>
+      <div style={{  marginLeft:'440px',top: '100px', width: '100%', textAlign: 'left', paddingTop: '10px',fontSize: '12px'}}>
+      <div style={{ height: '50px', marginLeft:'450px',width: '25%', margin: '0 auto', top: '140px', textAlign: 'left', paddingTop: '10px', }}>
+      <p style={{ margin: 0 }}>PRI Rubber Industry </p>
+      <p style={{ margin: 0 }}>Colombo 07 </p>
+      <p style={{ margin: 0 }}>Sri Lanka </p>
+      <p style={{ margin: 0 }}>Tell: +94 xxxxxxxx </p>
+      <p style={{ margin: 0 }}>Email:
+      <a href="mailto:malindu113@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
+        malindu113@gmail.com
+      </a>
+      </p> {/* Clickable email link */}
+      </div>
       </div>
     </div>
   );
@@ -187,6 +210,7 @@ export default function CalTableWithBarChart() {
   return (
     <div>
       <div id="pdfContent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        
         <PDFContent
           summary={{
             totalSales: salesOrders.reduce((total, order) => total + order.totalSales, 0),
@@ -203,13 +227,15 @@ export default function CalTableWithBarChart() {
           }, {})}
           getBarChartData={getBarChartData}
           getProductQuantityBarChartData={getProductQuantityBarChartData}
+          
         />
+        
       </div>
 
       {/* Download button visible only on frontend */}
       <button 
         onClick={handleDownload} 
-        style={{ marginTop: '20px', padding: '10px 20px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft:'85%' }}
+        style={{ marginTop: '20px', padding: '10px 20px', backgroundColor: '#0000FF', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft:'85%' }}
       >
         Download PDF
       </button>

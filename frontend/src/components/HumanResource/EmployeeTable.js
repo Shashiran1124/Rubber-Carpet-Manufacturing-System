@@ -110,6 +110,7 @@ export default function EmployeeTable() {
             <th style={{ border: '1px solid #ddd', padding: '12px' }}>NIC</th>
             <th style={{ border: '1px solid #ddd', padding: '12px' }}>Contact</th>
             <th style={{ border: '1px solid #ddd', padding: '12px' }}>Address</th>
+            <th style={{ border: '1px solid #ddd', padding: '12px' }}>Designation</th> {/* New Designation column */}
             <th style={{ border: '1px solid #ddd', padding: '12px' }}>Actions</th>
           </tr>
         </thead>
@@ -132,6 +133,7 @@ export default function EmployeeTable() {
               <td style={{ border: '1px solid #ddd', padding: '12px' }}>{employee.nic}</td>
               <td style={{ border: '1px solid #ddd', padding: '12px' }}>{employee.contact}</td>
               <td style={{ border: '1px solid #ddd', padding: '12px' }}>{employee.address}</td>
+              <td style={{ border: '1px solid #ddd', padding: '12px' }}>{employee.designation}</td> {/* Display Designation */}
               <td style={{ border: '1px solid #ddd', padding: '12px', textAlign: 'center' }}>
                 <button
                   onClick={() => handleUpdate(employee)}
