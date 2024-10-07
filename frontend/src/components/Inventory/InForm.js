@@ -58,12 +58,17 @@ export default function ProductForm() {
     } else if (name === 'productName') {
       const nameRegex = /^[A-Za-z\s]+$/;
       if (!nameRegex.test(value)) {
-        errorMessage = 'Product Name can only contain English letters.';
+
       }
-    } else if (name === 'quantity' || name === 'unitPrice') {
-      const numberRegex = /^\d*\.?\d*$/;
-      if (!numberRegex.test(value)) {
-        errorMessage = `${name.charAt(0).toUpperCase() + name.slice(1)} must be a valid number.`;
+      
+    } else if (name === 'quantity') {
+      const quantityRegex = /^[1-9]\d*$/; // Allow only positive integers (no decimal numbers)
+      if (!quantityRegex.test(value)) {
+      }
+    } else if (name === 'unitPrice') {
+      const priceRegex = /^\d*\.?\d*$/; // Allow valid numbers, including decimals
+      if (!priceRegex.test(value)) {
+        
       }
     }
 
@@ -203,7 +208,7 @@ export default function ProductForm() {
           </div>
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="productionDate" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>
-              Production Date:
+              Receive Date:
             </label>
             <input
               type="date"

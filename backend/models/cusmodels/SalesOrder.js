@@ -29,10 +29,7 @@ const salesOrderSchema = new Schema({
         type: Number,
         required: true
     },
-    purchasingReason: {
-        type: String,
-        required: true
-    }
+    
 });
 
 // Ensure the model name is in PascalCase and matches the intended collection name

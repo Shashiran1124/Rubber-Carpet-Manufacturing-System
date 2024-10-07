@@ -13,8 +13,8 @@ export default function OrderForm1() {
     productCatalog: '',
     address: '',
     quantity: '',
-    purchasingReason: '',
   });
+
   const [errors, setErrors] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [orderId, setOrderId] = useState(null);
@@ -31,8 +31,6 @@ export default function OrderForm1() {
         productCatalog: order.productCatalog,
         address: order.address,
         quantity: order.quantity,
-        purchasingReason: order.purchasingReason,
-
       });
       setOrderId(order._id);
       setIsEditMode(true);
@@ -58,7 +56,7 @@ export default function OrderForm1() {
         [name]: filteredValue,
       });
     } else if (name === 'quantity') {
-      // Ensure only positive integers are accepted, no minus sign allowed
+      // Ensure only positive integers are accepted, no minus or decimal sign allowed
       const filteredValue = value.replace(/[^0-9]/g, ''); // Remove all non-numeric characters
       if (filteredValue === '' || parseInt(filteredValue) > 0) {
         setFormData({
@@ -78,37 +76,43 @@ export default function OrderForm1() {
       [name]: '',
     });
   };
-  
-  
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const url = isEditMode
-        ? `http://localhost:8070/custest/update/${orderId}`
-        : 'http://localhost:8070/custest/add';
-      const method = isEditMode ? 'PUT' : 'POST';
-
-      const response = await fetch(url, {
-        method: method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        alert(`SalesOrder ${isEditMode ? 'updated' : 'added'} successfully`);
-        navigate('');
-      } else {
-        alert(`Failed to ${isEditMode ? 'update' : 'add'} order`);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert(`An error occurred while ${isEditMode ? 'updating' : 'adding'} the order.`);
+  const handleKeyDown = (e) => {
+    // Prevent typing of decimal point and minus sign
+    if (e.key === '.' || e.key === '-') {
+      e.preventDefault();
     }
   };
+
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const url = isEditMode
+      ?` http://localhost:8070/custest/update/${orderId}`
+      : 'http://localhost:8070/custest/add';
+    const method = isEditMode ? 'PUT' : 'POST';
+
+    const response = await fetch(url, {
+      method: method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      alert(`Sales Order ${isEditMode ? 'updated' : 'added'} successfully`);
+      navigate('');
+    } else {
+      alert(`Failed to ${isEditMode ? 'update' : 'add'} order`);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert(`An error occurred while ${isEditMode ? 'updating' : 'adding'} the order.`);
+  }
+};
+
 
   return (
     <div style={{
@@ -118,7 +122,6 @@ export default function OrderForm1() {
       height: '100vh',
       backgroundColor: '#f7f7f7',
       padding: '10px'
-      
     }}>
       <div style={{ marginRight: '20px' }}>
         <img src={OrdernewImage} alt="Order" style={{ width: '300px', height: '94vh', borderRadius: '10px' }} />
@@ -133,7 +136,6 @@ export default function OrderForm1() {
         maxWidth: '420px',
         boxSizing: 'border-box',
         border: '2px solid #000000',
-        
       }}>
         <h2 style={{
           textAlign: 'center',
@@ -264,79 +266,52 @@ export default function OrderForm1() {
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="quantity" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Quantity:</label>
             <input
-  type="number"
-  id="quantity"
-  name="quantity"
-  value={formData.quantity}
-  onChange={handleChange}
-  onKeyPress={(e) => {
-    // Prevent typing '-' character
-    if (e.key === '-') {
-      e.preventDefault();
-    }
-  }}
-  required
-  style={{
-    width: '100%',
-    padding: '6px',
-    border: '1px solid #696767',
-    borderRadius: '8px',
-    boxSizing: 'border-box',
-    color: '#000',
-    fontSize: '14px'
-  }}
-/>
-
+              type="number"
+              id="quantity"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown} // Prevent decimal and minus sign
+              required
+              style={{
+                width: '100%',
+                padding: '6px',
+                border: '1px solid #696767',
+                borderRadius: '8px',
+                boxSizing: 'border-box',
+                color: '#000',
+                fontSize: '14px'
+              }}
+            />
             {errors.quantity && (
               <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
                 {errors.quantity}
               </div>
             )}
           </div>
-          <div style={{ marginBottom: '12px' }}>
-            <label htmlFor="purchasingReason" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Purchasing Reason:</label>
-            <textarea
-              id="purchasingReason"
-              name="purchasingReason"
-              value={formData.purchasingReason}
-              onChange={handleChange}
-              required
-              style={{
-                width: '100%',
-                padding: '4px',
-                border: '1px solid #696767',
-                borderRadius: '8px',
-                boxSizing: 'border-box',
-                color: '#000',
-                fontSize: '12px',
-                minHeight: '50px'
-              }}
-            />
-          </div>
+          
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', marginTop: '12px' }}>
-          <button
-            type="submit"
-            style={{
-              width: '25%',
-              padding: '8px',
-              backgroundColor: '#051ED7',
-              color: '#fff',
-              border: 'none',
-              display: 'block',
-              borderRadius: '10px',
-              margin: 'auto',
-              cursor: 'pointer',
-              fontSize: '12px',
-              marginRight:'2px',
-              marginLeft:'10px',
-            }}>
-            {isEditMode ? 'Update' : 'Submit'}
-          </button>
-         
+            <button
+              type="submit"
+              style={{
+                width: '25%',
+                padding: '8px',
+                backgroundColor: '#051ED7',
+                color: '#fff',
+                border: 'none',
+                display: 'block',
+                borderRadius: '10px',
+                margin: 'auto',
+                cursor: 'pointer',
+                fontSize: '12px',
+                marginRight:'2px',
+                marginLeft:'10px',
+              }}>
+              {isEditMode ? 'Update' : 'Submit'}
+            </button>
           </div>
         </form>
-        
       </div>
-    </div>
-  );
+    </div>
+  );
 }

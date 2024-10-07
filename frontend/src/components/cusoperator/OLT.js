@@ -99,7 +99,7 @@ export default function ViewOrderTable() {
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Product Catalog</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Address</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Quantity</th>
-            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Purchasing Reason</th>
+            
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Actions</th>
           </tr>
         </thead>
@@ -115,7 +115,7 @@ export default function ViewOrderTable() {
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.productCatalog}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.address}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.quantity}</td>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.purchasingReason}</td>
+              
               <td style={{ border: '1.5px solid #000000', padding: '8px', textAlign: 'center' }}>
                 <button
                   onClick={() => handleUpdate(order)}

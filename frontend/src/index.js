@@ -119,6 +119,7 @@ import DashReceRawform from './components/Inventory/DashReceRawform';
 import DashReceRawtable from './components/Inventory/DashReceRawtable';
 import DashReleRawform from './components/Inventory/DashReleRawform';
 import DashReleRawtable from './components/Inventory/DashReleRawtable';
+import Dashordertableinin from './components/Inventory/Dashordertableinin';
 
 
 //siyumi
@@ -148,7 +149,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BuyFormPart from "./components/machinerepair/BuyPartForm";
 import BuyPartView from "./components/machinerepair/BuyPartView";
-
 
 
 
@@ -281,6 +281,7 @@ root.render(
         <Route path = '/dashrecerawtable' element = {<DashReceRawtable/>}/>
         <Route path = '/dashrelerawform' element = {<DashReleRawform/>}/>
         <Route path = '/dashrelerawtable' element = {<DashReleRawtable/>}/>
+        <Route path = '/dashordertableinin' element = {<Dashordertableinin/>}/>
 
          {/*siyumi*/}
       <Route path='/Employees' element={<Employees />} />

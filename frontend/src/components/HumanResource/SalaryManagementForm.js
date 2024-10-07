@@ -164,15 +164,29 @@ const SalaryManagementForm = () => {
                         />
                     </Grid>
 
+                    {/* Designation dropdown */}
                     <Grid item xs={12}>
-                        <TextField
-                            fullWidth
-                            label="Designation"
-                            variant="outlined"
-                            value={designation}
-                            onChange={e => handleTextInput(e, setDesignation)}
-                            sx={{ marginBottom: '20px' }}
-                        />
+                        <FormControl fullWidth sx={{ marginBottom: '20px' }}>
+                            <InputLabel>Designation</InputLabel>
+                            <Select
+                                value={designation}
+                                onChange={e => setDesignation(e.target.value)}
+                                label="Designation"
+                            >
+                                <MenuItem value="Production Manager">Production Manager</MenuItem>
+                                <MenuItem value="Inventory Manager">Inventory Manager</MenuItem>
+                                <MenuItem value="Human Resource Manager">Human Resource Manager</MenuItem>
+                                <MenuItem value="Supervisor">Supervisor</MenuItem>
+                                <MenuItem value="Machine Operator">Machine Operator</MenuItem>
+                                <MenuItem value="Customer Service Operator">Customer Service Operator</MenuItem>
+                                <MenuItem value="Distributor">Distributor</MenuItem>
+                                <MenuItem value="Transportation Planner">Transportation Planner</MenuItem>
+                                <MenuItem value="Supplier Manager">Supplier Manager</MenuItem>
+                                <MenuItem value="Mechanical Inspector">Mechanical Inspector</MenuItem>
+                                <MenuItem value="Accountant">Accountant</MenuItem>
+                                <MenuItem value="Financial Manager">Financial Manager</MenuItem>
+                            </Select>
+                        </FormControl>
                     </Grid>
 
                     {/* Department dropdown */}
