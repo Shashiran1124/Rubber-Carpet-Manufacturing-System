@@ -78,10 +78,10 @@ const Sidebarhr = () => {
                 {/* Task Distribution Overview */}
                 <ListItem 
                     button 
-                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/machine-allocation']) ? '#191919' : 'inherit', borderRadius: "6px",width: "220px",border: "1.5px solid #000000",  marginTop: "8px", marginBottom: "8px"  }} 
-                    onClick={() => handleNavigation('/machine-allocation')}
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/empdashplantable']) ? '#191919' : 'inherit', borderRadius: "6px",width: "220px",border: "1.5px solid #000000",  marginTop: "8px", marginBottom: "8px"  }} 
+                    onClick={() => handleNavigation('/empdashplantable')}
                 >
-                    <ListItemText primary="Task Distribution Overview" sx={{ paddingLeft: "10px", color: isActive(['/machine-allocation']) ? '#fff' : '#000' }} />
+                    <ListItemText primary="Task Distribution Overview" sx={{ paddingLeft: "10px", color: isActive(['/empdashplantable']) ? '#fff' : '#000' }} />
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#fff" }} />
 
