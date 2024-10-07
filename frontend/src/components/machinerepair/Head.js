@@ -15,21 +15,10 @@ const Head = () => {
                         P.R.I Rubber Industries
                     </Typography>
                 </Box>
-                <Box sx={{ position: "relative", display: "inline-block" }}>
-                    <SearchIcon sx={{ position: "absolute", top: "8px", left: "20px", color: "#6a1b9a" }} />
-                    <InputBase
-                        placeholder="Search…"
-                        sx={{ pl: 4, pr: 2, backgroundColor: "#FFF", borderRadius: "15px", paddingLeft: "30px",fontSize:"14px" }}
-                    />
-                </Box>
-                <IconButton edge="end" color="inherit">
-                    <ShareIcon />
-                </IconButton>
+               
+                
                 <IconButton edge="end" color="inherit">
                     <NotificationsIcon />
-                </IconButton>
-                <IconButton edge="end" color="inherit">
-                    <SettingsIcon />
                 </IconButton>
                 
             </Toolbar>

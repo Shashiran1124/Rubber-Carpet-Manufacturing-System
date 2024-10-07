@@ -88,16 +88,16 @@ const RepairForm = () => {
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
 			<Box display="flex" height="100vh">
 				{/* Sidebar */}
-				<Box sx={{ width: "15%", backgroundColor: "#b0bec5", height: "100vh" }}>
+				<Box sx={{ width: "15%", backgroundColor: "#b0bec5", height: "100vh", position: "fixed" }}>
 					<Sidebar />
 				</Box>
 
 				{/* Main content area */}
-				<Box sx={{ width: "85%", padding: "20px" }}>
+				<Box sx={{ width: "85%", marginLeft: "15%", padding: "0px" }}>
 					<Head />
 					<ToastContainer />
 
-					<Box sx={{ width: "80%", padding: "20px" }}>
+					<Box sx={{ width: "100%", padding: "20px" }}>
 						<Paper elevation={3} sx={{ padding: "20px" }}>
 							<Grid container justifyContent="space-between">
 								<Typography variant="h5" sx={{ fontWeight: "bold" }}>
