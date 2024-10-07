@@ -214,6 +214,7 @@ export default function ProductForm() {
               min={getCurrentDate()}  // Setting min to the current date
               max={getCurrentDate()}  // Setting max to the current date
               required
+              readOnly // Make the field read-only
               style={{
                 width: '100%',
                 padding: '4px',
