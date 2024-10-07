@@ -3,7 +3,7 @@ const SalesOrder = require("../../models/cusmodels/SalesOrder");  // Correct pat
 
 // Data insertion
 router.route("/add").post((req, res) => {
-    const { customerName, orderDate, contactNumber, productCatalog, address, quantity, purchasingReason } = req.body;
+    const { customerName,orderDate, contactNumber, productCatalog, address, quantity, purchasingReason } = req.body;
     
     const newSalesOrder = new SalesOrder({
         customerName,
@@ -57,7 +57,7 @@ router.route("/update/:id").put(async (req, res) => {
     try {
         const updatedSalesOrder = await SalesOrder.findByIdAndUpdate(
             id,
-            { customerName, orderDate, contactNumber, productCatalog, address,quantity,purchasingReason },
+            { customerName,orderDate, contactNumber, productCatalog, address,quantity,purchasingReason },
             { new: true }  // Return the updated document
         );
 
