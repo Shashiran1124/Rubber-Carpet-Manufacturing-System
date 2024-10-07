@@ -16,13 +16,11 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Paper, Grid, Card, CardContent, Icon } from '@mui/material';
 import { LinearProgress } from '@mui/material'; // Import for progress bars
-
 import {List, ListItem, ListItemIcon, ListItemText, Divider, Box } from '@mui/material';
-
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 
 export default function Report() {
@@ -227,7 +225,7 @@ export default function Report() {
     </Typography>
     <List>
       {[
-        { text: 'Total Last Monthly Costs', value: 'Rs 24,200.00', icon: <AttachMoneyIcon /> },
+        { text: 'Total Last Monthly Costs', value: 'Rs 24,200.00', icon: <CurrencyRupeeIcon /> },
         { text: 'Best Distribution Area', value: 'Colombo', icon: <LocationOnIcon /> },
         { text: 'Cost Trend', value: '5% decrease from last month', icon: <TrendingUpIcon /> },
         { text: 'Top Expenses', value: 'Transportation, Fuel, Packaging', icon: <BarChartIcon /> },

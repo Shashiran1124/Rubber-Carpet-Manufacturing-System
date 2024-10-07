@@ -97,6 +97,16 @@ app.use("/hrtest", testRouterhr);
 app.use("/feedback", empFeedbackRouter); // Use the feedback routes
 app.use("/salary", empsalaryRouter); // Use the salary routes
 
+//nawodya
+const machineRouter = require("./routes/machineroute/machines.js"); //machine
+app.use("/machine", machineRouter); //machines,js file eka lord venna denna oona url eka machines
+
+const repairRouter = require("./routes/machineroute/repairs.js"); //repair
+app.use("/repair", repairRouter); //repairs,js file eka lord venna denna oona url eka machines
+
+const PartRouter = require("./routes/machineroute/parts.js"); //repair
+app.use("/Part", PartRouter); //repairs,js file eka lord venna denna oona url eka machines
+
 
 
 app.listen(PORT, ()=>{
