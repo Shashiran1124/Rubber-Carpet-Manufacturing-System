@@ -279,13 +279,13 @@ root.render(
         <Route path = '/dashordertableinin' element = {<Dashordertableinin/>}/>
 
          {/*siyumi*/}
-         <Route path='/Employees' element={<Employees />} />
+      <Route path='/Employees' element={<Employees />} />
       <Route path='/EmployeeForm' element={<EmployeeForm />} />
       <Route path='/EmployeeTable' element={<EmployeeTable />} />
       <Route path='/NavBar' element={<Navbarhr />} />
       <Route path='/SideBar' element={<Sidebarhr />} />
       <Route path='/Feedback' element={<Feedback />} />
-      <Route path='/FeedbackForm' element={<FeedbackFormhr />} />
+      <Route path='/FeedbackFormHR' element={<FeedbackFormhr />} />
       <Route path='/FeedbackTable' element={<FeedbackTablehr />} />
       <Route path='/SalaryManagementForm' element={<SalaryManagementForm />} />
       <Route path='/SalaryManagementTable' element={<SalaryManagementTable />} />

@@ -35,6 +35,10 @@ const registrationSchema = new Schema({
     address: {
         type: String,
         required: true
+    },
+    designation: { 
+        type: String,
+        required: true 
     }
 });
 

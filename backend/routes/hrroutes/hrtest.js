@@ -12,6 +12,7 @@ const Registration = mongoose.model('Registration', new mongoose.Schema({
     nic: String,
     contact: String,
     address: String,
+    designation: String, // Added designation field
 }));
 
 // POST route to register an employee

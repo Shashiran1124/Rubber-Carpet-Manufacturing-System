@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Box } from "@mui/material";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Box ,TextField} from "@mui/material";
 import axios from "axios";
 import jsPDF from "jspdf";
 import "jspdf-autotable"; // Import the autotable plugin
@@ -107,34 +107,34 @@ export default function BuyPartView() {
     return (
         <Box display="flex" height="100vh">
             {/* Sidebar */}
-            <Box sx={{ width: "15%", backgroundColor: "#b0bec5", height: "100vh" }}>
+            <Box sx={{ width: "15%", backgroundColor: "#ffffff", height: "100vh" }}>
                 <Sidebar />
             </Box>
 
             {/* Main content area */}
-            <Box sx={{ width: "85%", padding: "20px" }}>
-                <Head />
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-                    <h3>Machine Part Purchases</h3>
+            <Box sx={{ width: "100%", padding: "0px" }}>
+                <Head />  {/* Ensure the Head component takes full width */}
+                
+                {/* Main Section */}
+                <Box sx={{ marginTop: "20px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+                        <h3>Machine Part Purchases</h3>
 
-                    {/* Date Pickers and Filter Button */}
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <div className="row">
-                            <div className="col-4">
+                        {/* Date Pickers and Filter Button */}
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <div style={{ display: "flex", gap: "10px" }}>
                                 <DatePicker
                                     label="Start Date"
                                     value={startDate}
                                     onChange={handleStartDateChange}
+                                    renderInput={(params) => <TextField {...params} />}
                                 />
-                            </div>
-                            <div className="col-4">
                                 <DatePicker
                                     label="End Date"
                                     value={endDate}
                                     onChange={handleEndDateChange}
+                                    renderInput={(params) => <TextField {...params} />}
                                 />
-                            </div>
-                            <div className="col-4">
                                 <Button
                                     variant="contained"
                                     sx={{
@@ -147,35 +147,35 @@ export default function BuyPartView() {
                                     Filter
                                 </Button>
                             </div>
-                        </div>
-                    </LocalizationProvider>
+                        </LocalizationProvider>
 
-                    <Button variant="contained" color="primary" onClick={downloadPdf}>
-                        Download as PDF
-                    </Button>
-                </div>
+                        <Button variant="contained" color="primary" onClick={downloadPdf}>
+                            Download as PDF
+                        </Button>
+                    </div>
 
-                {/* Table */}
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Date</TableCell>
-                                <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Description</TableCell>
-                                <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Amount</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {buyPartData.map((rowData) => (
-                                <TableRow key={rowData._id}>
-                                    <TableCell>{rowData.date}</TableCell>
-                                    <TableCell>{rowData.description}</TableCell>
-                                    <TableCell>{rowData.amount}</TableCell>
+                    {/* Table */}
+                    <TableContainer component={Paper}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Date</TableCell>
+                                    <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Description</TableCell>
+                                    <TableCell sx={{ backgroundColor: '#1976d2', color: 'white' }}>Amount</TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                            </TableHead>
+                            <TableBody>
+                                {buyPartData.map((rowData) => (
+                                    <TableRow key={rowData._id}>
+                                        <TableCell>{rowData.date}</TableCell>
+                                        <TableCell>{rowData.description}</TableCell>
+                                        <TableCell>{rowData.amount}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
             </Box>
         </Box>
     );
