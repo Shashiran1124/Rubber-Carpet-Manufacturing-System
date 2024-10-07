@@ -6,15 +6,18 @@ export default function ReleaseInventoryForm() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Get the current date in YYYY-MM-DD format
+  const currentDate = new Date().toISOString().split('T')[0];
+
   const [formData, setFormData] = useState({
     productId: '',
     productName: '',
-    productionDate: '',
+    productionDate: currentDate, // Set default value to current date,
     quantity: '',
     unitPrice: '',
     totalPrice: '',
     releaseDate: ''
-  });
+  }); 
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [orderId, setOrderId] = useState(false);
@@ -154,7 +157,7 @@ export default function ReleaseInventoryForm() {
             </select>
           </div>
           <div style={{ marginBottom: '8px' }}>
-            <label htmlFor="productionDate" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Production Date:</label>
+            <label htmlFor="productionDate" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Release Date:</label>
             <input
               type="date"
               id="productionDate"
@@ -162,7 +165,10 @@ export default function ReleaseInventoryForm() {
               value={formData.productionDate}
               onChange={handleChange}
               required
+              min={currentDate} // Restrict to current date
+              max={currentDate} // Restrict to current date
               style={{ width: '100%', padding: '4px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px' }}
+              readOnly // Make the field read-only
             />
           </div>
           <div style={{ marginBottom: '8px' }}>
@@ -202,7 +208,7 @@ export default function ReleaseInventoryForm() {
             />
           </div>
           <div style={{ marginBottom: '8px' }}>
-            <label htmlFor="releaseDate" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Release Date:</label>
+            <label htmlFor="releaseDate" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Production Date:</label>
             <input
               type="date"
               id="releaseDate"
