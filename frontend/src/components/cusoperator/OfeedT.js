@@ -48,7 +48,7 @@ export default function OperatorFeeedTable() {
 
   return (
     <div style={{ padding: '20px,30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f7f7f7', minHeight: '170vh', display: 'flex', flexDirection: 'column' }}>
-      <h1 style={{ marginBottom: '40px', marginLeft: '400px', color: '#000000', fontSize: '22px' }}>List of Feedbacks</h1>
+      <h1 style={{ marginBottom: '40px', marginLeft: '440px', color: '#000000', fontSize: '22px' }}>List of Feedbacks</h1>
 
       {/* Search Bar */}
       <input
