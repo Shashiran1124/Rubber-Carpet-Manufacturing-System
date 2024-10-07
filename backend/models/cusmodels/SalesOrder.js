@@ -7,6 +7,7 @@ const salesOrderSchema = new Schema({
         type: String,
         required: true
     },
+   
     orderDate: {
         type: Date,
         required: true

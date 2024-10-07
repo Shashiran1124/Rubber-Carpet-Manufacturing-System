@@ -49,7 +49,7 @@ export default function CusOpForm() {
         ...formData,
         [name]: filteredValue,
       });
-    } else if (name === 'contactNumber') {
+    }else if (name === 'contactNumber') {
       // Allow only digits and limit to 10 digits
       const filteredValue = value.replace(/\D/g, '').slice(0, 10);
       setFormData({
@@ -157,6 +157,7 @@ export default function CusOpForm() {
               </div>
             )}
           </div>
+           {/* New Order Number input field */}
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="orderDate" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Order Date:</label>
             <input
@@ -315,7 +316,7 @@ export default function CusOpForm() {
           </button>
           <button
             type="button"
-            onClick={() => navigate('/DashOrderFormTable')}
+            onClick={() => navigate('/DashOLT')}
             style={{
               width: '20%',
               padding: '8px',

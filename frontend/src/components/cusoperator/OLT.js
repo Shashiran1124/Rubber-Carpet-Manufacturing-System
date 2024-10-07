@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ViewOrderTable() {
   const [salesOrder, setSalesOrder] = useState([]);
-  const [searchName, setSearchName] = useState(''); // Change to search by name
+  const [searchName, setSearchName] = useState('');
   const navigate = useNavigate();
+  const currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
   const fetchSalesOrder = async () => {
     try {
@@ -12,6 +13,19 @@ export default function ViewOrderTable() {
       if (response.ok) {
         const data = await response.json();
         setSalesOrder(data);
+
+        // Check for orders that match the current date
+        const matchingOrders = data.filter(order => {
+          const orderDate = new Date(new Date(order.orderDate).getTime() + new Date(order.orderDate).getTimezoneOffset() * 60000)
+            .toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+          return orderDate === currentDate;
+        });
+
+        // Dispatch custom event to notify Navbar
+        const notificationEvent = new CustomEvent('orderNotification', {
+          detail: matchingOrders.length, // Send the count of matching orders
+        });
+        window.dispatchEvent(notificationEvent);
       } else {
         console.error('Failed to fetch sales order');
       }
@@ -50,16 +64,15 @@ export default function ViewOrderTable() {
     setSearchName(e.target.value);
   };
 
-  // Filter salesOrder by searchName
+  // Filter orders based on customer name
   const filteredOrders = salesOrder.filter(order =>
     order.customerName.toLowerCase().includes(searchName.toLowerCase())
   );
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f7f7f7', minHeight: '170vh', display: 'flex', flexDirection: 'column' }}>
-      <h1 style={{ marginBottom: '40px', marginLeft: '380px', color: '#000000', fontSize: '22px' }}>List of the Orders</h1>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#ffffff', minHeight: '170vh', display: 'flex', flexDirection: 'column' }}>
+      <h1 style={{ marginBottom: '40px', marginLeft: '420px', color: '#000000', fontSize: '22px' }}>List of the Orders</h1>
 
-      {/* Search Input */}
       <div style={{ marginBottom: '20px', textAlign: 'center' }}>
         <input
           type="text"
@@ -79,6 +92,7 @@ export default function ViewOrderTable() {
       <table style={{ width: '100%', borderCollapse: 'collapse', border: '1.5px solid #000000', fontSize: '11px', margin: '0 auto' }}>
         <thead>
           <tr style={{ backgroundColor: '#f4f4f4', color: '#333' }}>
+            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Order Number</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Customer Name</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Order Date</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Contact Number</th>
@@ -90,12 +104,13 @@ export default function ViewOrderTable() {
           </tr>
         </thead>
         <tbody>
-          {filteredOrders.map((order) => (
+          {filteredOrders.map((order, index) => (
             <tr key={order._id}>
+              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.orderNumber || index + 1}</td> {/* Display actual order number if available, else use index */}
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.customerName}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>
-  {new Date(new Date(order.orderDate).getTime() + new Date(order.orderDate).getTimezoneOffset() * 60000).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
-</td>
+                {new Date(new Date(order.orderDate).getTime() + new Date(order.orderDate).getTimezoneOffset() * 60000).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+              </td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.contactNumber}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.productCatalog}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.address}</td>
