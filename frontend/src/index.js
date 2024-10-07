@@ -68,6 +68,8 @@ import DashRMCtable from './components/supplier/DashRMCTable';
 import SupReport from './components/supplier/SupReport';
 import DashReportt from './components/supplier/DashSupReport';
 import ReportTable from './components/supplier/ReportTable';
+import NishviewMaterials from './components/supplier/NishviewMaterials';
+import DashNishviewMaterials from './components/supplier/DashNishviewMaterials';
 
 
 //Malindu
@@ -150,6 +152,8 @@ import BuyPartView from "./components/machinerepair/BuyPartView";
 
 
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -224,6 +228,9 @@ root.render(
       <Route path='/SupReport' element={<SupReport/>}/>
       <Route path='/DashSupReport' element={<DashReportt/>}/>
       <Route path='/ReportTable' element={<ReportTable/>}/>
+      <Route path='/NishviewMaterials' element={<NishviewMaterials/>}/>
+      <Route path='/DashNishviewMaterials' element={<DashNishviewMaterials/>}/>
+
 
 
       {/*Malindu*/}

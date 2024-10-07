@@ -93,6 +93,18 @@ const Sidebarr1 = () => {
                 >
                     <ListItemText primary="Calculate Raw Material Costs" sx={{ paddingLeft: "10px", color: isActive(['/DashRawMaterialCostForm']) ? '#fff' : '#000' }} />
                 </ListItem>
+
+
+                {/* NishrawMaterialCost */}
+                <ListItem 
+                    button 
+                    sx={{ padding: "15px 20px",width:"244px",marginRight:"2px",borderRadius:"6px",border:"2px solid #000000",marginBottom:"4px", backgroundColor: isActive(['/DashNishviewMaterials']) ? '#191919' : 'inherit' }} 
+                    onClick={() => handleNavigation('/DashNishviewMaterials')}
+                >
+                    <ListItemText primary="View Inventory" sx={{ paddingLeft: "10px", color: isActive(['/DashNishviewMaterials']) ? '#fff' : '#000' }} />
+                </ListItem>
+
+
             </List>
         </Box>
     );

@@ -109,12 +109,12 @@ export default function RawMaterialCostForm() {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
+      height: '120vh',
       backgroundColor: '#f7f7f7',
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={CostImage} alt="Cost" style={{ width: '370px', height: '85vh', borderRadius: '10px' }} />
+        <img src={CostImage} alt="Cost" style={{ width: '370px', height: '98vh', borderRadius: '10px' }} />
       </div>
       <div style={{
         backgroundColor: '#EDEDEE',
@@ -123,7 +123,7 @@ export default function RawMaterialCostForm() {
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         width: '100%',
         maxWidth: '350px',
-        height: '79vh',
+        height: '98vh',
         border: '2px solid #000000',
       }}>
         <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Raw Material Cost Calculator</h2>
