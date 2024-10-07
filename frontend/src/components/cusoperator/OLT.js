@@ -23,7 +23,7 @@ export default function ViewOrderTable() {
 
         // Dispatch custom event to notify Navbar
         const notificationEvent = new CustomEvent('orderNotification', {
-          detail: matchingOrders.length, // Send the count of matching orders
+          detail: `There are ${matchingOrders.length} orders today`, // Send notification message
         });
         window.dispatchEvent(notificationEvent);
       } else {
@@ -99,14 +99,14 @@ export default function ViewOrderTable() {
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Product Catalog</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Address</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Quantity</th>
-            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Purchasing Reason</th>
+            
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredOrders.map((order, index) => (
             <tr key={order._id}>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.orderNumber || index + 1}</td> {/* Display actual order number if available, else use index */}
+              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.orderNumber || index + 1}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.customerName}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>
                 {new Date(new Date(order.orderDate).getTime() + new Date(order.orderDate).getTimezoneOffset() * 60000).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
@@ -115,7 +115,7 @@ export default function ViewOrderTable() {
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.productCatalog}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.address}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.quantity}</td>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.purchasingReason}</td>
+              
               <td style={{ border: '1.5px solid #000000', padding: '8px', textAlign: 'center' }}>
                 <button
                   onClick={() => handleUpdate(order)}

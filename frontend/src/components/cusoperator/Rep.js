@@ -11,9 +11,23 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQuantityBarChartData }) => {
   return (
     <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#F5F5F5', minHeight: '80vh', width:'90%', border: '3.5px solid black' }}>
-      <div style={{ marginLeft: '530px' }}>
-        <img src={PRIImage} alt="PRI" style={{ width: '160px', height: '15vh', borderRadius: '10px' }} />
+      <div style={{  marginLeft:'440px',top: '100px', width: '100%', textAlign: 'left', paddingTop: '10px',fontSize: '12px'}}>
+      <div style={{ height: '50px', marginLeft:'450px',width: '25%', margin: '0 auto', top: '140px', textAlign: 'left', paddingTop: '10px', }}>
+      <p style={{ margin: 0 }}>PRI Rubber Industry </p>
+      <p style={{ margin: 0 }}>Colombo 07 </p>
+      <p style={{ margin: 0 }}>Sri Lanka </p>
+      <p style={{ margin: 0 }}>Tell: +94 xxxxxxxx </p>
+      <p style={{ margin: 0 }}>Email:
+      <a href="mailto:malindu113@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
+        malindu113@gmail.com
+      </a>
+      </p> {/* Clickable email link */}
       </div>
+      </div>
+      <div style={{ marginLeft: '450px' }}>
+        <img src={PRIImage} alt="PRI" style={{ width: '130px', height: '15vh', borderRadius: '10px' }} />
+      </div>
+      
       <h1 style={{ marginBottom: '40px', textAlign: 'center', color: '#000000', fontSize: '28px', fontFamily: 'Dancing Script, cursive' }}>
         PRI Rubber Industries
       </h1>
@@ -75,24 +89,13 @@ const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQua
           }} />
       </div>
       <div style={{ height: '50px',width: '25%', marginTop: '50px', borderTop: '2px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px' }}>
+      <p style={{ margin: 0 }}>Malindu Nethmina </p>
         <p style={{ margin: 0 }}>Customer Manager </p>
         <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
         
 
       </div>
-      <div style={{  marginLeft:'440px',marginTop: '50px', width: '25%', textAlign: 'left',fontSize: '12px'}}>
-      <div style={{ height: '50px', marginLeft:'450px',width: '25%', marginTop: '50px', textAlign: 'left' }}>
-      <p style={{ margin: 0 }}>PRI Rubber Industry </p>
-      <p style={{ margin: 0 }}>Colombo 07 </p>
-      <p style={{ margin: 0 }}>Sri Lanka </p>
-      <p style={{ margin: 0 }}>Tell: +94 xxxxxxxx </p>
-      <p style={{ margin: 0 }}>Email:
-      <a href="mailto:malindu113@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
-        malindu113@gmail.com
-      </a>
-      </p> {/* Clickable email link */}
-      </div>
-      </div>
+      
     </div>
   );
 };
