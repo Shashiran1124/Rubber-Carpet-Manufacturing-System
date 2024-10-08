@@ -16,7 +16,7 @@ const Osidebar = () => {
     const isActive = (paths) => paths.includes(active);
 
     return (
-        <Box sx={{ width: "220px", backgroundColor: "#8D98A7", height: "321vh", paddingTop: "10px",borderRadius: "5px",border: "1.5px solid #000000" }}>
+        <Box sx={{ width: "220px", backgroundColor: "#8D98A7", height: "224vh", paddingTop: "10px",borderRadius: "5px",border: "1.5px solid #000000" }}>
             <List sx={{ padding: 0 }}>
                 
                 {/* Home */}

@@ -40,7 +40,7 @@ const AddMachine = () => {
             setMachineID(value);
             setMachineIDError("");
         } else {
-            setMachineIDError("Machine ID must be alphanumeric and contain no spaces or special characters.");
+            setMachineIDError("");
         }
     };
 
