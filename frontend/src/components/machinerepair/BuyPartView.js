@@ -52,6 +52,10 @@ export default function BuyPartView() {
 
     const downloadPdf = () => { //pdf download
         const doc = new jsPDF();
+        
+        const logo=  "../images/11.png";
+        doc.addImage(logo, 'PNG', 130, 0, 80, 80);
+
         doc.setFontSize(18);
         doc.text("PRI Rubber Industry", 14, 10);
         doc.setFontSize(15);
@@ -83,7 +87,7 @@ export default function BuyPartView() {
         doc.autoTable({
             head: [tableColumn],
             body: tableRows,
-            startY: 35, // Adjusts where the table starts
+            startY: 40, // Adjusts where the table starts
             headStyles: {
                 fillColor: [0, 0, 255],  // Blue background color for header
                 textColor: [255, 255, 255], // White text color for header
