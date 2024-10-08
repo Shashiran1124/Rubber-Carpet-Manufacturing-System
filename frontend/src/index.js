@@ -148,6 +148,20 @@ import BuyFormPart from "./components/machinerepair/BuyPartForm";
 import BuyPartView from "./components/machinerepair/BuyPartView";
 
 
+//haini
+//import "bootstrap/dist/css/bootstrap.min.css";
+//import "./App.css";
+//import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+//import { ToastContainer, toast } from "react-toastify";
+//import "react-toastify/dist/ReactToastify.css";
+import SalaryCreate from "./components/accountant/SalaryCreate";
+import SalaryView from "./components/accountant/SalaryView";
+import PettyCash from "./components/accountant/PettyCash";
+import PeticashAll from "./components/accountant/PeticashAll";
+import ProfitLostForm from "./components/accountant/ProfitLostForm";
+import PettycashEdit from "./components/accountant/PettycashEdit";
+import ProfitAndLostView from "./components/accountant/ProfitAndLostView";
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -297,6 +311,17 @@ root.render(
 						<Route path="/repair/add/:mid" element={<RepairForm />} />
 						<Route path="/Part/add" element={<BuyFormPart />} />
 						<Route path="/Part/all" element={<BuyPartView />} />
+
+
+
+              {/*hasini*/}
+            <Route path="/salaryCal/add" element={<SalaryCreate />} />
+            <Route path="/salaryCal/all" element={<SalaryView />} />
+            <Route path="/pettyCash/add" element={<PettyCash />} />
+            <Route path="/pettyCash/all" element={<PeticashAll />} />
+            <Route path="/pettyCash/update/:id" element={<PettycashEdit />} />
+            <Route path="/profitAndLosts/add" element={<ProfitLostForm />} />
+            <Route path="/profitAndLosts/all" element={<ProfitAndLostView />} />
 
     </Routes>
     </AuthProvider>
