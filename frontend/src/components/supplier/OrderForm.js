@@ -44,8 +44,37 @@ export default function OrderFormm() {
     let error = '';
 
     if (name === 'contactNumber') {
+      // Prevent any non-numeric input
       validValue = value.replace(/[^0-9]/g, '');
-      if (validValue.length > 10) validValue = validValue.slice(0, 10);
+  
+      // Ensure the contact number starts with "07" and third digit can only be 1, 2, 4, 5, 6, 7, 8, 0
+      if (validValue.length === 1 && validValue !== '0') {
+        // If the first digit is not "0", block input
+        validValue = '';
+        error = '';
+      }
+      
+      if (validValue.length === 2 && validValue !== '07') {
+        // If the first two digits are not "07", block input
+        validValue = validValue.slice(0, 1); // Remove the invalid second digit
+        error = '';
+      }
+  
+      if (validValue.length === 3 && !/[12456780]/.test(validValue[2])) {
+        // If the third digit is not in the allowed range, block input
+        validValue = validValue.slice(0, 2); // Remove the invalid third digit
+        error = '';
+      }
+  
+      // Limit the number of digits to 10
+      if (validValue.length > 10) {
+        validValue = validValue.slice(0, 10);
+      }
+  
+      // Check if the number is complete and valid (exactly 10 digits)
+      if (validValue.length === 10 && !/^07[12456780][0-9]{7}$/.test(validValue)) {
+        error = '';
+      }
     }
 
     if (name === 'quantity') {
@@ -106,7 +135,7 @@ export default function OrderFormm() {
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={TiersImage} alt="Order" style={{ width: '360px', height: '94vh', borderRadius: '10px' }} />
+        <img src={TiersImage} alt="Order" style={{ width: '360px', height: '84vh', borderRadius: '10px' }} />
       </div>
 
       <div style={{
