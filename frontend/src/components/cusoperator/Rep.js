@@ -10,42 +10,39 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQuantityBarChartData }) => {
   return (
-    <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#F5F5F5', minHeight: '80vh', width:'90%', border: '3.5px solid black' }}>
-      <div style={{  marginLeft:'440px',top: '100px', width: '100%', textAlign: 'left', paddingTop: '10px',fontSize: '12px'}}>
-      <div style={{ height: '50px', marginLeft:'450px',width: '25%', margin: '0 auto', top: '140px', textAlign: 'left', paddingTop: '10px', }}>
-      <p style={{ margin: 0 }}>PRI Rubber Industry </p>
-      <p style={{ margin: 0 }}>Colombo 07 </p>
-      <p style={{ margin: 0 }}>Sri Lanka </p>
-      <p style={{ margin: 0 }}>Tell: +94 xxxxxxxx </p>
-      <p style={{ margin: 0 }}>Email:
+    <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#FFFFFF', minHeight: '100vh', width:'90%', border: '3.5px solid black',fontFamily: 'Italic' }}>
+     
+      <p style={{ margin: 0,fontSize: '20px',fontWeight: 'bold' }}>PRI Rubber Industry </p>
+      <p style={{ margin: 0,fontSize: '14px' }}>Colombo 07 </p>
+      <p style={{ margin: 0 ,fontSize: '14px'}}>Sri Lanka </p>
+      <p style={{ margin: 0 ,fontSize: '14px'}}>Tell: +94 xxxxxxxx </p>
+      <p style={{ margin: 0 ,fontSize: '14px'}}>Email:
       <a href="mailto:malindu113@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
         malindu113@gmail.com
       </a>
-      </p> {/* Clickable email link */}
+      </p>
+    
+      <div style={{ marginLeft: '850px' }}>
+      <img src={PRIImage} alt="PRI" style={{ width: '100px', height: '10vh', borderRadius: '10px',marginTop:'-200px' }} />
       </div>
-      </div>
-      <div style={{ marginLeft: '450px' }}>
-        <img src={PRIImage} alt="PRI" style={{ width: '130px', height: '15vh', borderRadius: '10px' }} />
-      </div>
+     
       
-      <h1 style={{ marginBottom: '40px', textAlign: 'center', color: '#000000', fontSize: '28px', fontFamily: 'Dancing Script, cursive' }}>
-        PRI Rubber Industries
-      </h1>
-      <h1 style={{ marginBottom: '40px', textAlign: 'center', color: '#696969', fontSize: '20px',  }}>
+
+      <h1 style={{ marginBottom: '10px', textAlign: 'center', color: '#000000', fontSize: '24px',  fontFamily: 'Italic',fontWeight: 'bold' }}>
         Monthly Income Report (2024)
       </h1>
       
-      <div style={{ marginBottom: '40px', textAlign: 'center', backgroundColor: '#E6E6FA', padding: '20px', borderRadius: '26px' }}>
-        <h2 style={{ color: '#8A2BE2', fontSize: '20px' }}>Summary</h2>
-        <p style={{ color: '#FF0000' }}><strong>Total Sales:</strong> Rs {summary.totalSales.toFixed(2)}</p>
-        <p style={{ color: '#FF0000' }}><strong>Total Quantity Sold:</strong> {summary.totalQuantity}</p>
-        <p style={{ color: '#FF0000' }}><strong>Average Sales per Month:</strong> Rs {summary.averageSalesPerMonth}</p>
+      <div style={{ marginBottom: '40px',marginLeft: '150px' , textAlign: 'center', backgroundColor: '#E6E6FA', padding: '20px', borderRadius: '26px',width: '65%', }}>
+        <h2 style={{ color: '#FF0000', fontSize: '20px',}}>Summary</h2>
+        <p style={{ color: '#000000' }}><strong>Total Sales:</strong> Rs {summary.totalSales.toFixed(2)}</p>
+        <p style={{ color: '#000000' }}><strong>Total Quantity Sold:</strong> {summary.totalQuantity}</p>
+        <p style={{ color: '#000000' }}><strong>Average Sales per Month:</strong> Rs {summary.averageSalesPerMonth}</p>
         <p><strong>Number of Months with Sales Data:</strong> {summary.uniqueMonthsCount}</p>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '40px' }}>
-        <div style={{ width: '65%', marginBottom: '20px' }}>
-          <h2 style={{ marginBottom: '20px', color: '#8A2BE2', fontSize: '18px', textAlign: 'center',marginLeft:'290px' }}>Sales Data by Month</h2>
+        <div style={{ width: '68%', marginTop: '-20px' }}>
+          <h2 style={{ marginBottom: '20px', color: '#FF0000', fontSize: '18px', textAlign: 'center',marginLeft:'290px' }}>Sales Data by Month</h2>
           <table style={{ width: '100%', borderCollapse: 'collapse', border: '1.5px solid #000000', fontSize: '14px',marginLeft:'150px' }}>
             <thead>
               <tr style={{ backgroundColor: '#0000FF', color: '#FFFFFF' }}>
@@ -66,8 +63,8 @@ const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQua
           </table>
         </div>
 
-        <div style={{ width: '76%',marginLeft:'100px' }}>
-          <h2 style={{ marginBottom: '20px', color: '#8A2BE2', fontSize: '18px', textAlign: 'center',marginLeft:'10px' }}>Monthly Sales Chart</h2>
+        <div style={{ width: '60%',marginLeft:'170px' }}>
+          <h2 style={{ marginBottom: '-3px', color: '#FF0000', fontSize: '18px', textAlign: 'center',marginLeft:'10px' }}>Monthly Sales Chart</h2>
           <Bar data={getBarChartData()} options={{
             responsive: true,
             plugins: { legend: { position: 'top' }, title: { display: true, text: 'Monthly Total Sales', font: { size: 16, weight: 'bold' }, color: '#000000' }},
@@ -78,8 +75,8 @@ const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQua
         </div>
       </div>
 
-      <div style={{ width: '80%',marginLeft:'90px' }}>
-        <h2 style={{ marginBottom: '20px', color: '#8A2BE2', fontSize: '18px', textAlign: 'center' }}>Product Quantity Chart</h2>
+      <div style={{ width: '70%',marginLeft:'110px' }}>
+        <h2 style={{ marginBottom: '-0px', color: '#FF0000', fontSize: '18px', textAlign: 'center' }}>Product Quantity Chart</h2>
         <Bar data={getProductQuantityBarChartData()} options={{
             responsive: true,
             plugins: { legend: { position: 'top' }, title: { display: true, text: 'Product Quantity by Month', font: { size: 16, weight: 'bold' }, color: '#000000' }},
@@ -88,7 +85,7 @@ const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQua
                       y: { ticks: { color: 'rgba(0, 0, 0, 1)' }, grid: { color: 'rgba(0, 0, 0, 0.2)' }, beginAtZero: true }},
           }} />
       </div>
-      <div style={{ height: '50px',width: '25%', marginTop: '50px', borderTop: '2px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px' }}>
+      <div style={{ height: '50px',width: '15%', marginTop: '50px', borderTop: '2.3px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px',fontWeight: 'bold' }}>
       <p style={{ margin: 0 }}>Malindu Nethmina </p>
         <p style={{ margin: 0 }}>Customer Manager </p>
         <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
@@ -204,6 +201,7 @@ export default function CalTableWithBarChart() {
         pdf.addPage();
         pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
+       
       }
       
       pdf.save('Monthly_Report.pdf');
@@ -239,8 +237,11 @@ export default function CalTableWithBarChart() {
       <button 
         onClick={handleDownload} 
         style={{ marginTop: '20px', padding: '10px 20px', backgroundColor: '#0000FF', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', marginLeft:'85%' }}
+        
       >
+        
         Download PDF
+        
       </button>
     </div>
   );
