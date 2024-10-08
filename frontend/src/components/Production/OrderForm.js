@@ -62,11 +62,13 @@ export default function OrderForm() {
     const { name, value } = e.target;
     let validValue = value;
 
+    // Only allow integers for qty and materialQTY, exclude decimal mark
     if (name === 'qty' || name === 'materialQTY') {
-      validValue = value.replace(/[^0-9]/g, '');
+      validValue = value.replace(/[^0-9]/g, ''); // Replace with only digits
       if (parseInt(validValue, 10) < 0) validValue = '0';
     }
 
+    // Allow only alphanumeric characters for num and size
     if (name === 'num' || name === 'size') {
       validValue = value.replace(/[^A-Za-z0-9 ]/g, '');
     }
@@ -83,6 +85,13 @@ export default function OrderForm() {
     });
   };
 
+  const handleKeyDown = (e) => {
+    // Prevent typing of decimal point
+    if (e.key === '.') {
+      e.preventDefault();
+    }
+  };
+
   const validateForm = () => {
     const newErrors = {};
     if (!formData.num) {
@@ -92,7 +101,7 @@ export default function OrderForm() {
       newErrors.name = 'Product Name is required';
     }
     if (!formData.qty || isNaN(formData.qty) || formData.qty <= 0) {
-      newErrors.qty = 'Quantity should be a positive number';
+      newErrors.qty = 'Quantity should be a positive integer';
     }
     if (!formData.size) {
       newErrors.size = 'Size is required';
@@ -101,7 +110,7 @@ export default function OrderForm() {
       newErrors.material = 'Material is required';
     }
     if (!formData.materialQTY || isNaN(formData.materialQTY) || formData.materialQTY <= 0) {
-      newErrors.materialQTY = 'Material Quantity should be a positive number';
+      newErrors.materialQTY = 'Material Quantity should be a positive integer';
     }
     
     setErrors(newErrors);
@@ -219,6 +228,7 @@ export default function OrderForm() {
               name="qty"
               value={formData.qty}
               onChange={handleChange}
+              onKeyDown={handleKeyDown} // Add the key down handler here
               required
               min="0"
               style={{
@@ -290,6 +300,7 @@ export default function OrderForm() {
               name="materialQTY"
               value={formData.materialQTY}
               onChange={handleChange}
+              onKeyDown={handleKeyDown} // Add the key down handler here
               required
               min="0"
               style={{
@@ -314,7 +325,8 @@ export default function OrderForm() {
                 border: 'none',
                 borderRadius: '5px',
                 cursor: 'pointer',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                marginRight: '10px' 
               }}
             >
               {isEditMode ? 'Update Order' : 'Submit Order'}
@@ -329,7 +341,8 @@ export default function OrderForm() {
                 border: 'none',
                 borderRadius: '5px',
                 cursor: 'pointer',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                marginRight: '10px' 
               }}
             >
               View Order
@@ -344,7 +357,8 @@ export default function OrderForm() {
                 border: 'none',
                 borderRadius: '5px',
                 cursor: 'pointer',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                marginRight: '10px' 
               }}
             >
               View Stock
