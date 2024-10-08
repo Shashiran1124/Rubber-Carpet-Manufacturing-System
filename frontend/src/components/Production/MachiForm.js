@@ -47,6 +47,10 @@ export default function MachiForm() {
     });
   };
 
+  const getMinEndTime = () => {
+    return formData.mstime ? formData.mstime : null;
+  };
+
   const validateForm = () => {
     const newErrors = {};
     const currentDate = new Date().toISOString().split('T')[0]; // Today's date in YYYY-MM-DD
@@ -218,6 +222,7 @@ export default function MachiForm() {
               value={formData.metime}
               onChange={handleChange}
               required
+              min={getMinEndTime()} // Dynamically set the min attribute for endTime
               style={{
                 width: '100%',
                 padding: '10px',
