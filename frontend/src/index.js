@@ -68,6 +68,8 @@ import DashRMCtable from './components/supplier/DashRMCTable';
 import SupReport from './components/supplier/SupReport';
 import DashReportt from './components/supplier/DashSupReport';
 import ReportTable from './components/supplier/ReportTable';
+import NishviewMaterials from './components/supplier/NishviewMaterials';
+import DashNishviewMaterials from './components/supplier/DashNishviewMaterials';
 
 
 //Malindu
@@ -117,6 +119,7 @@ import DashReceRawform from './components/Inventory/DashReceRawform';
 import DashReceRawtable from './components/Inventory/DashReceRawtable';
 import DashReleRawform from './components/Inventory/DashReleRawform';
 import DashReleRawtable from './components/Inventory/DashReleRawtable';
+import Dashordertableinin from './components/Inventory/Dashordertableinin';
 
 
 //siyumi
@@ -146,6 +149,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BuyFormPart from "./components/machinerepair/BuyPartForm";
 import BuyPartView from "./components/machinerepair/BuyPartView";
+
 
 
 
@@ -224,6 +228,9 @@ root.render(
       <Route path='/SupReport' element={<SupReport/>}/>
       <Route path='/DashSupReport' element={<DashReportt/>}/>
       <Route path='/ReportTable' element={<ReportTable/>}/>
+      <Route path='/NishviewMaterials' element={<NishviewMaterials/>}/>
+      <Route path='/DashNishviewMaterials' element={<DashNishviewMaterials/>}/>
+
 
 
       {/*Malindu*/}
@@ -274,6 +281,7 @@ root.render(
         <Route path = '/dashrecerawtable' element = {<DashReceRawtable/>}/>
         <Route path = '/dashrelerawform' element = {<DashReleRawform/>}/>
         <Route path = '/dashrelerawtable' element = {<DashReleRawtable/>}/>
+        <Route path = '/dashordertableinin' element = {<Dashordertableinin/>}/>
 
          {/*siyumi*/}
       <Route path='/Employees' element={<Employees />} />

@@ -16,7 +16,7 @@ const Sidebarin = () => {
     const isActive = (paths) => paths.includes(active);
 
     return (
-        <Box sx={{ width: "220px", backgroundColor: "#8D98A7", height: "140vh", paddingTop: "10px",borderRadius: "5px",border: "1.5px solid #000000" }}>
+        <Box sx={{ width: "220px", backgroundColor: "#8D98A7", height: "239vh", paddingTop: "10px",borderRadius: "5px",border: "1.5px solid #000000" }}>
             <List sx={{ padding: 0 }}>
                 
                 {/* Home */}
@@ -107,10 +107,10 @@ const Sidebarin = () => {
                 {/* View Order Details*/}
                 <ListItem 
                     button 
-                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/machine-allocation']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
-                    onClick={() => handleNavigation('/DashOrderTablein')}
+                    sx={{ padding: "15px 20px", backgroundColor: isActive(['/dashordertableinin']) ? '#191919' : 'inherit', borderRadius: "6px",width: "200px",border: "2px solid #000000",marginBottom: "4px" }} 
+                    onClick={() => handleNavigation('/dashordertableinin')}
                 >
-                    <ListItemText primary="View Order Details" sx={{ paddingLeft: "10px", color: isActive(['/machine-allocation']) ? '#fff' : '#000' }} />
+                    <ListItemText primary="View Order Details" sx={{ paddingLeft: "10px", color: isActive(['/dashordertableinin']) ? '#fff' : '#000' }} />
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#fff" }} />
                 
