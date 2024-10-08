@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     signatureLine: {
         width: 200,
         borderBottom: '1px solid #34495e',
-        marginBottom: 4,
+        marginTop: -14,
         alignSelf: 'flex-end',
     },
 
@@ -119,6 +119,11 @@ const styles = StyleSheet.create({
     dividerLine: {
         width: '510px',
         border: '1px solid #000'
+    },
+
+    signatureTextsup:{
+        marginTop: '1px',
+        marginLeft: '73%'
     },
 
 
@@ -262,7 +267,7 @@ const SupReport = () => {
 
             <div style={{ textAlign: 'center', margin: '40px 0' }}>
                 <PDFDownloadLink
-                    document={<MyDocument reportData={reportData} />}
+                    document={<MyDocument reportData={reportData} topMaterial={getTopMaterial()}/>}
                     fileName="Material_Quantity_Report.pdf"
                     style={{
                         padding: '10px 20px',
@@ -282,7 +287,9 @@ const SupReport = () => {
     );
 };
 
-const MyDocument = ({ reportData }) => (
+const MyDocument = ({ reportData, topMaterial }  ) => (
+
+
     <Document>
         <Page style={styles.page}>
             <View style={styles.header}>
@@ -298,22 +305,25 @@ const MyDocument = ({ reportData }) => (
             <View style={[styles.address, { alignItems: 'flex-start', marginTop: -10}]}>
                 <Text>PRI Rubber Industries,</Text>
                 <Text>Biyagama,</Text>
-                <Text>Sri Lanka.</Text>
+                <Text>Sri Lanka</Text>
+                <Text>Tel : +94 70222132</Text>
+                <Text>E-mail : priRubberindustries@gmail.com</Text>
             </View>
 
 
 
             <View style={[styles.summarySection, {marginTop: 10}]}>
                 <Text style={styles.summaryTitle}>Summary</Text>
-                <Text style={styles.summaryText}>This report contains the data of raw materials supplied.</Text>
-                <Text style={styles.summaryText}>Total materials supplied: {reportData.reduce((acc, item) => acc + item.quantity, 0)}</Text>
-                <Text style={styles.summaryText}>Top Material: {reportData.length > 0 ? reportData[0].materialType : 'N/A'}</Text>
+                <Text style={styles.summaryText}>This report contains the data of raw materials gathered from suppliers.</Text>
+                <Text style={styles.summaryText}>Total materials recieved: {reportData.reduce((acc, item) => acc + item.quantity, 0)}</Text>
+                <Text style={styles.summaryText}>Top Material: {topMaterial}</Text> {/* Display topMaterial */}
+
             </View>
 
             
 
 
-            <View style={[styles.tableSection, {marginTop: -10}]}>
+            <View style={[styles.tableSection, {marginTop: -15}]}>
                 <Text style={styles.sectionTitle}>Material Quantity Table</Text>
                 <View style={styles.table}>
                     <View style={styles.tableHeader}>
@@ -331,11 +341,11 @@ const MyDocument = ({ reportData }) => (
 
             <View style={[styles.signatureSection, {marginTop: -15}]}>
                 <Text style={styles.signatureText}>Prepared by:</Text>
-                <View style={styles.signatureLine} />
-                <Text style={styles.signatureText}>Supplier Manager</Text>
+                <View style={styles.signatureLine} /> 
             </View>
-
-            
+            <View style={styles.signatureTextsup}>
+            <Text style={styles.signatureText}>Supplier Manager</Text>
+            </View>
 
             
         </Page>
