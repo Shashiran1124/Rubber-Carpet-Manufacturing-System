@@ -16,7 +16,7 @@ const Sidebar = () => {
     const isActive = (paths) => paths.includes(active);
 
     return (
-        <Box sx={{ width: "220px", backgroundColor: "#8D98A7", height: "100vh", paddingTop: "10px",borderRadius: "5px",border: "1.5px solid #000000" }}>
+        <Box sx={{ width: "220px", backgroundColor: "#8D98A7", height: "120vh", paddingTop: "10px",borderRadius: "5px",border: "1.5px solid #000000" }}>
             <List sx={{ padding: 0 }}>
                 
                 {/* Home */}

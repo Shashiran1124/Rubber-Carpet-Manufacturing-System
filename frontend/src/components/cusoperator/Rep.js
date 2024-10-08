@@ -11,7 +11,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQuantityBarChartData }) => {
   return (
     <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#F5F5F5', minHeight: '80vh', width:'90%', border: '3.5px solid black' }}>
-      <div style={{ marginLeft: '400px' }}>
+      <div style={{ marginLeft: '450px' }}>
         <img src={PRIImage} alt="PRI" style={{ width: '130px', height: '15vh', borderRadius: '10px' }} />
       </div>
       <h1 style={{ marginBottom: '40px', textAlign: 'center', color: '#000000', fontSize: '28px', fontFamily: 'Dancing Script, cursive' }}>
@@ -80,8 +80,8 @@ const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQua
         
 
       </div>
-      <div style={{ position: 'absolute', marginLeft:'2px',top: '100px', width: '100%', textAlign: 'center', paddingTop: '10px',fontSize: '12px'}}>
-      <div style={{ height: '50px', marginLeft:'2px',width: '25%', margin: '0 auto', top: '140px', textAlign: 'left', paddingTop: '10px', }}>
+      <div style={{  marginLeft:'440px',top: '100px', width: '100%', textAlign: 'left', paddingTop: '10px',fontSize: '12px'}}>
+      <div style={{ height: '50px', marginLeft:'450px',width: '25%', margin: '0 auto', top: '140px', textAlign: 'left', paddingTop: '10px', }}>
       <p style={{ margin: 0 }}>PRI Rubber Industry </p>
       <p style={{ margin: 0 }}>Colombo 07 </p>
       <p style={{ margin: 0 }}>Sri Lanka </p>

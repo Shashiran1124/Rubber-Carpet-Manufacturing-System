@@ -8,7 +8,6 @@ export default function CusOpForm() {
   
   const [formData, setFormData] = useState({
     customerName: '',
-    orderNumber:'',
     orderDate: '',
     contactNumber: '',
     productCatalog: '',
@@ -27,7 +26,6 @@ export default function CusOpForm() {
 
       setFormData({
         customerName: order.customerName,
-        orderNumber:order.orderNumber,
         orderDate: formattedDate,
         contactNumber: order.contactNumber,
         productCatalog: order.productCatalog,
@@ -51,13 +49,7 @@ export default function CusOpForm() {
         ...formData,
         [name]: filteredValue,
       });
-    }else if (name === 'orderNumber') {
-      const filteredValue = value.replace(/\D/g, ''); // Only allow integer numbers
-      setFormData({
-        ...formData,
-        [name]: filteredValue,
-      });
-    } else if (name === 'contactNumber') {
+    }else if (name === 'contactNumber') {
       // Allow only digits and limit to 10 digits
       const filteredValue = value.replace(/\D/g, '').slice(0, 10);
       setFormData({
@@ -166,26 +158,6 @@ export default function CusOpForm() {
             )}
           </div>
            {/* New Order Number input field */}
-           <div style={{ marginBottom: '8px' }}>
-        <label htmlFor="orderNumber" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Order Number:</label>
-        <input
-          type="text"
-          id="orderNumber"
-          name="orderNumber"
-          value={formData.orderNumber}
-          onChange={handleChange}
-          required
-          style={{
-            width: '100%',
-            padding: '8px',
-            border: '1px solid #696767',
-            borderRadius: '8px',
-            boxSizing: 'border-box',
-            color: '#000',
-            fontSize: '14px'
-          }}
-        />
-         </div>
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="orderDate" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Order Date:</label>
             <input
@@ -344,7 +316,7 @@ export default function CusOpForm() {
           </button>
           <button
             type="button"
-            onClick={() => navigate('/DashOrderFormTable')}
+            onClick={() => navigate('/DashOLT')}
             style={{
               width: '20%',
               padding: '8px',

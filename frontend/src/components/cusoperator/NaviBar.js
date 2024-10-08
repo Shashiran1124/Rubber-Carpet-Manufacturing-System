@@ -1,26 +1,38 @@
-import { AppBar, Toolbar, IconButton, InputBase, Typography, Avatar, Box } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import { AppBar, Toolbar, IconButton, Typography, Avatar, Box, Badge } from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import SettingsIcon from '@mui/icons-material/Settings';
-import ShareIcon from '@mui/icons-material/Share';
 import PRIImage from '../../images/PRI.png'; 
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
+    const [notifications, setNotifications] = useState(0);
+
+    // Listen for custom event from ViewOrderTable.js
+    useEffect(() => {
+        const handleNotification = (event) => {
+            setNotifications(event.detail); // Set notifications to the total count of today's orders
+        };
+
+        window.addEventListener("orderNotification", handleNotification);
+
+        return () => {
+            window.removeEventListener("orderNotification", handleNotification);
+        };
+    }, []);
+
     return (
-        <AppBar position="static" sx={{ backgroundColor: "#ADB4BF", color: "#000000", boxShadow: "none",borderRadius: "5px",border: "1px solid #000000",height: "80px"  }}>
+        <AppBar position="static" style={{backgroundColor: "#ADB4BF", color: "#000000", boxShadow: "none", borderRadius: "5px", border: "1px solid #000000", height: "80px" }}>
             <Toolbar>
-                <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: "bold",fontSize:"20px",marginLeft:"30px" }}>
-                        P.R.I Rubber Industries
-                    </Typography>
+                <Typography variant="h6" style={{ flexGrow: 1 }}>
+                    Rubber Carpet Manufacturing System
+                </Typography>
+                <Box style={{ display: 'flex', alignItems: 'center' }}>
+                    <Badge badgeContent={notifications} color="secondary">
+                        <NotificationsIcon />
+                    </Badge>
+                    <IconButton color="inherit" edge="end">
+                        <Avatar alt="Profile Image" src={PRIImage} />
+                    </IconButton>
                 </Box>
-                
-               
-                <IconButton edge="end" color="inherit">
-                    <NotificationsIcon />
-                </IconButton>
-                
-                <Avatar alt="User" src={PRIImage} sx={{ marginLeft: 2,width: 70, height: 40 }} />
             </Toolbar>
         </AppBar>
     );

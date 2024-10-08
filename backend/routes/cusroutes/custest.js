@@ -3,11 +3,10 @@ const SalesOrder = require("../../models/cusmodels/SalesOrder");  // Correct pat
 
 // Data insertion
 router.route("/add").post((req, res) => {
-    const { customerName, orderNumber,orderDate, contactNumber, productCatalog, address, quantity, purchasingReason } = req.body;
+    const { customerName,orderDate, contactNumber, productCatalog, address, quantity, purchasingReason } = req.body;
     
     const newSalesOrder = new SalesOrder({
         customerName,
-        orderNumber,
         orderDate,
         contactNumber,
         productCatalog,
@@ -53,12 +52,12 @@ router.route("/delete/:id").delete((req, res) => {
 // Update a by ID
 router.route("/update/:id").put(async (req, res) => {
     const id = req.params.id;
-    const { customerName,orderNumber, orderDate, contactNumber, productCatalog, address,quantity,purchasingReason} = req.body;
+    const { customerName, orderDate, contactNumber, productCatalog, address,quantity,purchasingReason} = req.body;
 
     try {
         const updatedSalesOrder = await SalesOrder.findByIdAndUpdate(
             id,
-            { customerName,orderNumber, orderDate, contactNumber, productCatalog, address,quantity,purchasingReason },
+            { customerName,orderDate, contactNumber, productCatalog, address,quantity,purchasingReason },
             { new: true }  // Return the updated document
         );
 
