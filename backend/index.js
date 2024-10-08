@@ -14,13 +14,13 @@ app.use(bodyParser.json());
 const URL = process.env.MONGODB_URL;
 
 mongoose.connect(URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 const connection = mongoose.connection;
-connection.once("open", ()=>{
-    console.log("MongoDB Connection Success!");
+connection.once("open", () => {
+  console.log("MongoDB Connection Success!");
 });
 
 //Hashan
@@ -63,14 +63,13 @@ const suptestRouter2 = require("./routes/suproutes/suptest2"); // Ensure this pa
 app.use("/suptest2", suptestRouter2);
 
 //Malindu
-const custestRouter = require('./routes/cusroutes/custest');
-const custest2Router = require('./routes/cusroutes/custest2');
-const custest3Router = require('./routes/cusroutes/custest3'); // Ensure this path is correct
+const custestRouter = require("./routes/cusroutes/custest");
+const custest2Router = require("./routes/cusroutes/custest2");
+const custest3Router = require("./routes/cusroutes/custest3"); // Ensure this path is correct
 
-app.use('/custest', custestRouter);
-app.use('/cusfeedback', custest2Router);
-app.use('/cuscalculation', custest3Router); // Adjust route path as needed
-
+app.use("/custest", custestRouter);
+app.use("/cusfeedback", custest2Router);
+app.use("/cuscalculation", custest3Router); // Adjust route path as needed
 
 //nishitha
 const testRouterin = require("./routes/inventory/inventoryroute.js");
@@ -84,7 +83,6 @@ app.use("/receiveRawMaterialsRoutes", testRouter3in);
 
 const testRouter4in = require("./routes/inventory/releaseRawMaterialsRoutes.js");
 app.use("/releaseRawMaterialsRoutes", testRouter4in);
-
 
 //siyumi
 // Import routers
@@ -107,8 +105,16 @@ app.use("/repair", repairRouter); //repairs,js file eka lord venna denna oona ur
 const PartRouter = require("./routes/machineroute/parts.js"); //repair
 app.use("/Part", PartRouter); //repairs,js file eka lord venna denna oona url eka machines
 
+//hasini
+const salaryRouter = require("./routes/accountantroute/salaryCal.js");
+app.use("/salaryy", salaryRouter);//salary
 
+const pettytRouter = require("./routes/accountantroute/pettyCash.js");
+app.use("/PettyCash", pettytRouter);
 
-app.listen(PORT, ()=>{
-    console.log(`Server is up and running on PORT : ${PORT}`);
+const profitAndLostRouter = require("./routes/accountantroute/profitAndLosts.js");
+app.use("/ProfitAndLost", profitAndLostRouter);
+
+app.listen(PORT, () => {
+  console.log(`Server is up and running on PORT : ${PORT}`);
 });

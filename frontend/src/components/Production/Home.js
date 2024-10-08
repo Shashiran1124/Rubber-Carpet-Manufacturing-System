@@ -118,17 +118,17 @@ const Home = () => {
               {/* Address */}
               <ListItem>
                 <ListItemIcon><LocationOn fontSize="large" color="primary" /></ListItemIcon>
-                <ListItemText primary="Our Office Address" secondary="Palm Court Bldg M, 501/B, 5th Floor, New Link Road, Beside Goregaon Sports Complex, Malad West, Mumbai, Maharashtra 400064" />
+                <ListItemText primary="Our Office Address" secondary="PRI Rubber Manufacturing (Pvt) Ltd. 123, Industrial Zone, Colombo 05,Colombo,,00500,Sri Lanka" />
               </ListItem>
               {/* Email */}
               <ListItem>
                 <ListItemIcon><Mail fontSize="large" color="primary" /></ListItemIcon>
-                <ListItemText primary="General Enquiries" secondary="websupport@justdial.com" />
+                <ListItemText primary="General Enquiries" secondary="prirubber@email.com" />
               </ListItem>
               {/* Phone */}
               <ListItem>
                 <ListItemIcon><Phone fontSize="large" color="primary" /></ListItemIcon>
-                <ListItemText primary="Call Us" secondary="+91-8888888888" />
+                <ListItemText primary="Call Us" secondary="+94-78 111 1111" />
               </ListItem>
               {/* Office Hours */}
               <ListItem>
@@ -158,8 +158,8 @@ const Home = () => {
           {/* Right Text Section */}
           <Grid item xs={12} md={6} sx={{ paddingLeft: { xs: '0', md: '30px' }, marginTop: { xs: '20px', md: '0' } }}>
             <Typography variant="h4" component="h2" gutterBottom>ABOUT US</Typography>
-            <Typography variant="body1" color="textSecondary">We Prism Home Decor, situated at Malad West, Mumbai, Maharashtra, are a leading name engaged in supplying a commendable range of superior quality home decor and carpets. These products are designed and manufactured using quality tested components and advanced technology under the guidance of skilled professionals.</Typography>
-            <Typography variant="body1" color="textSecondary" mt={2}>We also offer reliable and quality interior designing services to our honored patrons. As per the varied requirements of our clients, we offer these products in different attractive designs, easy fitting, perfect finish, and durability.</Typography>
+            <Typography variant="body1" color="textSecondary">At P.R.I RUBBER, we specialize in creating durable, high-quality rubber carpets designed for both commercial and residential use. </Typography>
+            <Typography variant="body1" color="textSecondary" mt={2}>With a focus on innovation and sustainability, we are committed to providing eco-friendly flooring solutions that enhance comfort, safety, and style. Our dedicated team ensures that every product meets the highest standards of performance and design, delivering value and satisfaction to our customers.</Typography>
           </Grid>
         </Grid>
       </Box>

@@ -87,7 +87,7 @@ export default function RMCTable() {
           marginBottom: '20px',
           border: '1px solid #ccc',
           borderRadius: '5px',
-          marginLeft:'290px',
+          marginLeft:'400px',
         }}
       />
 

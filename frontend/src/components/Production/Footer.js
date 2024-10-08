@@ -70,9 +70,9 @@ const Footer = () => {
               CONTACT
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              Palm Court Bldg M, 501/B, 5th Floor, New Link Road, 
-              Beside Goregaon Sports Complex, Malad West, 
-              Mumbai, Maharashtra 400064, India
+            PRI Rubber Manufacturing (Pvt) Ltd. 123, Industrial Zone, 
+            Colombo 05,Colombo,,00500,
+            Sri Lanka,
             </Typography>
             <Typography variant="body2" color="textSecondary" sx={{ marginTop: '10px' }}>
               +91-8888888888

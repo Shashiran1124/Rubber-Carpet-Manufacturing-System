@@ -114,7 +114,7 @@ export default function RawMaterialCostForm() {
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={CostImage} alt="Cost" style={{ width: '370px', height: '98vh', borderRadius: '10px' }} />
+        <img src={CostImage} alt="Cost" style={{ width: '400px', height: '98vh', borderRadius: '10px' }} />
       </div>
       <div style={{
         backgroundColor: '#EDEDEE',
@@ -122,7 +122,7 @@ export default function RawMaterialCostForm() {
         borderRadius: '8px',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         width: '100%',
-        maxWidth: '350px',
+        maxWidth: '500px',
         height: '98vh',
         border: '2px solid #000000',
       }}>
@@ -137,6 +137,7 @@ export default function RawMaterialCostForm() {
               value={formData.date}
               onChange={handleChange}
               required
+              min={new Date().toISOString().split('T')[0]}
               style={{
                 width: '100%',
                 padding: '10px',

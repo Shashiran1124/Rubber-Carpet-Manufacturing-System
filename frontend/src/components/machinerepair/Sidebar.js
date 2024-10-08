@@ -23,9 +23,9 @@ const Sidebar = () => {
                 <ListItem 
                     button 
                     sx={{ justifyContent: 'center', padding: "20px ",width: "200px", marginRight:"2px", borderRadius: "6px",marginBottom: "60px"}} 
-                    onClick={() => handleNavigation('/')}
+                    onClick={() => handleNavigation('/app')}
                 >
-                    <HomeIcon sx={{ color: isActive(['/']) ? '#FFF' : '#000',fontSize: "32px", marginRight: "2px" }} />
+                    <HomeIcon sx={{ color: isActive(['/app']) ? '#FFF' : '#000',fontSize: "32px", marginRight: "2px" }} />
                 </ListItem>
                 <Divider sx={{ backgroundColor: "#fff" }} />
                 
