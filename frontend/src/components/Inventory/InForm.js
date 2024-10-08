@@ -50,25 +50,24 @@ export default function ProductForm() {
 
     if (name === 'productId') {
       const idRegex = /^[0-9]*$/; // Allow only digits
-
-      // Check if the input value matches the regex
       if (!idRegex.test(value)) {
-        return; // If not a number, do nothing (input will not update)
+        return; // Prevent input if not a number
       }
     } else if (name === 'productName') {
       const nameRegex = /^[A-Za-z\s]+$/;
       if (!nameRegex.test(value)) {
-
+        errorMessage = '';
       }
-      
     } else if (name === 'quantity') {
       const quantityRegex = /^[1-9]\d*$/; // Allow only positive integers (no decimal numbers)
       if (!quantityRegex.test(value)) {
+        errorMessage = '';
       }
     } else if (name === 'unitPrice') {
-      const priceRegex = /^\d*\.?\d*$/; // Allow valid numbers, including decimals
+      const priceRegex = /^\d*(\.\d{0,2})?$/; // Allow valid numbers, only two decimal places
       if (!priceRegex.test(value)) {
-        
+        errorMessage = '';
+        return; // Prevent the input from being updated if invalid
       }
     }
 
@@ -94,6 +93,13 @@ export default function ProductForm() {
     }
   }, [formData.quantity, formData.unitPrice]);
 
+  const handleKeyDown = (e) => {
+    // Prevent typing of decimal point and minus sign in "Quantity" field
+    if (e.key === '.' || e.key === '-') {
+      e.preventDefault();
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.values(errors).some((err) => err)) {
@@ -116,14 +122,14 @@ export default function ProductForm() {
       });
 
       if (response.ok) {
-        alert(`Order ${isEditMode ? 'updated' : 'added'} successfully`);
+        alert`(Order ${isEditMode ? 'updated' : 'added'} successfully)`;
         navigate('/dashtable');
       } else {
-        alert(`Failed to ${isEditMode ? 'update' : 'add'} the order.`);
+        alert`(Failed to ${isEditMode ? 'update' : 'add'} the order.)`;
       }
     } catch (error) {
       console.error('Error:', error);
-      alert(`An error occurred while ${isEditMode ? 'updating' : 'adding'} the order.`);
+      alert`(An error occurred while ${isEditMode ? 'updating' : 'adding'} the order.)`;
     }
   };
 
@@ -133,7 +139,7 @@ export default function ProductForm() {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f7f7f7', padding: '10px' }}>
-      <div style={{ maxWidth: '420px', width: '100%', marginRight: '20px', marginRight: '20px', }}>
+      <div style={{ maxWidth: '420px', width: '100%', marginRight: '20px' }}>
         <img
           src={pic3} 
           alt="Product"
@@ -158,7 +164,7 @@ export default function ProductForm() {
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="productId" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>
-              Product :
+              Product ID:
             </label>
             <input
               type="text"
@@ -240,6 +246,7 @@ export default function ProductForm() {
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
+              onKeyDown={handleKeyDown} // Prevent decimal and minus sign
               required
               style={{
                 width: '100%',
@@ -257,7 +264,7 @@ export default function ProductForm() {
               Unit Price:
             </label>
             <input
-              type="number"
+              type="text"
               id="unitPrice"
               name="unitPrice"
               value={formData.unitPrice}
@@ -327,6 +334,6 @@ export default function ProductForm() {
           View Product Table
         </button>
       </div>
-    </div>
-  );
+    </div>
+  );
 }
