@@ -36,7 +36,7 @@ const Navbar = () => {
                 </Typography>
                 <Box style={{ display: 'flex', alignItems: 'center' }}>
                     <IconButton color="inherit" onClick={handleClick}>
-                        <Badge badgeContent={notifications ? 1 : 0} color="secondary">
+                        <Badge badgeContent={notifications ? 1 : 0} color="error">
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
