@@ -161,14 +161,14 @@ const Sidebar2 = () => {
         </StyledListItem>
          )}
 
-       {(user?.email === 'cus@email.com' || user?.email === 'first5@email.com')&& (
+      
         <StyledListItem button onClick={() => navigate('/Dashcusdsh')}>
           <ListItemIcon sx={{ color: '#fff' }}>
           <StorefrontIcon />
           </ListItemIcon>
           <ListItemText primary="Order Now" />
         </StyledListItem>
-          )}
+          
 
 
         <StyledListItem button onClick={() => handleScroll('products')}>

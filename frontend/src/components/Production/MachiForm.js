@@ -47,6 +47,10 @@ export default function MachiForm() {
     });
   };
 
+  const getMinEndTime = () => {
+    return formData.mstime ? formData.mstime : null;
+  };
+
   const validateForm = () => {
     const newErrors = {};
     const currentDate = new Date().toISOString().split('T')[0]; // Today's date in YYYY-MM-DD
@@ -218,6 +222,7 @@ export default function MachiForm() {
               value={formData.metime}
               onChange={handleChange}
               required
+              min={getMinEndTime()} // Dynamically set the min attribute for endTime
               style={{
                 width: '100%',
                 padding: '10px',
@@ -286,22 +291,7 @@ export default function MachiForm() {
             >
               Allocation Machine
             </button>
-            <button
-              type="button"
-              onClick={() => navigate('/dashmachitable')}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#28a745',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-                marginRight: '10px'
-              }}
-            >
-              Available Machine
-            </button>
+            
           </div>
         </form>
       </div>

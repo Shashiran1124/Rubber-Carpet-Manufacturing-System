@@ -147,7 +147,7 @@ export default function Reports() {
             <Typography variant="body2" sx={{ margin: 0 }}>PRI Rubber Industry</Typography>
             <Typography variant="body2" sx={{ margin: 0 }}>Colombo 07</Typography>
             <Typography variant="body2" sx={{ margin: 0 }}>Sri Lanka</Typography>
-            <Typography variant="body2" sx={{ margin: 0 }}>Tell: +94 xxxxxxxx</Typography>
+            <Typography variant="body2" sx={{ margin: 0 }}>Tell: +94 781 111 111</Typography>
             <Typography variant="body2" sx={{ margin: 0 }}>
               Email: 
               <Link href="mailto:malindu113@gmail.com" sx={{ textDecoration: 'none', color: 'blue' }}>

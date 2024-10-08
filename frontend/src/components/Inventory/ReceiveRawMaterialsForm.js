@@ -161,6 +161,12 @@ export default function ReceiveRawMaterialsForm() {
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                // Prevent decimal point (.) and negative sign (-)
+                if (e.key === '.' || e.key === '-' || e.key === 'e') {
+                  e.preventDefault();
+                }
+              }}
               required
               style={{ width: '100%', padding: '6px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px' }}
             />
