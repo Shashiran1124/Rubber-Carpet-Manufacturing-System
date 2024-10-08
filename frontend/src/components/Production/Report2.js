@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Grid, Paper } from '@mui/material';
+import { Box, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { Pie } from 'react-chartjs-2';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 
@@ -100,54 +100,79 @@ export default function Reports2() {
         Production Summary Report
       </Typography>
 
+{/* Product List and Quantities Table */}
+<TableContainer
+  component={Paper}
+  sx={{
+    marginTop: '20px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)', // Subtle shadow for charm
+    borderRadius: '12px', // Smooth rounded corners
+    overflow: 'hidden', // Ensure the table stays within the container
+  }}
+>
+  <Table>
+    <TableHead>
+      <TableRow
+        sx={{
+          backgroundColor: '#e0f7fa', // Light turquoise background for headers
+        }}
+      >
+        <TableCell sx={{ fontWeight: 'bold', color: '#006064', padding: '16px' }}>Product</TableCell>
+        <TableCell sx={{ fontWeight: 'bold', color: '#006064', padding: '16px' }}>Total Quantity</TableCell>
+        <TableCell sx={{ fontWeight: 'bold', color: '#006064', padding: '16px' }}>Percentage</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {Object.entries(categorySums).map(([product, quantity], index) => {
+        const percentage = totalQuantity > 0 ? ((quantity / totalQuantity) * 100).toFixed(2) : 0; // Calculate percentage
+        
+        return (
+          <TableRow
+            key={index}
+            sx={{
+              backgroundColor: index % 2 === 0 ? '#f1f8e9' : '#fff', // Alternating row colors (soft green and white)
+              transition: 'background-color 0.3s ease', // Smooth transition for hover effect
+              '&:hover': {
+                backgroundColor: '#e0f2f1', // Light turquoise hover effect
+              },
+            }}
+          >
+            <TableCell sx={{ padding: '16px', color: '#004d40' }}>{product}</TableCell>
+            <TableCell sx={{ padding: '16px', color: '#004d40' }}>{quantity}</TableCell>
+            <TableCell sx={{ padding: '16px', color: '#00796b' }}>{percentage}%</TableCell>
+          </TableRow>
+        );
+      })}
+    </TableBody>
+  </Table>
+</TableContainer>
+
+
       {/* Pie Chart */}
       <Box sx={{ maxWidth: 600, margin: '0 auto' }}>
         <Pie data={pieChartData} />
       </Box>
 
-      {/* Product Summary */}
-      <Typography
-        variant="h4"
-        sx={{ marginTop: '30px', color: '#333', textAlign: 'center', fontWeight: 'bold' }}
+      
+
+
+      {/* Footer */}
+      <Box
+        sx={{
+          height: '50px',
+          width: '25%',
+          marginTop: '100px',
+          marginBottom: '30px',
+          borderTop: '2px dotted black',
+          textAlign: 'left',
+          paddingTop: '10px',
+          fontSize: '14px',
+        }}
       >
-        Product Summary
-      </Typography>
-
-      {/* Product List and Quantities */}
-      <Grid container spacing={2} sx={{ marginTop: '20px' }}>
-        {Object.entries(categorySums).map(([product, quantity], index) => {
-          const percentage = totalQuantity > 0 ? ((quantity / totalQuantity) * 100).toFixed(2) : 0; // Calculate percentage
-
-          return (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Paper
-                sx={{
-                  padding: '20px',
-                  backgroundColor: '#fff',
-                  boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-                  borderRadius: '10px',
-                  textAlign: 'center',
-                }}
-              >
-                <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#555' }}>
-                  {product}
-                </Typography>
-                <Typography variant="h5" sx={{ color: '#333', marginTop: '10px' }}>
-                  Total Quantity: {quantity}
-                </Typography>
-                <Typography variant="h6" sx={{ color: '#777', marginTop: '5px' }}>
-                  Percentage: {percentage}%
-                </Typography>
-              </Paper>
-            </Grid>
-          );
-        })}
-      </Grid>
-      <div style={{ height: '50px',width: '25%', marginTop: '100px', marginBottom: '30px', borderTop: '2px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px' }}>
-      <p style={{ margin: 0 }}>Hashan Lahiru</p>
-        <p style={{ margin: 0 }}>Production Handling </p>
-        <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
-      </div>
+        <Typography variant="body2" sx={{ margin: 0 }}>Hashan Lahiru</Typography>
+        <Typography variant="body2" sx={{ margin: 0 }}>Production Handling</Typography>
+        <Typography variant="body2" sx={{ margin: 0 }}>Date: {new Date().toLocaleDateString()}</Typography>
+      </Box>
     </Box>
   );
 }

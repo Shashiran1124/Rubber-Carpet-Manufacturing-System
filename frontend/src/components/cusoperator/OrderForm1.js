@@ -43,24 +43,43 @@ export default function OrderForm1() {
   const handleChange = (e) => {
     const { name, value } = e.target;
   
-    // Validations
     if (name === 'customerName') {
-      // Allow only English letters (uppercase and lowercase) and prevent typing numbers or symbols
-      const filteredValue = value.replace(/[^a-zA-Z]/g, '');
+      const filteredValue = value.replace(/[^a-zA-Z]/g, ''); // Allow only English letters
       setFormData({
         ...formData,
         [name]: filteredValue,
       });
     } else if (name === 'contactNumber') {
-      // Allow only digits and limit to 10 digits
-      const filteredValue = value.replace(/\D/g, '').slice(0, 10);
+      let filteredValue = value.replace(/\D/g, ''); // Remove all non-numeric characters
+  
+      // Ensure the number starts with "07"
+      if (filteredValue.length === 1) {
+        if (filteredValue !== '0') {
+          filteredValue = ''; // Reset if the first digit is not "0"
+        }
+      } else if (filteredValue.length === 2) {
+        if (filteredValue !== '07') {
+          filteredValue = '0'; // Reset to '0' if the first two digits are not '07'
+        }
+      } else if (filteredValue.length >= 3) {
+        // Check the first three digits to allow only valid prefixes
+        const validPrefixes = ['070', '071', '072', '074', '075', '076', '077', '078'];
+        const prefix = filteredValue.slice(0, 3);
+  
+        if (!validPrefixes.includes(prefix)) {
+          filteredValue = filteredValue.slice(0, 2); // Keep only the first two digits if the prefix is invalid
+        }
+      }
+  
+      // Limit the contact number to 10 digits
+      filteredValue = filteredValue.slice(0, 10);
+  
       setFormData({
         ...formData,
         [name]: filteredValue,
       });
     } else if (name === 'quantity') {
-      // Ensure only positive integers are accepted, no minus or decimal sign allowed
-      const filteredValue = value.replace(/[^0-9]/g, ''); // Remove all non-numeric characters
+      const filteredValue = value.replace(/[^0-9]/g, ''); // Ensure only positive integers
       if (filteredValue === '' || parseInt(filteredValue) > 0) {
         setFormData({
           ...formData,
@@ -79,6 +98,7 @@ export default function OrderForm1() {
       [name]: '',
     });
   };
+  
 
   const handleKeyDown = (e) => {
     // Prevent typing of decimal point and minus sign
