@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Card, CardContent, Typography, CircularProgress, Grid, Link } from '@mui/material';
+import { Box, Card, CardContent, Typography, CircularProgress, Grid, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { TrendingUp, TrendingDown, CheckCircle, Error, Star, StarOutline } from '@mui/icons-material';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
-
-ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale);
 
 export default function Reports() {
   const [progressData, setProgressData] = useState([]);
@@ -97,31 +93,6 @@ export default function Reports() {
     }
   }, [progressData]);
 
-  const trendChartData = {
-    labels: trendData.labels,
-    datasets: [
-      {
-        label: 'Quality % Over Time',
-        data: trendData.data,
-        borderColor: '#36a2eb',
-        fill: false,
-        tension: 0.1,
-      },
-    ],
-  };
-
-  const trendChartOptions = {
-    scales: {
-      y: {
-        min: 0,
-        max: 100,
-        ticks: {
-          callback: (value) => `${value}%`,
-        },
-      },
-    },
-  };
-
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -135,27 +106,22 @@ export default function Reports() {
   };
 
   return (
-
-        
-
-
-
     <Box sx={{ padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f6f8', minHeight: '100vh' }}>
       {/* New Contact Information Section */}
-        <Box sx={{ textAlign: 'left', paddingTop: '10px', fontSize: '12px' }}>
-          <Box sx={{ height: '50px', width: '25%', paddingTop: '10px' }}>
-            <Typography variant="body2" sx={{ margin: 0 }}>PRI Rubber Industry</Typography>
-            <Typography variant="body2" sx={{ margin: 0 }}>Colombo 07</Typography>
-            <Typography variant="body2" sx={{ margin: 0 }}>Sri Lanka</Typography>
-            <Typography variant="body2" sx={{ margin: 0 }}>Tell: +94 781 111 111</Typography>
-            <Typography variant="body2" sx={{ margin: 0 }}>
-              Email: 
-              <Link href="mailto:malindu113@gmail.com" sx={{ textDecoration: 'none', color: 'blue' }}>
-                malindu113@gmail.com
-              </Link>
-            </Typography>
-          </Box>
+      <Box sx={{ textAlign: 'left', paddingTop: '10px', fontSize: '12px' }}>
+        <Box sx={{ height: '50px', width: '25%', paddingTop: '10px' }}>
+          <Typography variant="body2" sx={{ margin: 0 }}>PRI Rubber Industry</Typography>
+          <Typography variant="body2" sx={{ margin: 0 }}>Colombo 07</Typography>
+          <Typography variant="body2" sx={{ margin: 0 }}>Sri Lanka</Typography>
+          <Typography variant="body2" sx={{ margin: 0 }}>Tell: +94 781 111 111</Typography>
+          <Typography variant="body2" sx={{ margin: 0 }}>
+            Email: 
+            <Link href="mailto:malindu113@gmail.com" sx={{ textDecoration: 'none', color: 'blue' }}>
+              malindu113@gmail.com
+            </Link>
+          </Typography>
         </Box>
+      </Box>
       
       <Typography variant="h3" sx={{ marginBottom: '20px', color: '#333', textAlign: 'center', fontWeight: 'bold' }}>
         PRI RUBBER CARPET
@@ -164,7 +130,6 @@ export default function Reports() {
         Production Efficiency Report
       </Typography>
       
-
       {/* Display efficiency */}
       <Card
         sx={{
@@ -301,59 +266,101 @@ export default function Reports() {
         </Grid>
       </Grid>
 
-      {/* Trend Over Time (Line Chart) */}
-      <Box sx={{ marginTop: '40px' }}>
-        <Card
-          sx={{
-            backgroundColor: '#fff',
-            padding: '20px',
-            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-            borderRadius: '10px',
-          }}
-        >
-          <CardContent>
-            <Typography variant="h5" sx={{ marginBottom: '20px', textAlign: 'center' }}>
-              Quality Percentage Trend Over Time
-            </Typography>
-            <Line data={trendChartData} options={trendChartOptions} />
-          </CardContent>
-        </Card>
-      </Box>
-
-      {/* Production Line Ratings */}
-      <Grid container spacing={4} sx={{ marginTop: '40px' }}>
-        <Grid item xs={12}>
-          <Card
-            sx={{
-              background: 'linear-gradient(135deg, #e0e0e0, #bdbdbd)',
-              color: '#000',
-              padding: '20px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
-              borderRadius: '10px',
-            }}
-          >
-            <CardContent>
-              <Typography variant="h5" sx={{ marginBottom: '20px', fontWeight: 'bold', textAlign: 'center' }}>
-                Production Line Ratings
-              </Typography>
-              <Grid container spacing={2}>
-                {lineRatings.map((line, index) => (
-                  <Grid item xs={12} sm={4} key={index}>
-                    <Typography variant="h6" sx={{ textAlign: 'center' }}>
-                      {line.lineName}
-                    </Typography>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-                      {renderStars(line.rating)}
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-
-      
+{/* Trend Over Time (Table) */}
+<Box sx={{ marginTop: '40px' }}>
+  <Card
+    sx={{
+      backgroundColor: '#f9f9f9', // Light background color
+      padding: '20px',
+      boxShadow: '0 8px 16px rgba(0, 0, 0, 0.08)', // Softer shadow for a smoother look
+      borderRadius: '16px', // Rounded corners
+      border: '1px solid #e0e0e0', // Soft border for more definition
+    }}
+  >
+    <CardContent>
+      <Typography
+        variant="h5"
+        sx={{
+          marginBottom: '20px',
+          textAlign: 'center',
+          fontWeight: 'bold',
+          color: '#333', // Slightly darker text for contrast
+        }}
+      >
+        Quality Percentage Trend and Line Ratings Over Time
+      </Typography>
+      <TableContainer
+        component={Paper}
+        sx={{
+          boxShadow: 'none', // Remove extra shadows from the table container
+          borderRadius: '12px', // Smooth edges on the table
+        }}
+      >
+        <Table sx={{ backgroundColor: '#fff' }}>
+          <TableHead>
+            <TableRow sx={{ backgroundColor: '#e8f5e9' }}> {/* Light green background for table headers */}
+              <TableCell
+                sx={{
+                  color: '#2e7d32',
+                  fontWeight: 'bold',
+                  padding: '16px',
+                  width: '30%', // Set width for better column balancing
+                }}
+              >
+                Line Name
+              </TableCell>
+              <TableCell
+                sx={{
+                  color: '#2e7d32',
+                  fontWeight: 'bold',
+                  padding: '16px',
+                  width: '30%', // Set width for better column balancing
+                  textAlign: 'center',
+                }}
+              >
+                Quality Percentage
+              </TableCell>
+              <TableCell
+                sx={{
+                  color: '#2e7d32',
+                  fontWeight: 'bold',
+                  padding: '16px',
+                  width: '40%', // Set width for better column balancing
+                  textAlign: 'center', // Center align for the ratings column
+                }}
+              >
+                Line Rating
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {trendData.labels.map((label, index) => (
+              <TableRow
+                key={index}
+                sx={{
+                  '&:nth-of-type(odd)': { backgroundColor: '#f4f6f8' }, // Light grey background for odd rows
+                  '&:nth-of-type(even)': { backgroundColor: '#ffffff' }, // White for even rows
+                  transition: 'background-color 0.3s ease', // Smooth transition for hover
+                  '&:hover': { backgroundColor: '#f1f8e9' }, // Light hover effect
+                }}
+              >
+                <TableCell sx={{ padding: '16px' }}>{label}</TableCell>
+                <TableCell sx={{ padding: '16px', textAlign: 'center' }}>
+                  {trendData.data[index].toFixed(2)}%
+                </TableCell>
+                <TableCell sx={{ padding: '16px', textAlign: 'center' }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    {renderStars(lineRatings[index].rating)} {/* Render the star ratings */}
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </CardContent>
+  </Card>
+</Box>
 
     </Box>
   );
