@@ -429,7 +429,7 @@ export default function Report() {
         </Paper>
         <div style={{ height: '50px',width: '18%', marginTop: '60px', textAlign: 'left',borderTop: '2px dotted black', paddingTop: '10px',fontSize: '16px' }}>
         <p style={{ margin: 0  }}>Nishan Nilanga </p>
-        <p style={{ margin: 0 }}>Distributor Coordinator </p>
+        <p style={{ margin: 0 }}>Distribution Coordinator </p>
         <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
          </div>
         
