@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend } from 'chart.js';
-import Sidebar from "./SideBar";              
-import Navbar from "./NavBar";  
+import Sidebar from "./SideBar";
+import Navbar from "./NavBar";
 import html2canvas from 'html2canvas'; // For capturing DOM elements as canvas
 import jsPDF from 'jspdf'; // For generating PDFs
 import PRIImage from '../../images/PRI.png'; // Import company logo
-
-
 
 // Register components to use with Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
@@ -15,7 +13,6 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Le
 export default function SalaryReportWithBarChart() {
   const [salaryData, setSalaryData] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState('');
-  
 
   // Fetch salary data
   const fetchSalaryData = async () => {
@@ -169,7 +166,24 @@ export default function SalaryReportWithBarChart() {
       pdf.setFontSize(14);
       pdf.text(`Salary Report (${selectedMonth || 'All Months'})`, 50, 30);
 
+      // Add report image
       pdf.addImage(imgData, 'PNG', 0, 40, imgWidth, imgHeight);
+
+      // Add signature field 
+      pdf.setFontSize(8);
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const textWidth = pdf.getTextWidth('..................................................');
+      const marginRight = 10; // Right margin for alignment
+
+      // Calculate the X position for right alignment
+      const xPosition = pageWidth - textWidth - marginRight;
+
+      // Position the text just below the pie chart image area, right-aligned
+      pdf.text('Sign here:', xPosition, pageHeight - 30);
+      pdf.text('..................................................', xPosition, pageHeight - 20);
+      pdf.text('Human Resource Manager', xPosition, pageHeight - 10);
+
       pdf.save(`Salary_Report_${selectedMonth || 'All_Months'}.pdf`);
     });
   };
