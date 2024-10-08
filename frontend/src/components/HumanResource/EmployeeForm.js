@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography, MenuItem, Link } from "@mui/material"; // Import Link
+import { Button, Grid, TextField, Typography, MenuItem, Link } from "@mui/material"; 
 import { useState, useEffect, useMemo } from "react";
 import RegistrationImage from '../../images/Registration.jpg';
 import { useNavigate, useLocation } from "react-router-dom";
@@ -13,6 +13,7 @@ const EmployeeForm = () => {
     const [lastName, setLastName] = useState(employee.lastName || '');
     const [dob, setDob] = useState(employee.dob || '');
     const [gender, setGender] = useState(employee.gender || '');
+    const [designation, setDesignation] = useState(employee.designation || ''); 
     const [nic, setNic] = useState(employee.nic || '');
     const [contact, setContact] = useState(employee.contact || '');
     const [address, setAddress] = useState(employee.address || '');
@@ -24,6 +25,7 @@ const EmployeeForm = () => {
             setLastName(employee.lastName);
             setDob(employee.dob ? employee.dob.split('T')[0] : ''); // Ensure dob is in YYYY-MM-DD format
             setGender(employee.gender || '');
+            setDesignation(employee.designation || ''); // Set designation if available
             setNic(employee.nic);
             setContact(employee.contact);
             setAddress(employee.address);
@@ -58,6 +60,7 @@ const EmployeeForm = () => {
             lastName,
             dob,
             gender,
+            designation, 
             nic,
             contact,
             address,
@@ -86,6 +89,7 @@ const EmployeeForm = () => {
                 setLastName('');
                 setDob('');
                 setGender('');
+                setDesignation(''); 
                 setNic('');
                 setContact('');
                 setAddress('');
@@ -226,6 +230,32 @@ const EmployeeForm = () => {
                             <MenuItem value="male">Male</MenuItem>
                             <MenuItem value="female">Female</MenuItem>
                             <MenuItem value="other">Other</MenuItem>
+                        </TextField>
+                    </Grid>
+
+                    {/* Designation Field */}
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            select
+                            label="Designation"
+                            variant="outlined"
+                            value={designation}
+                            onChange={e => setDesignation(e.target.value)}
+                            sx={{ marginBottom: '20px' }}
+                        >
+                            <MenuItem value="Production Manager">Production Manager</MenuItem>
+                            <MenuItem value="Inventory Manager">Inventory Manager</MenuItem>
+                            <MenuItem value="Human Resource Manager">Human Resource Manager</MenuItem>
+                            <MenuItem value="Supervisor">Supervisor</MenuItem>
+                            <MenuItem value="Machine Operator">Machine Operator</MenuItem>
+                            <MenuItem value="Customer Service Operator">Customer Service Operator</MenuItem>
+                            <MenuItem value="Distributor">Distributor</MenuItem>
+                            <MenuItem value="Transportation Planner">Transportation Planner</MenuItem>
+                            <MenuItem value="Supplier Manager">Supplier Manager</MenuItem>
+                            <MenuItem value="Mechanical Inspector">Mechanical Inspector</MenuItem>
+                            <MenuItem value="Accountant">Accountant</MenuItem>
+                            <MenuItem value="Financial Manager">Financial Manager</MenuItem>
                         </TextField>
                     </Grid>
 

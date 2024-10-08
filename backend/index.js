@@ -89,13 +89,23 @@ app.use("/releaseRawMaterialsRoutes", testRouter4in);
 //siyumi
 // Import routers
 const testRouterhr = require("./routes/hrroutes/hrtest.js");
-const empFeedbackRouter = require("./routes/hrroutes/empfeedback.js"); // Adjust path if necessary
-const empsalaryRouter = require("./routes/hrroutes/empsalary.js"); // Import the new empsalary router
+const empFeedbackRouter = require("./routes/hrroutes/empfeedback.js"); 
+const empsalaryRouter = require("./routes/hrroutes/empsalary.js"); 
 
 // Use routers
 app.use("/hrtest", testRouterhr);
-app.use("/feedback", empFeedbackRouter); // Use the feedback routes
-app.use("/salary", empsalaryRouter); // Use the salary routes
+app.use("/feedback", empFeedbackRouter); 
+app.use("/salary", empsalaryRouter); 
+
+//nawodya
+const machineRouter = require("./routes/machineroute/machines.js"); //machine
+app.use("/machine", machineRouter); //machines,js file eka lord venna denna oona url eka machines
+
+const repairRouter = require("./routes/machineroute/repairs.js"); //repair
+app.use("/repair", repairRouter); //repairs,js file eka lord venna denna oona url eka machines
+
+const PartRouter = require("./routes/machineroute/parts.js"); //repair
+app.use("/Part", PartRouter); //repairs,js file eka lord venna denna oona url eka machines
 
 
 

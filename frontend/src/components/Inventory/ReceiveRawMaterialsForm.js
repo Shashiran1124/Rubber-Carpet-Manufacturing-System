@@ -6,10 +6,13 @@ export default function ReceiveRawMaterialsForm() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Get the current date in the format yyyy-mm-dd
+  const currentDate = new Date().toISOString().split('T')[0];
+
   const [formData, setFormData] = useState({
     stockNumber: '',
     stockType: '',
-    receiveDate: '',
+    receiveDate: currentDate,  // Set default to current date
     quantity: ''
   });
 
@@ -142,6 +145,9 @@ export default function ReceiveRawMaterialsForm() {
               id="receiveDate"
               name="receiveDate"
               value={formData.receiveDate}
+              min={currentDate}  // Restrict to current date
+              max={currentDate}  // Restrict to current date
+              readOnly // Make the field read-only
               onChange={handleChange}
               required
               style={{ width: '100%', padding: '4px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px' }}

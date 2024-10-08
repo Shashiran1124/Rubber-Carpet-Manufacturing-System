@@ -6,16 +6,20 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.1",
-    "@mui/material": "^6.1.1",
+    "@mui/material": "^6.1.2",
+    "@mui/x-date-pickers": "^7.19.0",
     "@react-pdf/renderer": "^4.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
     "chart.js": "^4.4.4",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.3",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
@@ -48,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

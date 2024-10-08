@@ -135,7 +135,17 @@ import SalaryManagementTable from './components/HumanResource/SalaryManagementTa
 import Reporthr from './components/HumanResource/Report';
 
 
-
+//navodya
+import "bootstrap/dist/css/bootstrap.min.css";
+import MachineRegister from "./components/machinerepair/MachineRegister";
+import AllData from "./components/machinerepair/AllData";
+import UpdateMachine from "./components/machinerepair/UpdateMachine";
+import SingleMachineView from "./components/machinerepair/SingleMachineView";
+import RepairForm from "./components/machinerepair/RepairForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import BuyFormPart from "./components/machinerepair/BuyPartForm";
+import BuyPartView from "./components/machinerepair/BuyPartView";
 
 
 
@@ -266,19 +276,27 @@ root.render(
         <Route path = '/dashrelerawtable' element = {<DashReleRawtable/>}/>
 
          {/*siyumi*/}
-         <Route path='/Employees' element={<Employees />} />
+      <Route path='/Employees' element={<Employees />} />
       <Route path='/EmployeeForm' element={<EmployeeForm />} />
       <Route path='/EmployeeTable' element={<EmployeeTable />} />
       <Route path='/NavBar' element={<Navbarhr />} />
       <Route path='/SideBar' element={<Sidebarhr />} />
       <Route path='/Feedback' element={<Feedback />} />
-      <Route path='/FeedbackForm' element={<FeedbackFormhr />} />
+      <Route path='/FeedbackFormHR' element={<FeedbackFormhr />} />
       <Route path='/FeedbackTable' element={<FeedbackTablehr />} />
       <Route path='/SalaryManagementForm' element={<SalaryManagementForm />} />
       <Route path='/SalaryManagementTable' element={<SalaryManagementTable />} />
       <Route path='/Salary' element={<Salary />} />
       <Route path='/Reporthr' element={<Reporthr />} />
 
+         {/*navodya*/}
+         <Route path="/machine/add" element={<MachineRegister />} />
+						<Route path="/machine/all" element={<AllData />} />
+						<Route path="/machine/update/:id" element={<UpdateMachine />} />
+						<Route path="/machine/view/:id/:mid" element={<SingleMachineView />} />
+						<Route path="/repair/add/:mid" element={<RepairForm />} />
+						<Route path="/Part/add" element={<BuyFormPart />} />
+						<Route path="/Part/all" element={<BuyPartView />} />
 
     </Routes>
     </AuthProvider>
