@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TableSortLabel, Tooltip, Button, TextField } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Tooltip, Button, TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import Navbarhr from './NavBar';
@@ -65,7 +65,7 @@ const FeedbackTablehr = () => {
     return (
         <>
             <Navbarhr notifications={notifications} />
-            <TableContainer component={Paper} sx={{ marginTop: 4 }}>
+            <TableContainer component={Paper} sx={{ marginTop: 4, paddingX: 2 }}>
                 <Typography variant="h4" align="center" gutterBottom sx={{ marginBottom: 2 }}>
                     Feedback List
                 </Typography>
@@ -81,7 +81,7 @@ const FeedbackTablehr = () => {
                         <TableRow>
                             <StyledTableCell>First Name</StyledTableCell>
                             <StyledTableCell>Last Name</StyledTableCell>
-                            <StyledTableCell>Employee ID</StyledTableCell>
+                            <StyledTableCell>Employee Id</StyledTableCell>
                             <StyledTableCell>Email</StyledTableCell>
                             <StyledTableCell>Phone</StyledTableCell>
                             <StyledTableCell>Issue</StyledTableCell>
