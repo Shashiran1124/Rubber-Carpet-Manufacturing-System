@@ -58,19 +58,26 @@ export default function TransportForm() {
       if (parseInt(validValue, 10) < 0) validValue = '0'; // Prevent negative values
     }
 
-    if (name === 'Drop_off_Date_and_Time') {
-      const pickupDate = new Date(formData.Pickup_Date_and_Time);
-      const dropOffDate = new Date(value);
-      if (dropOffDate < pickupDate) {
-        alert("Drop-off date cannot be before Pickup date.");
-        return; // Do not update the state if the drop-off date is invalid
-      }
-    }
-
     setFormData({
       ...formData,
       [name]: validValue
     });
+
+    // Automatically update Order_Number based on Transport_Number
+    if (name === 'Transport_Number') {
+      const transportNum = parseInt(validValue, 10);
+      if (!isNaN(transportNum)) {
+        setFormData((prevState) => ({
+          ...prevState,
+          Order_Number: (transportNum + 100).toString()
+        }));
+      } else {
+        setFormData((prevState) => ({
+          ...prevState,
+          Order_Number: ''
+        }));
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -167,6 +174,7 @@ export default function TransportForm() {
                 fontSize: '14px',
                 boxSizing: 'border-box'
               }}
+              readOnly // Make Order_Number read-only
             />
           </div>
 
@@ -261,7 +269,7 @@ export default function TransportForm() {
               value={formData.Drop_off_Date_and_Time}
               onChange={handleChange}
               required
-              min={formData.Pickup_Date_and_Time} // Ensure it cannot be before pickup date
+              min={formData.Pickup_Date_and_Time} // Ensure drop-off is after pickup
               style={{
                 width: '100%',
                 padding: '8px',
@@ -294,27 +302,39 @@ export default function TransportForm() {
             />
           </div>
 
-          <button type="submit" style={{
-            width: '100%',
-            backgroundColor: '#4CAF50',
-            color: 'white',
-            padding: '10px',
-            border: 'none',
-            borderRadius: '4px',
-            fontSize: '16px',
-            cursor: 'pointer',
-            marginBottom: '10px'
-          }}>Submit</button>
-          <button type="button" onClick={handleViewTable} style={{
-            width: '100%',
-            backgroundColor: '#f44336',
-            color: 'white',
-            padding: '10px',
-            border: 'none',
-            borderRadius: '4px',
-            fontSize: '16px',
-            cursor: 'pointer'
-          }}>View Table</button>
+          <button
+            type="submit"
+            style={{
+              width: '100%',
+              backgroundColor: '#007bff',
+              color: '#fff',
+              padding: '10px',
+              fontSize: '16px',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            {isEditMode ? 'Update Transport' : 'Add Transport'}
+          </button>
+
+          <button
+            type="button"
+            onClick={handleViewTable}
+            style={{
+              width: '100%',
+              backgroundColor: '#28a745',
+              color: '#fff',
+              padding: '10px',
+              fontSize: '16px',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              marginTop: '10px'
+            }}
+          >
+            View Transport Table
+          </button>
         </form>
       </div>
     </div>
