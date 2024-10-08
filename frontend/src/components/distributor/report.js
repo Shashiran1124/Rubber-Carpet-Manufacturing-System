@@ -173,8 +173,8 @@ export default function Report() {
       <p style={{ margin: 0 }}>Sri Lanka </p>
       <p style={{ margin: 0 }}>Tell: +94 xxxxxxxx </p>
       <p style={{ margin: 0 }}>Email:
-      <a href="mailto:malindu113@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
-        malindu113@gmail.com
+      <a href="mailto:nishan113@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
+        nishan113@gmail.com
       </a>
       </p> {/* Clickable email link */}
       </div>
@@ -198,6 +198,7 @@ export default function Report() {
         <Paper
         elevation={4}
         style={{
+          marginTop: '50px',
           padding: '5px',
           borderRadius: '20px',
           backgroundColor: '#ffffff',
@@ -212,6 +213,7 @@ export default function Report() {
    <Typography
     variant="h5"
     style={{
+      
       marginBottom: '15px',
       color: theme.palette.primary.main,
       fontWeight: 'bold',
@@ -234,7 +236,7 @@ export default function Report() {
       fontStyle: 'italic',
     }}
   >
-    This report provides an overview of the monthly costs associated with our distribution operations.
+    This report summarizes the monthly costs of distribution operations, including transport, food, vehicle maintenance, and fuel expenses. It highlights cost trends, fluctuations, and efficiency initiatives, providing insights into key expenses and strategies to manage rising costs while ensuring smooth logistics and operational effectiveness across the distribution network.
   </Typography>
 
   <Divider style={{ margin: '20px 0', backgroundColor: theme.palette.primary.light }} />
@@ -294,7 +296,8 @@ export default function Report() {
         <Paper
           elevation={3}
           style={{
-            padding: '10px',
+            marginTop: '80px',
+            padding: '30px',
             borderRadius: '15px',
             backgroundColor: '#ffffff',
           }}
@@ -340,13 +343,13 @@ export default function Report() {
           <Paper
             elevation={3}
             style={{
-              marginTop: '280px',
+              marginTop: '100px',
               padding: '20px',
               borderRadius: '15px',
               backgroundColor: '#ffffff',
             }}
           >
-            <Typography variant="h5" style={{ marginBottom: '20px', color: theme.palette.primary.main }}>
+            <Typography variant="h5" style={{ marginBottom: '15px', color: theme.palette.primary.main }}>
               Monthly Cost Bar Chart
             </Typography>
             <ResponsiveContainer width="100%" height={300}>
@@ -369,7 +372,7 @@ export default function Report() {
         <Paper
           elevation={3}
           style={{
-            marginTop: '40px',
+            marginTop: '80px',
             padding: '20px',
             borderRadius: '15px',
             backgroundColor: '#ffffff',
@@ -385,7 +388,7 @@ export default function Report() {
                   style={{
                     borderRadius: '15px',
                     background: `linear-gradient(145deg, ${getRatingColor(area.rating)}, ${theme.palette.background.default})`,
-                    color: '#ffffff',
+                    color: '#000000',
                   }}
                 >
                   <CardContent>
