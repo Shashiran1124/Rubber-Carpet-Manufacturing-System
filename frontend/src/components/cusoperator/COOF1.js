@@ -13,7 +13,7 @@ export default function CusOpForm() {
     productCatalog: '',
     address: '',
     quantity: '',
-    purchasingReason: '',
+    
   });
   const [errors, setErrors] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
@@ -31,7 +31,7 @@ export default function CusOpForm() {
         productCatalog: order.productCatalog,
         address: order.address,
         quantity: order.quantity,
-        purchasingReason: order.purchasingReason,
+       
 
       });
       setOrderId(order._id);
@@ -49,7 +49,7 @@ export default function CusOpForm() {
         ...formData,
         [name]: filteredValue,
       });
-    } else if (name === 'contactNumber') {
+    }else if (name === 'contactNumber') {
       // Allow only digits and limit to 10 digits
       const filteredValue = value.replace(/\D/g, '').slice(0, 10);
       setFormData({
@@ -157,6 +157,7 @@ export default function CusOpForm() {
               </div>
             )}
           </div>
+           {/* New Order Number input field */}
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="orderDate" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Order Date:</label>
             <input
@@ -275,26 +276,7 @@ export default function CusOpForm() {
               </div>
             )}
           </div>
-          <div style={{ marginBottom: '12px' }}>
-            <label htmlFor="purchasingReason" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Purchasing Reason:</label>
-            <textarea
-              id="purchasingReason"
-              name="purchasingReason"
-              value={formData.purchasingReason}
-              onChange={handleChange}
-              required
-              style={{
-                width: '100%',
-                padding: '4px',
-                border: '1px solid #696767',
-                borderRadius: '8px',
-                boxSizing: 'border-box',
-                color: '#000',
-                fontSize: '12px',
-                minHeight: '50px'
-              }}
-            />
-          </div>
+          
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', marginTop: '12px' }}>
           <button
             type="submit"
@@ -315,7 +297,7 @@ export default function CusOpForm() {
           </button>
           <button
             type="button"
-            onClick={() => navigate('/DashOrderFormTable')}
+            onClick={() => navigate('/DashOLT')}
             style={{
               width: '20%',
               padding: '8px',

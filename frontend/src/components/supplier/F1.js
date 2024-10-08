@@ -116,7 +116,7 @@ export default function SupplierForm() {
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={supplierImage} alt="Order" style={{ width: '370px', height: '94vh', borderRadius: '10px' }} />
+        <img src={supplierImage} alt="Order" style={{ width: '370px', height: '88vh', borderRadius: '10px' }} />
       </div>
 
       <div style={{

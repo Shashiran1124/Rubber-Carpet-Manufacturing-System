@@ -25,7 +25,7 @@ const EmpSidebar = () => {
                     sx={{ 
                         justifyContent: 'center', 
                         padding: "20px 0", 
-                        border: '2px solid #354a5f', // Add border/frame
+                        
                         borderRadius: '5px', // Optional: add border-radius to make the edges smoother
                         margin: "5px", // Add margin between buttons
                         backgroundColor: isActive(['/app']) ? '#354a5f' : 'inherit' // Add active color effect

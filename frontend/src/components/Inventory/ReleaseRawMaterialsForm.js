@@ -6,10 +6,16 @@ export default function ReleaseRawMaterialsForm() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Get the current date in 'YYYY-MM-DD' format
+  const getCurrentDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
   const [formData, setFormData] = useState({
     stockNumber: '',
     stockType: '',
-    releaseDate: '',
+    releaseDate: getCurrentDate(), // Set the default value to the current date
     quantity: ''
   });
 
@@ -145,7 +151,10 @@ export default function ReleaseRawMaterialsForm() {
               value={formData.releaseDate}
               onChange={handleChange}
               required
+              min={getCurrentDate()} // Restrict to today's date
+              max={getCurrentDate()} // Restrict to today's date
               style={{ width: '100%', padding: '4px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px' }}
+              readOnly // Make the field read-only
             />
           </div>
           <div style={{ marginBottom: '8px' }}>
@@ -156,6 +165,12 @@ export default function ReleaseRawMaterialsForm() {
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                // Prevent decimal point (.) and negative sign (-)
+                if (e.key === '.' || e.key === '-' || e.key === 'e') {
+                  e.preventDefault();
+                }
+              }}
               required
               style={{ width: '100%', padding: '6px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px' }}
             />

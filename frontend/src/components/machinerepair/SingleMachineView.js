@@ -28,25 +28,29 @@ export default function SingleMachineView() {
     return (
         <Box display="flex" height="100vh">
             {/* Sidebar */}
-            <Box sx={{ width: "15%", backgroundColor: "#b0bec5", height: "100vh" }}>
+            <Box sx={{ width: "15%", backgroundColor: "#b0bec5", height: "100vh", position: "fixed" }}>
                 <Sidebar />
             </Box>
 
             {/* Main content area */}
-            <Box sx={{ width: "85%", padding: "20px" }}>
+            <Box sx={{ width: "85%", marginLeft: "15%", padding: "0px" }}>
                 <Head />
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "20px" }}>
-                    <div style={{ fontSize: "1.2rem", fontWeight: "bold" }}>Machine ID {mid}</div>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        href={`/repair/add/${mid}`}
-                    >
-                        Add New Record
-                    </Button>
-                </div>
+                
+                <Box sx={{ marginTop: "20px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <div style={{ fontSize: "1.2rem", fontWeight: "bold" }}>Machine ID {mid}</div>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            href={`/repair/add/${mid}`}
+                        >
+                            Add New Record
+                        </Button>
+                    </div>
+                </Box>
                 <br />
 
+                {/* Table displaying repair data */}
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
@@ -63,7 +67,7 @@ export default function SingleMachineView() {
                                     <TableCell>{rowData.repairStartDate}</TableCell>
                                     <TableCell>{rowData.partName}</TableCell>
                                     <TableCell>{rowData.repairEndDate}</TableCell>
-                                    <TableCell>{rowData.description}</TableCell> {/* Fixed typo from 'discription' */}
+                                    <TableCell>{rowData.discription}</TableCell> {/* Fixed typo from 'discription' */}
                                 </TableRow>
                             ))}
                         </TableBody>

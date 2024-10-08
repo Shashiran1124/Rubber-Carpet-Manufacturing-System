@@ -68,6 +68,8 @@ import DashRMCtable from './components/supplier/DashRMCTable';
 import SupReport from './components/supplier/SupReport';
 import DashReportt from './components/supplier/DashSupReport';
 import ReportTable from './components/supplier/ReportTable';
+import NishviewMaterials from './components/supplier/NishviewMaterials';
+import DashNishviewMaterials from './components/supplier/DashNishviewMaterials';
 
 
 //Malindu
@@ -117,6 +119,7 @@ import DashReceRawform from './components/Inventory/DashReceRawform';
 import DashReceRawtable from './components/Inventory/DashReceRawtable';
 import DashReleRawform from './components/Inventory/DashReleRawform';
 import DashReleRawtable from './components/Inventory/DashReleRawtable';
+import Dashordertableinin from './components/Inventory/Dashordertableinin';
 
 
 //siyumi
@@ -161,6 +164,7 @@ import PeticashAll from "./components/accountant/PeticashAll";
 import ProfitLostForm from "./components/accountant/ProfitLostForm";
 import PettycashEdit from "./components/accountant/PettycashEdit";
 import ProfitAndLostView from "./components/accountant/ProfitAndLostView";
+
 
 
 
@@ -238,6 +242,9 @@ root.render(
       <Route path='/SupReport' element={<SupReport/>}/>
       <Route path='/DashSupReport' element={<DashReportt/>}/>
       <Route path='/ReportTable' element={<ReportTable/>}/>
+      <Route path='/NishviewMaterials' element={<NishviewMaterials/>}/>
+      <Route path='/DashNishviewMaterials' element={<DashNishviewMaterials/>}/>
+
 
 
       {/*Malindu*/}
@@ -288,15 +295,16 @@ root.render(
         <Route path = '/dashrecerawtable' element = {<DashReceRawtable/>}/>
         <Route path = '/dashrelerawform' element = {<DashReleRawform/>}/>
         <Route path = '/dashrelerawtable' element = {<DashReleRawtable/>}/>
+        <Route path = '/dashordertableinin' element = {<Dashordertableinin/>}/>
 
          {/*siyumi*/}
-         <Route path='/Employees' element={<Employees />} />
+      <Route path='/Employees' element={<Employees />} />
       <Route path='/EmployeeForm' element={<EmployeeForm />} />
       <Route path='/EmployeeTable' element={<EmployeeTable />} />
       <Route path='/NavBar' element={<Navbarhr />} />
       <Route path='/SideBar' element={<Sidebarhr />} />
       <Route path='/Feedback' element={<Feedback />} />
-      <Route path='/FeedbackForm' element={<FeedbackFormhr />} />
+      <Route path='/FeedbackFormHR' element={<FeedbackFormhr />} />
       <Route path='/FeedbackTable' element={<FeedbackTablehr />} />
       <Route path='/SalaryManagementForm' element={<SalaryManagementForm />} />
       <Route path='/SalaryManagementTable' element={<SalaryManagementTable />} />

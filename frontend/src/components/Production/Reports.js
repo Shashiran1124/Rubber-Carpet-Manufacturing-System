@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Card, CardContent, Typography, CircularProgress, Grid } from '@mui/material';
-import { TrendingUp, TrendingDown, CheckCircle, Error, Star,  StarOutline } from '@mui/icons-material';
+import { Box, Card, CardContent, Typography, CircularProgress, Grid, Link } from '@mui/material';
+import { TrendingUp, TrendingDown, CheckCircle, Error, Star, StarOutline } from '@mui/icons-material';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
 
@@ -29,7 +29,6 @@ export default function Reports() {
     }
   };
 
-  // Calculate efficiency, trends, and determine highest and lowest quality lines
   useEffect(() => {
     fetchProgressData();
   }, []);
@@ -47,7 +46,6 @@ export default function Reports() {
         setEfficiency(0);
       }
 
-      // Find the lines with the highest and lowest quality percentage
       let highestQuality = { lineName: '', percentage: 0 };
       let lowestQuality = { lineName: '', percentage: 100 };
 
@@ -67,7 +65,6 @@ export default function Reports() {
       setHighestQualityLine(highestQuality);
       setLowestQualityLine(lowestQuality);
 
-      // Prepare trend data
       const trendLabels = progressData.map((progress) => progress.lname);
       const trendDataPoints = progressData.map((progress) => {
         const totalUnitsForLine = progress.lgoodunit + progress.lDefectiveunit;
@@ -76,25 +73,23 @@ export default function Reports() {
 
       setTrendData({ labels: trendLabels, data: trendDataPoints });
 
-      // Calculate production line ratings based on criteria
       const ratings = progressData.map((progress) => {
         const totalUnitsForLine = progress.lgoodunit + progress.lDefectiveunit;
         const qualityPercentage = totalUnitsForLine > 0 ? (progress.lgoodunit / totalUnitsForLine) * 100 : 0;
 
-        // Determine rating based on quality percentage
         let rating = 0;
         if (qualityPercentage >= 90) {
-          rating = 5; // 5 stars
+          rating = 5;
         } else if (qualityPercentage >= 75) {
-          rating = 4; // 4 stars
+          rating = 4;
         } else if (qualityPercentage >= 60) {
-          rating = 3; // 3 stars
+          rating = 3;
         } else if (qualityPercentage >= 40) {
-          rating = 2; // 2 stars
+          rating = 2;
         } else if (qualityPercentage >= 20) {
-          rating = 1; // 1 star
+          rating = 1;
         } else {
-          rating = 0; // 0 stars
+          rating = 0;
         }
         return { lineName: progress.lname, rating };
       });
@@ -119,35 +114,56 @@ export default function Reports() {
     scales: {
       y: {
         min: 0,
-        max: 100, // Y-axis range from 0 to 100%
+        max: 100,
         ticks: {
-          callback: (value) => `${value}%`, // Add percentage symbol
+          callback: (value) => `${value}%`,
         },
       },
     },
   };
 
-  // Render stars for line ratings
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
       if (i < rating) {
-        stars.push(<Star key={i} sx={{ color: '#ff0015' }} />); // Full star
+        stars.push(<Star key={i} sx={{ color: '#ff0015' }} />);
       } else {
-        stars.push(<StarOutline key={i} sx={{ color: '#ff0015' }} />); // Outline star
+        stars.push(<StarOutline key={i} sx={{ color: '#ff0015' }} />);
       }
     }
     return stars;
   };
 
   return (
+
+        
+
+
+
     <Box sx={{ padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f6f8', minHeight: '100vh' }}>
+      {/* New Contact Information Section */}
+        <Box sx={{ textAlign: 'left', paddingTop: '10px', fontSize: '12px' }}>
+          <Box sx={{ height: '50px', width: '25%', paddingTop: '10px' }}>
+            <Typography variant="body2" sx={{ margin: 0 }}>PRI Rubber Industry</Typography>
+            <Typography variant="body2" sx={{ margin: 0 }}>Colombo 07</Typography>
+            <Typography variant="body2" sx={{ margin: 0 }}>Sri Lanka</Typography>
+            <Typography variant="body2" sx={{ margin: 0 }}>Tell: +94 781 111 111</Typography>
+            <Typography variant="body2" sx={{ margin: 0 }}>
+              Email: 
+              <Link href="mailto:malindu113@gmail.com" sx={{ textDecoration: 'none', color: 'blue' }}>
+                malindu113@gmail.com
+              </Link>
+            </Typography>
+          </Box>
+        </Box>
+      
       <Typography variant="h3" sx={{ marginBottom: '20px', color: '#333', textAlign: 'center', fontWeight: 'bold' }}>
         PRI RUBBER CARPET
       </Typography>
       <Typography variant="h3" sx={{ marginBottom: '20px', color: '#333', textAlign: 'center', fontWeight: 'bold' }}>
         Production Efficiency Report
       </Typography>
+      
 
       {/* Display efficiency */}
       <Card
@@ -193,10 +209,10 @@ export default function Reports() {
         <Grid item xs={12} sm={6}>
           <Card
             sx={{
-              background: 'linear-gradient(135deg, #d7e5f1, #f4f9fc)', // Light pastel colors
+              background: 'linear-gradient(135deg, #d7e5f1, #f4f9fc)',
               color: '#000',
               padding: '20px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)', // Softer shadow
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
               borderRadius: '10px',
             }}
           >
@@ -205,9 +221,7 @@ export default function Reports() {
                 Highest Quality Line
               </Typography>
               <Typography variant="h6">Line Name: {highestQualityLine.lineName}</Typography>
-              <Typography variant="h6">
-                Quality Percentage: {highestQualityLine.percentage.toFixed(2)}%
-              </Typography>
+              <Typography variant="h6">Quality Percentage: {highestQualityLine.percentage.toFixed(2)}%</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -215,10 +229,10 @@ export default function Reports() {
         <Grid item xs={12} sm={6}>
           <Card
             sx={{
-              background: 'linear-gradient(135deg, #d7e5f1, #f4f9fc)', // Light pastel colors
+              background: 'linear-gradient(135deg, #d7e5f1, #f4f9fc)',
               color: '#000',
               padding: '20px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)', // Softer shadow
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
               borderRadius: '10px',
             }}
           >
@@ -227,9 +241,7 @@ export default function Reports() {
                 Lowest Quality Line
               </Typography>
               <Typography variant="h6">Line Name: {lowestQualityLine.lineName}</Typography>
-              <Typography variant="h6">
-                Quality Percentage: {lowestQualityLine.percentage.toFixed(2)}%
-              </Typography>
+              <Typography variant="h6">Quality Percentage: {lowestQualityLine.percentage.toFixed(2)}%</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -313,12 +325,12 @@ export default function Reports() {
         <Grid item xs={12}>
           <Card
             sx={{
-  background: 'linear-gradient(135deg, #e0e0e0, #bdbdbd)', // Gray gradient
-  color: '#000',
-  padding: '20px',
-  boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)', // Softer shadow
-  borderRadius: '10px',
-}}
+              background: 'linear-gradient(135deg, #e0e0e0, #bdbdbd)',
+              color: '#000',
+              padding: '20px',
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
+              borderRadius: '10px',
+            }}
           >
             <CardContent>
               <Typography variant="h5" sx={{ marginBottom: '20px', fontWeight: 'bold', textAlign: 'center' }}>
@@ -340,6 +352,9 @@ export default function Reports() {
           </Card>
         </Grid>
       </Grid>
+
+      
+
     </Box>
   );
 }

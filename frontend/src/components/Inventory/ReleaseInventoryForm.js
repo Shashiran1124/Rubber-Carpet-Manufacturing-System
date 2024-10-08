@@ -6,18 +6,21 @@ export default function ReleaseInventoryForm() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Get the current date in YYYY-MM-DD format
+  const currentDate = new Date().toISOString().split('T')[0];
+
   const [formData, setFormData] = useState({
     productId: '',
     productName: '',
-    productionDate: '',
+    productionDate: currentDate, // Set default value to current date,
     quantity: '',
     unitPrice: '',
     totalPrice: '',
     releaseDate: ''
-  });
+  }); 
 
   const [isEditMode, setIsEditMode] = useState(false);
-  const [orderId, setOrderId] = useState(false);
+  const [orderId, setOrderId] = useState('');
 
   useEffect(() => {
     if (location.state && location.state.order) {
@@ -47,6 +50,23 @@ export default function ReleaseInventoryForm() {
       setFormData({
         ...formData,
         [name]: onlyNumbers
+      });
+    } else if (name === 'quantity') {
+      // Restrict quantity to positive integers only
+      const filteredValue = value.replace(/[^0-9]/g, '');
+      setFormData({
+        ...formData,
+        [name]: filteredValue
+      });
+    } else if (name === 'unitPrice') {
+      // Allow numbers with up to two decimal places
+      const filteredValue = value
+        .replace(/[^0-9.]/g, '') // Only allow numbers and dots
+        .replace(/(\..*)\./g, '$1') // Prevent multiple decimals
+        .replace(/(\.\d{2})\d+/g, '$1'); // Limit to two decimal places
+      setFormData({
+        ...formData,
+        [name]: filteredValue
       });
     } else {
       setFormData({
@@ -84,14 +104,14 @@ export default function ReleaseInventoryForm() {
       });
 
       if (response.ok) {
-        alert(`Release Inventory ${isEditMode ? 'updated' : 'added'} successfully`);
+        alert`(Release Inventory ${isEditMode ? 'updated' : 'added'} successfully)`;
         navigate('/dashreinTable');
       } else {
-        alert(`Failed to ${isEditMode ? 'update' : 'add'} release inventory`);
+        alert`(Failed to ${isEditMode ? 'update' : 'add'} release inventory)`;
       }
     } catch (error) {
       console.error('Error:', error);
-      alert(`An error occurred while ${isEditMode ? 'updating' : 'adding'} the Release Inventory.`);
+      alert`(An error occurred while ${isEditMode ? 'updating' : 'adding'} the Release Inventory.)`;
     }
   };
 
@@ -102,7 +122,7 @@ export default function ReleaseInventoryForm() {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f7f7f7', padding: '10px' }}>
       <div style={{ backgroundColor: '#F1F1F1', padding: '20px', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', width: '100%', maxWidth: '420px', border: '2px solid #000' }}>
-      <img
+        <img
           src={pic4} 
           alt="Product"
           style={{
@@ -112,18 +132,18 @@ export default function ReleaseInventoryForm() {
             marginBottom: '1px',
           }}
         />
-        </div>
-        <div style={{
-          backgroundColor: '#F1F1F1',
-          padding: '20px',
-          borderRadius: '8px',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-          border: '2px solid #000',
-        }}>
+      </div>
+      <div style={{
+        backgroundColor: '#F1F1F1',
+        padding: '20px',
+        borderRadius: '8px',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        border: '2px solid #000',
+      }}>
         <h2 style={{ textAlign: 'center', marginBottom: '10px', color: '#000', fontSize: '22px' }}>{isEditMode ? 'Edit Release Inventory' : 'Add Release Final Goods'}</h2>
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '8px' }}>
-            <label htmlFor="productId" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>release order number:</label>
+            <label htmlFor="productId" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Release Order Number:</label>
             <input
               type="text"
               id="productId"
@@ -154,7 +174,7 @@ export default function ReleaseInventoryForm() {
             </select>
           </div>
           <div style={{ marginBottom: '8px' }}>
-            <label htmlFor="productionDate" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Production Date:</label>
+            <label htmlFor="productionDate" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Release Date:</label>
             <input
               type="date"
               id="productionDate"
@@ -162,17 +182,26 @@ export default function ReleaseInventoryForm() {
               value={formData.productionDate}
               onChange={handleChange}
               required
+              min={currentDate} // Restrict to current date
+              max={currentDate} // Restrict to current date
               style={{ width: '100%', padding: '4px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px' }}
+              readOnly // Make the field read-only
             />
           </div>
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="quantity" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Quantity:</label>
             <input
-              type="number"
+              type="text"
               id="quantity"
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                // Prevent decimal point (.) and negative sign (-)
+                if (e.key === '.' || e.key === '-' || e.key === 'e') {
+                  e.preventDefault();
+                }
+              }}
               required
               style={{ width: '100%', padding: '6px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px' }}
             />
@@ -180,7 +209,7 @@ export default function ReleaseInventoryForm() {
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="unitPrice" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Unit Price:</label>
             <input
-              type="number"
+              type="text"
               step="0.01"
               id="unitPrice"
               name="unitPrice"
@@ -201,18 +230,7 @@ export default function ReleaseInventoryForm() {
               style={{ width: '100%', padding: '6px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px', backgroundColor: '#e9e9e9' }}
             />
           </div>
-          <div style={{ marginBottom: '8px' }}>
-            <label htmlFor="releaseDate" style={{ display: 'block', marginBottom: '2px', color: '#000', fontSize: '12px', fontWeight: '600' }}>Release Date:</label>
-            <input
-              type="date"
-              id="releaseDate"
-              name="releaseDate"
-              value={formData.releaseDate}
-              onChange={handleChange}
-              required
-              style={{ width: '100%', padding: '4px', borderRadius: '8px', boxSizing: 'border-box', color: '#000', fontSize: '14px' }}
-            />
-          </div>
+          
           <div style={{ textAlign: 'center' }}>
           <button
               type="submit"
@@ -253,4 +271,3 @@ export default function ReleaseInventoryForm() {
     </div>
   );
 }
-

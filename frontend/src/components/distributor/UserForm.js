@@ -58,6 +58,15 @@ export default function TransportForm() {
       if (parseInt(validValue, 10) < 0) validValue = '0'; // Prevent negative values
     }
 
+    if (name === 'Drop_off_Date_and_Time') {
+      const pickupDate = new Date(formData.Pickup_Date_and_Time);
+      const dropOffDate = new Date(value);
+      if (dropOffDate < pickupDate) {
+        alert("Drop-off date cannot be before Pickup date.");
+        return; // Do not update the state if the drop-off date is invalid
+      }
+    }
+
     setFormData({
       ...formData,
       [name]: validValue
@@ -92,7 +101,6 @@ export default function TransportForm() {
     }
   };
 
-  // New function to handle 'View Table' button click
   const handleViewTable = () => {
     navigate('/dashtranstable');
   };
@@ -106,23 +114,22 @@ export default function TransportForm() {
       backgroundColor: '#f7f7f7',
       padding: '10px'
     }}>
-      <div style={{ marginRight: '20px' }}>
-        <img src={supplierImage} alt="Order" style={{ width: '550px', height: '84vh', borderRadius: '10px' }} />
+      <div style={{ marginRight: '10px' }}>
+        <img src={supplierImage} alt="Order" style={{ width: '500px', height: '80vh', borderRadius: '8px' }} />
       </div>
       <div style={{
         backgroundColor: '#EDEDEE',
-        padding: '20px 40px',
-        borderRadius: '8px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        padding: '15px 25px',
+        borderRadius: '6px',
+        boxShadow: '0 0 8px rgba(0, 0, 0, 0.1)',
         width: '100%',
-        maxWidth: '450px',
-        border: '2px solid #000000',
+        maxWidth: '400px',
+        border: '1px solid #000000',
       }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Transport & Order Details Form</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '15px', color: '#333', fontSize: '18px' }}>Transport & Order Details Form</h2>
         <form onSubmit={handleSubmit}>
-          {/* Transport Number Field */}
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Transport_Number" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Transport Number:</label>
+          <div style={{ marginBottom: '10px' }}>
+            <label htmlFor="Transport_Number" style={{ display: 'block', marginBottom: '3px', textAlign: 'left', fontSize: '14px' }}>Transport Number:</label>
             <input
               type="text"
               id="Transport_Number"
@@ -133,17 +140,17 @@ export default function TransportForm() {
               pattern="\d+"
               style={{
                 width: '100%',
-                padding: '10px',
+                padding: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '5px',
+                borderRadius: '4px',
+                fontSize: '14px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          {/* Order Number Field */}
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Order_Number" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Order Number:</label>
+          <div style={{ marginBottom: '10px' }}>
+            <label htmlFor="Order_Number" style={{ display: 'block', marginBottom: '3px', textAlign: 'left', fontSize: '14px' }}>Order Number:</label>
             <input
               type="text"
               id="Order_Number"
@@ -154,17 +161,17 @@ export default function TransportForm() {
               pattern="\d+"
               style={{
                 width: '100%',
-                padding: '10px',
+                padding: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '5px',
+                borderRadius: '4px',
+                fontSize: '14px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          {/* Number of Packages Field */}
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Number_of_Packages" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Number of Packages:</label>
+          <div style={{ marginBottom: '10px' }}>
+            <label htmlFor="Number_of_Packages" style={{ display: 'block', marginBottom: '3px', textAlign: 'left', fontSize: '14px' }}>Number of Packages:</label>
             <input
               type="number"
               id="Number_of_Packages"
@@ -175,17 +182,17 @@ export default function TransportForm() {
               min="0"
               style={{
                 width: '100%',
-                padding: '10px',
+                padding: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '5px',
+                borderRadius: '4px',
+                fontSize: '14px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          {/* Drop-off Location Field */}
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Drop_off_Location" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Drop-off Location:</label>
+          <div style={{ marginBottom: '10px' }}>
+            <label htmlFor="Drop_off_Location" style={{ display: 'block', marginBottom: '3px', textAlign: 'left', fontSize: '14px' }}>Drop-off Location:</label>
             <input
               type="text"
               id="Drop_off_Location"
@@ -195,17 +202,17 @@ export default function TransportForm() {
               required
               style={{
                 width: '100%',
-                padding: '10px',
+                padding: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '5px',
+                borderRadius: '4px',
+                fontSize: '14px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          {/* Vehicle Number Field */}
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Vehicle_Number" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Vehicle Number:</label>
+          <div style={{ marginBottom: '10px' }}>
+            <label htmlFor="Vehicle_Number" style={{ display: 'block', marginBottom: '3px', textAlign: 'left', fontSize: '14px' }}>Vehicle Number:</label>
             <input
               type="text"
               id="Vehicle_Number"
@@ -216,17 +223,17 @@ export default function TransportForm() {
               pattern="\d+"
               style={{
                 width: '100%',
-                padding: '10px',
+                padding: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '5px',
+                borderRadius: '4px',
+                fontSize: '14px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          {/* Pickup Date Field */}
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Pickup_Date_and_Time" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Pickup Date:</label>
+          <div style={{ marginBottom: '10px' }}>
+            <label htmlFor="Pickup_Date_and_Time" style={{ display: 'block', marginBottom: '3px', textAlign: 'left', fontSize: '14px' }}>Pickup Date:</label>
             <input
               type="date"
               id="Pickup_Date_and_Time"
@@ -236,17 +243,17 @@ export default function TransportForm() {
               required
               style={{
                 width: '100%',
-                padding: '10px',
+                padding: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '5px',
+                borderRadius: '4px',
+                fontSize: '14px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          {/* Drop-off Date Field */}
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Drop_off_Date_and_Time" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Drop-off Date:</label>
+          <div style={{ marginBottom: '10px' }}>
+            <label htmlFor="Drop_off_Date_and_Time" style={{ display: 'block', marginBottom: '3px', textAlign: 'left', fontSize: '14px' }}>Drop-off Date:</label>
             <input
               type="date"
               id="Drop_off_Date_and_Time"
@@ -254,19 +261,20 @@ export default function TransportForm() {
               value={formData.Drop_off_Date_and_Time}
               onChange={handleChange}
               required
+              min={formData.Pickup_Date_and_Time} // Ensure it cannot be before pickup date
               style={{
                 width: '100%',
-                padding: '10px',
+                padding: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '5px',
+                borderRadius: '4px',
+                fontSize: '14px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          {/* Tracking Number Field */}
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="Tracking_Number" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Tracking Number:</label>
+          <div style={{ marginBottom: '10px' }}>
+            <label htmlFor="Tracking_Number" style={{ display: 'block', marginBottom: '3px', textAlign: 'left', fontSize: '14px' }}>Tracking Number:</label>
             <input
               type="text"
               id="Tracking_Number"
@@ -277,42 +285,36 @@ export default function TransportForm() {
               pattern="\d+"
               style={{
                 width: '100%',
-                padding: '10px',
+                padding: '8px',
                 border: '1px solid #ccc',
-                borderRadius: '5px',
+                borderRadius: '4px',
+                fontSize: '14px',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          {/* Submit Button */}
           <button type="submit" style={{
+            width: '100%',
             backgroundColor: '#4CAF50',
             color: 'white',
-            padding: '10px 15px',
+            padding: '10px',
             border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            width: '100%',
-            fontSize: '16px'
-          }}>
-            {isEditMode ? 'Update Transport' : 'Add Transport'}
-          </button>
-
-          {/* View Table Button */}
-          <button type="button" onClick={handleViewTable} style={{
-            backgroundColor: '#2196F3',
-            color: 'white',
-            padding: '10px 15px',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            width: '100%',
+            borderRadius: '4px',
             fontSize: '16px',
-            marginTop: '10px'
-          }}>
-            View Transport Table
-          </button>
+            cursor: 'pointer',
+            marginBottom: '10px'
+          }}>Submit</button>
+          <button type="button" onClick={handleViewTable} style={{
+            width: '100%',
+            backgroundColor: '#f44336',
+            color: 'white',
+            padding: '10px',
+            border: 'none',
+            borderRadius: '4px',
+            fontSize: '16px',
+            cursor: 'pointer'
+          }}>View Table</button>
         </form>
       </div>
     </div>

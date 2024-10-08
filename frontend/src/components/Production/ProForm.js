@@ -7,7 +7,7 @@ export default function ProForm() {
   const location = useLocation();
 
   const [formData, setFormData] = useState({
-    lname: '',  // Change this to a dropdown later
+    lname: '',
     lmaterial: '',
     lcutting: '',
     lmolding: '',
@@ -53,6 +53,13 @@ export default function ProForm() {
       ...formData,
       [name]: validValue
     });
+  };
+
+  const handleKeyDown = (e) => {
+    // Prevent typing of decimal point
+    if (e.key === '.') {
+      e.preventDefault();
+    }
   };
 
   const validateForm = () => {
@@ -128,7 +135,7 @@ export default function ProForm() {
       }}>
         <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Production Progress Form</h2>
         <form onSubmit={handleSubmit}>
-          
+
           {/* Line Name Dropdown */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="lname" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Line Name:</label>
@@ -193,6 +200,7 @@ export default function ProForm() {
               name="lgoodunit"
               value={formData.lgoodunit}
               onChange={handleChange}
+              onKeyDown={handleKeyDown} // Add the key down handler here
               required
               min="0"
               style={{
@@ -215,6 +223,7 @@ export default function ProForm() {
               name="lDefectiveunit"
               value={formData.lDefectiveunit}
               onChange={handleChange}
+              onKeyDown={handleKeyDown} // Add the key down handler here
               required
               min="0"
               style={{

@@ -143,6 +143,11 @@ export default function Reports2() {
           );
         })}
       </Grid>
+      <div style={{ height: '50px',width: '25%', marginTop: '100px', marginBottom: '30px', borderTop: '2px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px' }}>
+      <p style={{ margin: 0 }}>Hashan Lahiru</p>
+        <p style={{ margin: 0 }}>Production Handling </p>
+        <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
+      </div>
     </Box>
   );
 }

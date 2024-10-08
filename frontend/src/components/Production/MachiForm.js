@@ -6,7 +6,7 @@ export default function MachiForm() {
   const navigate = useNavigate();
   const location = useLocation();
   const [formData, setFormData] = useState({
-    mnum: '',
+    mnum: '', // This will now be the selected machine
     mdate: '',
     mstime: '',
     metime: '',
@@ -16,6 +16,9 @@ export default function MachiForm() {
   const [errors, setErrors] = useState({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [allocationId, setAllocationId] = useState(null);
+
+  // List of machine options for the dropdown
+  const machineOptions = ['M001', 'M002', 'M003', 'M004', 'M005'];
 
   useEffect(() => {
     if (location.state && location.state.allocations) {
@@ -38,11 +41,14 @@ export default function MachiForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData({
       ...formData,
       [name]: value
     });
+  };
+
+  const getMinEndTime = () => {
+    return formData.mstime ? formData.mstime : null;
   };
 
   const validateForm = () => {
@@ -80,7 +86,7 @@ export default function MachiForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -137,16 +143,15 @@ export default function MachiForm() {
       }}>
         <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>Machine Allocation Form</h2>
         <form onSubmit={handleSubmit}>
+          {/* Machine Name Dropdown */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="mnum" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Machine Name:</label>
-            <input
-              type="text"
+            <select
               id="mnum"
               name="mnum"
               value={formData.mnum}
               onChange={handleChange}
               required
-              pattern="\d*"
               style={{
                 width: '100%',
                 padding: '10px',
@@ -154,8 +159,17 @@ export default function MachiForm() {
                 borderRadius: '5px',
                 boxSizing: 'border-box'
               }}
-            />
+            >
+              <option value="">Select Machine</option>
+              {machineOptions.map((machine) => (
+                <option key={machine} value={machine}>
+                  {machine}
+                </option>
+              ))}
+            </select>
           </div>
+
+          {/* Date Input */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="mdate" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Date:</label>
             <input
@@ -176,6 +190,8 @@ export default function MachiForm() {
             />
             {errors.mdate && <div style={{ color: 'red', fontSize: '12px' }}>{errors.mdate}</div>}
           </div>
+
+          {/* Start Time Input */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="mstime" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Start Time:</label>
             <input
@@ -195,6 +211,8 @@ export default function MachiForm() {
             />
             {errors.mstime && <div style={{ color: 'red', fontSize: '12px' }}>{errors.mstime}</div>}
           </div>
+
+          {/* End Time Input */}
           <div style={{ marginBottom: '15px' }}>
             <label htmlFor="metime" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>End Time:</label>
             <input
@@ -204,6 +222,7 @@ export default function MachiForm() {
               value={formData.metime}
               onChange={handleChange}
               required
+              min={getMinEndTime()} // Dynamically set the min attribute for endTime
               style={{
                 width: '100%',
                 padding: '10px',
@@ -214,6 +233,8 @@ export default function MachiForm() {
             />
             {errors.metime && <div style={{ color: 'red', fontSize: '12px' }}>{errors.metime}</div>}
           </div>
+
+          {/* Team Name Input */}
           <div style={{ marginBottom: '20px' }}>
             <label htmlFor="mteam" style={{ display: 'block', marginBottom: '5px', textAlign: 'left' }}>Team Name:</label>
             <select
@@ -236,6 +257,7 @@ export default function MachiForm() {
               <option value="Team C">Team C</option>
             </select>
           </div>
+
           {/* Button container */}
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
             <button
@@ -247,7 +269,8 @@ export default function MachiForm() {
                 border: 'none',
                 borderRadius: '5px',
                 cursor: 'pointer',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                marginRight: '10px'
               }}
             >
               {isEditMode ? 'Update' : 'Submit'}
@@ -262,27 +285,13 @@ export default function MachiForm() {
                 border: 'none',
                 borderRadius: '5px',
                 cursor: 'pointer',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                marginRight: '10px'
               }}
             >
               Allocation Machine
             </button>
-
-            <button
-              type="button"
-              onClick={() => navigate('/dashmachitable')}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#28a745',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
-              }}
-            >
-              Available Machine
-            </button>
+            
           </div>
         </form>
       </div>

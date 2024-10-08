@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Typography, Card, CardContent, CircularProgress, Alert, IconButton } from '@mui/material';
+import { Container, Grid, Typography, Card, CardContent, CircularProgress, Alert, Avatar, IconButton, Paper } from '@mui/material';
 import { Fade } from '@mui/material';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import DownloadIcon from '@mui/icons-material/Download'; // Import download icon
 import jsPDF from 'jspdf'; // Import jsPDF for PDF generation
+import PRIImage from '../../images/PRIImage.jpg';
 
 export default function Report() {
   const [inventorySums, setInventorySums] = useState({
@@ -132,104 +133,6 @@ export default function Report() {
     doc.setFontSize(12);
     doc.setTextColor(128, 0, 128); // Purple color for subheadings
   
-    // Inventory Report
-    doc.text(`Inventory Rubber Mats:`, 14, 40);
-    doc.setTextColor(0, 0, 0); // Black for the data
-    doc.text(`${inventorySums.inventoryRubberMats.toFixed(2)} units`, 80, 40);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Gym Rubber Flooring:`, 14, 50);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${inventorySums.gymRubberFlooring.toFixed(2)} units`, 80, 50);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Runner Mats:`, 14, 60);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${inventorySums.rubberRunnerMats.toFixed(2)} units`, 80, 60);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Playground Mats:`, 14, 70);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${inventorySums.rubberPlaygroundMats.toFixed(2)} units`, 80, 70);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Commercial Rubber Flooring:`, 14, 80);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${inventorySums.commercialRubberFlooring.toFixed(2)} units`, 80, 80);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Carpet Tiles:`, 14, 90);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${inventorySums.rubberCarpetTiles.toFixed(2)} units`, 80, 90);
-  
-    // Release Inventory Report
-    doc.setTextColor(0, 0, 128); // Dark Blue for the section title
-    doc.text('Release Inventory Report', 14, 110);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Inventory Rubber Mats:`, 14, 130);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${releaseInventorySums.inventoryRubberMats.toFixed(2)} units`, 80, 130);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Gym Rubber Flooring:`, 14, 140);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${releaseInventorySums.gymRubberFlooring.toFixed(2)} units`, 80, 140);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Runner Mats:`, 14, 150);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${releaseInventorySums.rubberRunnerMats.toFixed(2)} units`, 80, 150);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Playground Mats:`, 14, 160);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${releaseInventorySums.rubberPlaygroundMats.toFixed(2)} units`, 80, 160);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Commercial Rubber Flooring:`, 14, 170);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${releaseInventorySums.commercialRubberFlooring.toFixed(2)} units`, 80, 170);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Carpet Tiles:`, 14, 180);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${releaseInventorySums.rubberCarpetTiles.toFixed(2)} units`, 80, 180);
-  
-    // Difference Report
-    doc.setTextColor(0, 0, 128); // Dark Blue for section title
-    doc.text('Difference Report', 14, 200);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Inventory Rubber Mats:`, 14, 220);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${differenceSums.inventoryRubberMats.toFixed(2)} units`, 80, 220);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Gym Rubber Flooring:`, 14, 230);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${differenceSums.gymRubberFlooring.toFixed(2)} units`, 80, 230);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Runner Mats:`, 14, 240);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${differenceSums.rubberRunnerMats.toFixed(2)} units`, 80, 240);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Playground Mats:`, 14, 250);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${differenceSums.rubberPlaygroundMats.toFixed(2)} units`, 80, 250);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Commercial Rubber Flooring:`, 14, 260);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${differenceSums.commercialRubberFlooring.toFixed(2)} units`, 80, 260);
-  
-    doc.setTextColor(128, 0, 128); // Purple
-    doc.text(`Rubber Carpet Tiles:`, 14, 270);
-    doc.setTextColor(0, 0, 0); // Black
-    doc.text(`${differenceSums.rubberCarpetTiles.toFixed(2)} units`, 80, 270);
-  
     // Save the PDF
     doc.save('product_category_report.pdf');
   };
@@ -300,60 +203,107 @@ export default function Report() {
 
   return (
     <Container maxWidth="md" sx={{ marginTop: '20px' }}>
-      <Grid container spacing={4}>
-        <Fade in timeout={500}>
-          <Grid item xs={12} sm={6}>
-            <Card sx={{ minHeight: '200px', backgroundColor: '#f3e5f5', color: '#6a1b9a' }}>
-              <CardContent>
-                <Typography variant="h5" gutterBottom>
-                  Product Inventory Summary
-                </Typography>
-                <Typography>Inventory Rubber Mats: {inventorySums.inventoryRubberMats.toFixed(2)} units</Typography>
-                <Typography>Gym Rubber Flooring: {inventorySums.gymRubberFlooring.toFixed(2)} units</Typography>
-                <Typography>Rubber Runner Mats: {inventorySums.rubberRunnerMats.toFixed(2)} units</Typography>
-                <Typography>Rubber Playground Mats: {inventorySums.rubberPlaygroundMats.toFixed(2)} units</Typography>
-                <Typography>Commercial Rubber Flooring: {inventorySums.commercialRubberFlooring.toFixed(2)} units</Typography>
-                <Typography>Rubber Carpet Tiles: {inventorySums.rubberCarpetTiles.toFixed(2)} units</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Fade>
-        
-        <Fade in timeout={500}>
-          <Grid item xs={12} sm={6}>
-            <Card sx={{ minHeight: '200px', backgroundColor: '#f3e5f5', color: '#6a1b9a' }}>
-              <CardContent>
-                <Typography variant="h5" gutterBottom>
-                  Release Inventory Summary
-                </Typography>
-                <Typography>Inventory Rubber Mats: {releaseInventorySums.inventoryRubberMats.toFixed(2)} units</Typography>
-                <Typography>Gym Rubber Flooring: {releaseInventorySums.gymRubberFlooring.toFixed(2)} units</Typography>
-                <Typography>Rubber Runner Mats: {releaseInventorySums.rubberRunnerMats.toFixed(2)} units</Typography>
-                <Typography>Rubber Playground Mats: {releaseInventorySums.rubberPlaygroundMats.toFixed(2)} units</Typography>
-                <Typography>Commercial Rubber Flooring: {releaseInventorySums.commercialRubberFlooring.toFixed(2)} units</Typography>
-                <Typography>Rubber Carpet Tiles: {releaseInventorySums.rubberCarpetTiles.toFixed(2)} units</Typography>
-              </CardContent>
-            </Card>
+      {/* Paper wrapping the entire report with a border */}
+      <Paper elevation={3} sx={{ padding: 4, border: '3px solid black' }}>
+      <Fade in timeout={500}>
+          <Grid container justifyContent="center" alignItems="center" direction="column">
+            {/* Grid item for the image and header */}
+            <Grid item>
+              <Avatar alt="User" src={PRIImage} sx={{ width: 150, height: 100 }} />
+            </Grid>
+            <Grid item>
+              <Typography variant="h4" sx={{ marginTop: 4 }}>
+                P.R.I Rubber Industries
+              </Typography>
+            </Grid>
           </Grid>
         </Fade>
 
         <Fade in timeout={500}>
-          <Grid item xs={12}>
-            <Card sx={{ padding: 2, backgroundColor: '#f3e5f5', color: '#6a1b9a' }}>
-              <CardContent>
-                <Typography variant="h5" gutterBottom>
-                  Difference Summary
-                </Typography>
-                <Bar data={barData} options={barOptions} />
-                <IconButton onClick={downloadReport} color="primary" sx={{ marginTop: 2 }}>
-                  <DownloadIcon /> Download Report
-                </IconButton>
-              </CardContent>
-            </Card>
-          </Grid>
+          <Grid container direction="column">
+            {/* Grid item for the image and header */}
+              <Typography variant="h7" sx={{ marginTop: 4 }}>
+                P.R.I Rubber Industries
+              </Typography>
+              <Typography variant="h7" sx={{ marginTop: 0 }}>
+                Biyagama,
+              </Typography>
+              <Typography variant="h7" sx={{ marginTop: 0 }}>
+                Sri Lanka.
+              </Typography>
+              <Typography variant="h7" sx={{ marginTop: 0 }}>
+                Tell:+9422233322
+              </Typography>
+              <Typography variant="h7" sx={{ marginTop: 0 }} color="blue">
+                Email:Prirubberindustry@gmail.com
+              </Typography>
+            </Grid>
         </Fade>
-      </Grid>
+
+        <Grid container spacing={4} sx={{ marginTop: 1 }}>
+          <Fade in timeout={500}>
+            <Grid item xs={12} sm={10}>
+              <Card sx={{ minHeight: '20px', backgroundColor: "#ADB4BF", color: "#000000", border: '1px solid #000' }}>
+                <CardContent>
+                  <Typography variant="h5" gutterBottom >
+                    Product Inventory Summary
+                  </Typography>
+                  <Typography>Inventory Rubber Mats: {inventorySums.inventoryRubberMats.toFixed(2)} units</Typography>
+                  <Typography>Gym Rubber Flooring: {inventorySums.gymRubberFlooring.toFixed(2)} units</Typography>
+                  <Typography>Rubber Runner Mats: {inventorySums.rubberRunnerMats.toFixed(2)} units</Typography>
+                  <Typography>Rubber Playground Mats: {inventorySums.rubberPlaygroundMats.toFixed(2)} units</Typography>
+                  <Typography>Commercial Rubber Flooring: {inventorySums.commercialRubberFlooring.toFixed(2)} units</Typography>
+                  <Typography>Rubber Carpet Tiles: {inventorySums.rubberCarpetTiles.toFixed(2)} units</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Fade>
+          
+          <Fade in timeout={500}>
+            <Grid item xs={12} sm={10}>
+              <Card sx={{ minHeight: '20px', backgroundColor: "#AFB9CA", color: "#000000", border: '1px solid #000' }}>
+                <CardContent>
+                  <Typography variant="h5" gutterBottom>
+                    Released Inventory Summary
+                  </Typography>
+                  <Typography>Inventory Rubber Mats: {releaseInventorySums.inventoryRubberMats.toFixed(2)} units</Typography>
+                  <Typography>Gym Rubber Flooring: {releaseInventorySums.gymRubberFlooring.toFixed(2)} units</Typography>
+                  <Typography>Rubber Runner Mats: {releaseInventorySums.rubberRunnerMats.toFixed(2)} units</Typography>
+                  <Typography>Rubber Playground Mats: {releaseInventorySums.rubberPlaygroundMats.toFixed(2)} units</Typography>
+                  <Typography>Commercial Rubber Flooring: {releaseInventorySums.commercialRubberFlooring.toFixed(2)} units</Typography>
+                  <Typography>Rubber Carpet Tiles: {releaseInventorySums.rubberCarpetTiles.toFixed(2)} units</Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Fade>
+        </Grid>
+
+        <div style={{ height: '400px', marginTop: '20px' }}>
+          <Bar data={barData} options={barOptions} />
+        </div>
+
+        <Fade in timeout={500}>
+          <Grid container direction="column">
+            {/* Grid item for the image and header */}
+              <Typography variant="h7" sx={{ marginTop: 4 }}>
+                ............................................
+              </Typography>
+              <Typography variant="h7" sx={{ marginTop: 0 }}>
+              Inventory Manager
+              </Typography>
+              <Typography variant="h7" sx={{ marginTop: 0 }}>
+              P.R.I Rubber Industries
+              </Typography>
+              <Typography variant="h7" sx={{ marginTop: 0 }}>
+                Date: 10/07/2024
+              </Typography>
+              
+              
+            </Grid>
+        </Fade>
+
+        
+      </Paper>
     </Container>
   );
 }
-
