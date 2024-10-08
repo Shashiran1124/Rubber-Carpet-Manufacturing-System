@@ -53,8 +53,7 @@ export default function BuyPartView() {
     const downloadPdf = () => { //pdf download
         const doc = new jsPDF();
         
-        const logo=  "../images/11.png";
-        doc.addImage(logo, 'PNG', 130, 0, 80, 80);
+        
 
         doc.setFontSize(18);
         doc.text("PRI Rubber Industry", 14, 10);
