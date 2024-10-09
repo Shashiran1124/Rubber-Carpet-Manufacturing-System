@@ -21,6 +21,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import PRIImage from '../../images/PRI.jpg';
 
 
 export default function Report() {
@@ -114,15 +115,18 @@ export default function Report() {
       let position = 0;
 
       pdf.setFontSize(22);
+      <div style={{ marginLeft: '450px' }}>
+        <img src={PRIImage} alt="PRI" style={{ width: '130px', height: '15vh', borderRadius: '10px' }} />
+      </div>
       pdf.text('P.R.I Rubber Industries', 105, 15, { align: 'center' });
       pdf.setFontSize(10);
-      pdf.addImage(imgData, 'PNG', 0, 20, imgWidth, imgHeight);
+      pdf.addImage(imgData, 'PRI.jpg', 0, 20, imgWidth, imgHeight);
       heightLeft -= pageHeight;
 
       while (heightLeft >= 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        pdf.addImage(imgData, 'PRI.jpg', 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
 
@@ -153,34 +157,63 @@ export default function Report() {
           padding: '20px',
           backgroundColor: '#f5f5f5',
           borderRadius: '15px',
+          height: '360vh',
+         
         }}
+        
       >
+        <div style={{ marginTop:'5px',marginLeft:'500px' }}>
+        <img src={PRIImage} alt="PRI" style={{ width: '160px', height: '15vh', borderRadius: '10px' }} />
+        </div>
+        
+<div style={{  marginLeft:'500px',top: '0px', width: '100%', textAlign: 'left', paddingTop: '10px',fontSize: '12px'}}>
+      <div style={{ height: '50px', marginLeft:'500px',width: '25%', margin: '0 auto', top: '0px', textAlign: 'left', paddingTop: '10px', }}>
+      <p style={{ margin: 0 }}>PRI Rubber Industry </p>
+      <p style={{ margin: 0 }}>Colombo 07 </p>
+      <p style={{ margin: 0 }}>Sri Lanka </p>
+      <p style={{ margin: 0 }}>Tell: +94 xxxxxxxx </p>
+      <p style={{ margin: 0 }}>Email:
+      <a href="mailto:nishan113@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
+        nishan113@gmail.com
+      </a>
+      </p> {/* Clickable email link */}
+      </div>
+      </div>
+        
+        
         <Typography
           variant="h4"
           style={{
             marginBottom: '20px',
             textAlign: 'center',
             color: theme.palette.primary.main,
+            
+
           }}
         >
           Monthly Cost Report
+          
         </Typography>
 
         <Paper
-  elevation={4}
-  style={{
-    padding: '5px',
-    borderRadius: '20px',
-    backgroundColor: '#ffffff',
-    marginBottom: '40px',
-    position: 'relative',
-    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.2)', // Slightly deeper shadow
-  }}
->
-  {/* Title Section */}
-  <Typography
+        elevation={4}
+        style={{
+          marginTop: '50px',
+          padding: '5px',
+          borderRadius: '20px',
+          backgroundColor: '#ffffff',
+          marginBottom: '40px',
+          position: 'relative',
+          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.2)', // Slightly deeper shadow
+          
+   }}
+   
+   >
+   {/* Title Section */}
+   <Typography
     variant="h5"
     style={{
+      
       marginBottom: '15px',
       color: theme.palette.primary.main,
       fontWeight: 'bold',
@@ -203,7 +236,7 @@ export default function Report() {
       fontStyle: 'italic',
     }}
   >
-    This report provides an overview of the monthly costs associated with our distribution operations.
+    This report summarizes the monthly costs of distribution operations, including transport, food, vehicle maintenance, and fuel expenses. It highlights cost trends, fluctuations, and efficiency initiatives, providing insights into key expenses and strategies to manage rising costs while ensuring smooth logistics and operational effectiveness across the distribution network.
   </Typography>
 
   <Divider style={{ margin: '20px 0', backgroundColor: theme.palette.primary.light }} />
@@ -219,9 +252,13 @@ export default function Report() {
         textAlign: 'center',
         textDecoration: 'underline',
         letterSpacing: '1px',
+
+        
       }}
+      
     >
       Key Highlights
+      
     </Typography>
     <List>
       {[
@@ -259,7 +296,8 @@ export default function Report() {
         <Paper
           elevation={3}
           style={{
-            padding: '10px',
+            marginTop: '80px',
+            padding: '30px',
             borderRadius: '15px',
             backgroundColor: '#ffffff',
           }}
@@ -267,7 +305,7 @@ export default function Report() {
           <Typography variant="h5" style={{ marginBottom: '20px', color: theme.palette.primary.main }}>
             Total Monthly Costs
           </Typography>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse'}}>
             <thead>
               <tr style={{ backgroundColor: theme.palette.primary.light, color: '#ffffff' }}>
                 <th style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>Month</th>
@@ -305,13 +343,13 @@ export default function Report() {
           <Paper
             elevation={3}
             style={{
-              marginTop: '40px',
+              marginTop: '100px',
               padding: '20px',
               borderRadius: '15px',
               backgroundColor: '#ffffff',
             }}
           >
-            <Typography variant="h5" style={{ marginBottom: '20px', color: theme.palette.primary.main }}>
+            <Typography variant="h5" style={{ marginBottom: '15px', color: theme.palette.primary.main }}>
               Monthly Cost Bar Chart
             </Typography>
             <ResponsiveContainer width="100%" height={300}>
@@ -334,13 +372,13 @@ export default function Report() {
         <Paper
           elevation={3}
           style={{
-            marginTop: '40px',
+            marginTop: '80px',
             padding: '20px',
             borderRadius: '15px',
             backgroundColor: '#ffffff',
           }}
         >
-          <Typography variant="h5" style={{ marginBottom: '20px', color: theme.palette.primary.main }}>
+          <Typography variant="h5" style={{ marginBottom: '10px', color: theme.palette.primary.main }}>
             Best Distribution Areas
           </Typography>
           <Grid container spacing={2}>
@@ -350,7 +388,7 @@ export default function Report() {
                   style={{
                     borderRadius: '15px',
                     background: `linear-gradient(145deg, ${getRatingColor(area.rating)}, ${theme.palette.background.default})`,
-                    color: '#ffffff',
+                    color: '#000000',
                   }}
                 >
                   <CardContent>
@@ -365,7 +403,7 @@ export default function Report() {
                       value={area.score}
                       style={{
                         marginTop: '12px',
-                        height: '10px',
+                        height: '6px',
                         borderRadius: '5px',
                         backgroundColor: theme.palette.grey[300],
                       }}
@@ -373,11 +411,22 @@ export default function Report() {
                   </CardContent>
                 </Card>
               </Grid>
+              
             ))}
           </Grid>
+          
         </Paper>
-      </div>
+        <div style={{ height: '50px',width: '18%', marginTop: '60px', textAlign: 'left',borderTop: '2px dotted black', paddingTop: '10px',fontSize: '16px' }}>
+        <p style={{ margin: 0  }}>Nishan Nilanga </p>
+        <p style={{ margin: 0 }}>Distributor Coordinator </p>
+        <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
+         </div>
+        
+        
+      
 
+      </div>
+     
       <Button
         variant="contained"
         color="primary"

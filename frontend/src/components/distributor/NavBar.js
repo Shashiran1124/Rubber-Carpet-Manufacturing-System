@@ -5,7 +5,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ShareIcon from '@mui/icons-material/Share';
 import PRIImage from '../../images/PRI.jpg'; 
-import { format } from "date-fns"; // Import date-fns to format dates
+import { format, isSameDay, isAfter } from "date-fns"; // Import date-fns to format and compare dates
 
 const Navbar = () => {
     const [notifications, setNotifications] = useState([]);
@@ -21,7 +21,7 @@ const Navbar = () => {
                 const upcomingNotifications = data.filter(transport => {
                     const dropOffDate = new Date(transport.Drop_off_Date_and_Time);
                     // Check if the drop-off date is today or in the future
-                    return dropOffDate >= currentDate && dropOffDate.toDateString() === currentDate.toDateString();
+                    return isSameDay(dropOffDate, currentDate) || isAfter(dropOffDate, currentDate);
                 });
                 setNotifications(upcomingNotifications);
             } else {
