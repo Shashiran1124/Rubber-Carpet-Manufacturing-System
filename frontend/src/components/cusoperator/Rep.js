@@ -10,20 +10,20 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const PDFContent = ({ summary, totalSalesByMonth }) => {
   return (
-    <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#FFFFFF', minHeight: '100vh', width:'90%', border: '3.5px solid black',fontFamily: 'Italic' }}>
+    <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#FFFFFF', minHeight: '130vh', width:'90%', border: '3.5px solid black',fontFamily: 'Italic' }}>
      
       <p style={{ margin: 0,fontSize: '20px',fontWeight: 'bold' }}>PRI Rubber Industry </p>
-      <p style={{ margin: 0,fontSize: '14px' }}>Colombo 07 </p>
-      <p style={{ margin: 0 ,fontSize: '14px'}}>Sri Lanka </p>
-      <p style={{ margin: 0 ,fontSize: '14px'}}>Tell: +94 xxxxxxxx </p>
-      <p style={{ margin: 0 ,fontSize: '14px'}}>Email:
-      <a href="mailto:malindu113@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
-        malindu113@gmail.com
+      <p style={{ margin: 0,fontSize: '15px' }}>Biyagama  </p>
+      <p style={{ margin: 0 ,fontSize: '15px'}}>Sri Lanka </p>
+      <p style={{ margin: 0 ,fontSize: '15px'}}>Tell: +94 xxxxxxxx </p>
+      <p style={{ margin: 0 ,fontSize: '15px'}}>Email:
+      <a href="mailto:biyagamarubber@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
+      biyagamarubber@gmail.com
       </a>
       </p>
     
       <div style={{ marginLeft: '850px' }}>
-      <img src={PRIImage} alt="PRI" style={{ width: '100px', height: '10vh', borderRadius: '10px',marginTop:'-200px' }} />
+      <img src={PRIImage} alt="PRI" style={{ width: '113px', height: '15vh', borderRadius: '10px',marginTop:'-200px' }} />
       </div>
      
       
@@ -32,7 +32,7 @@ const PDFContent = ({ summary, totalSalesByMonth }) => {
         Monthly Income Report (2024)
       </h1>
       
-      <div style={{ marginBottom: '40px',marginLeft: '150px' , textAlign: 'center', backgroundColor: '#E6E6FA', padding: '20px', borderRadius: '26px',width: '65%', }}>
+      <div style={{ marginBottom: '40px',marginLeft: '165px' , textAlign: 'center', backgroundColor: '#EFEFFC', padding: '20px', borderRadius: '20px',width: '65%', }}>
         <h2 style={{ color: '#FF0000', fontSize: '20px',}}>Summary</h2>
         <p style={{ color: '#000000' }}><strong>Total Sales:</strong> Rs {summary.totalSales.toFixed(2)}</p>
         <p style={{ color: '#000000' }}><strong>Total Quantity Sold:</strong> {summary.totalQuantity}</p>
@@ -42,8 +42,8 @@ const PDFContent = ({ summary, totalSalesByMonth }) => {
 
       <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '40px' }}>
         <div style={{ width: '68%', marginTop: '-20px' }}>
-          <h2 style={{ marginBottom: '20px', color: '#FF0000', fontSize: '18px', textAlign: 'center',marginLeft:'290px' }}>Sales Data by Month</h2>
-          <table style={{ width: '100%', borderCollapse: 'collapse', border: '1.5px solid #000000', fontSize: '14px',marginLeft:'150px' }}>
+          <h2 style={{ marginBottom: '20px', color: '#FF0000', fontSize: '18px', textAlign: 'center',marginLeft:'290px' }}>Sales Orders by Month</h2>
+          <table style={{ width: '100%', borderCollapse: 'collapse', border: '1.5px solid #000000', fontSize: '16px',marginLeft:'150px' , backgroundColor: '#EFEFFC'}}>
             <thead>
               <tr style={{ backgroundColor: '#0000FF', color: '#FFFFFF' }}>
                 <th style={{ padding: '10px', border: '1px solid #000000' }}>Month</th>
@@ -67,7 +67,7 @@ const PDFContent = ({ summary, totalSalesByMonth }) => {
       </div>
 
       
-      <div style={{ height: '50px',width: '15%', marginTop: '50px', borderTop: '2.3px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px',fontWeight: 'bold' }}>
+      <div style={{ height: '50px',width: '15%', marginTop: '80px', borderTop: '2.3px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px',fontWeight: 'bold' }}>
       <p style={{ margin: 0 }}>Malindu Nethmina </p>
         <p style={{ margin: 0 }}>Customer Manager </p>
         <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
