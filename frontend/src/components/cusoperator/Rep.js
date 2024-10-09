@@ -17,8 +17,8 @@ const PDFContent = ({ summary, totalSalesByMonth }) => {
       <p style={{ margin: 0 ,fontSize: '15px'}}>Sri Lanka </p>
       <p style={{ margin: 0 ,fontSize: '15px'}}>Tell: +94 xxxxxxxx </p>
       <p style={{ margin: 0 ,fontSize: '15px'}}>Email:
-      <a href="mailto:biyagamarubber@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
-      biyagamarubber@gmail.com
+      <a href="mailto:PRIrubberindustry@gmail.com" style={{ textDecoration: 'none', color: 'blue' }}>
+      PRIrubberindustry@gmail.com
       </a>
       </p>
     

@@ -107,7 +107,7 @@ export default function ViewOrderTable() {
         <tbody>
           {filteredOrders.map((order, index) => (
             <tr key={order._id}>
-              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.orderNumber || index + 1}</td>
+              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{101 + index}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.customerName}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>
                 {new Date(new Date(order.orderDate).getTime() + new Date(order.orderDate).getTimezoneOffset() * 60000).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
