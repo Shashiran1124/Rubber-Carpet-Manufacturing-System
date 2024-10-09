@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     summarySection: {
         marginBottom: 20,
         padding: 10,
-        backgroundColor: '#ecf0f1',
+        backgroundColor: '#F9F4E5',
         borderRadius: 8,
         textAlign: 'left',
     },
@@ -50,16 +50,22 @@ const styles = StyleSheet.create({
     },
     tableSection: {
         marginTop: 20,
+        marginBottom: 40,
+        textAlign: 'center',
     },
     sectionTitle: {
         fontSize: 16,
-        color: '#2980b9',
+        color: '#F08080',
         marginBottom: 10,
     },
     table: {
         display: 'table',
         width: '100%',
+        height: '305px',
         margin: '0 auto',
+        borderWidth: 1,
+        borderColor: '#fff',
+        borderStyle: 'solid',
     },
     tableHeader: {
         display: 'table-row',
@@ -67,15 +73,19 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 12,
         textAlign: 'center',
+        fontWeight: 'bold',
     },
     tableRow: {
         display: 'table-row',
-        backgroundColor: '#ecf0f1',
+        backgroundColor: '#E6E6FA',
+        borderWidth: '1',
+        borderColor: '#fff'
     },
     tableCell: {
         display: 'table-cell',
-        padding: 6,
-        border: '1px solid #bdc3c7',
+        padding: 8,
+        borderWidth: 1,
+        borderColor: '#fff',
         textAlign: 'center',
         fontSize: 12,
     },
@@ -100,6 +110,23 @@ const styles = StyleSheet.create({
         borderBottom: '1px solid #34495e',
         marginBottom: 4,
         alignSelf: 'flex-end',
+    },
+
+    generatedByText: {
+        fontSize: '12'
+    },
+
+    dividerLine: {
+        width: '510px',
+        border: '1px solid #000'
+    },
+
+
+    address: {
+        fontSize: 12,
+        marginTop: 40,
+        textAlign: 'center',
+        color: '#2c3e50',
     },
 });
 
@@ -182,7 +209,7 @@ const SupReport = () => {
     };
 
     return (
-        <div style={{ width: '99%', margin: '0 auto', padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f0f4f7', borderRadius: '10px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+        <div style={{ width: '99%', margin: '0 auto', padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f0f4f7',border: '2px solid #000', borderRadius: '10px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <header style={{ textAlign: 'center', marginBottom: '40px', color: '#333' }}>
                 <h1 style={{ fontSize: '28px', margin: '10px 0', color: '#2c3e50' }}>Material Type Quantity Report</h1>
                 <p style={{ color: '#2c3e50' }}>A detailed report on the distribution of raw material quantities and costs by type</p>
@@ -202,7 +229,7 @@ const SupReport = () => {
                     width: '70%',
                     height: '400px',
                     margin: '0 auto',
-                    border: '3px solid #000',
+                    border: '1px solid #000',
                     borderRadius: '10px',
                 
                     padding: '20px',
@@ -225,37 +252,32 @@ const SupReport = () => {
                     width: '100%',
                     padding: '10px',
                     backgroundColor: '#f9fafb',
-                    border: '3px solid #000',
+                    
                     borderRadius: '10px',
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+                    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
                 }}>
-                    <ReportTable data={reportData} />
+                    <ReportTable reportData={reportData} />
                 </div>
             </section>
 
-            <div style={{ textAlign: 'center', marginTop: '30px' }}>
-    <PDFDownloadLink
-        document={<MyDocument reportData={reportData} />}
-        fileName="material_report.pdf"
-        style={{
-            display: 'inline-block',
-            padding: '10px 20px', // Add padding for better button appearance
-            backgroundColor: '#4CAF50', // Green background color
-            color: 'white', // Text color
-            border: 'none', // No border
-            borderRadius: '5px', // Rounded corners
-            textDecoration: 'none', // Remove underline from link
-            fontWeight: 'bold', // Make text bold
-            width: '300px', // Set a fixed width
-            margin: 'center', // Center the button
-        }}
-    >
-        Download Report
-    </PDFDownloadLink>
-</div>
+            <div style={{ textAlign: 'center', margin: '40px 0' }}>
+                <PDFDownloadLink
+                    document={<MyDocument reportData={reportData} />}
+                    fileName="Material_Quantity_Report.pdf"
+                    style={{
+                        padding: '10px 20px',
+                        fontSize: '18px',
+                        backgroundColor: '#2980b9',
+                        color: '#fff',
+                        borderRadius: '8px',
+                        textDecoration: 'none',
+                        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                    }}
+                >
+                    {({ loading }) => (loading ? 'Preparing PDF...' : 'Download PDF Report')}
+                </PDFDownloadLink>
+            </div>
 
-
-            
         </div>
     );
 };
@@ -264,27 +286,42 @@ const MyDocument = ({ reportData }) => (
     <Document>
         <Page style={styles.page}>
             <View style={styles.header}>
-                <Image src={PRIImage} style={styles.logo} />
-                <Text style={styles.title}>Material Type Quantity Report</Text>
-                <Text style={styles.subtitle}>Generated by P.R.I.Rubber Carpet Manufacturing System</Text>
+                <Text style={styles.title}>Raw Material Quantity Report</Text>
+                <Text style={styles.generatedByText}>Report Generated By PRI Rubber Industries Pvt</Text>
+                
                 <Text style={styles.subtitle}>{new Date().toLocaleDateString()}</Text>
+                
+                <Image src={PRIImage} style={styles.logo} />
+                <View style={styles.dividerLine} />
             </View>
 
-            <View style={styles.summarySection}>
+            <View style={[styles.address, { alignItems: 'flex-start', marginTop: -10}]}>
+                <Text>PRI Rubber Industries,</Text>
+                <Text>Biyagama,</Text>
+                <Text>Sri Lanka.</Text>
+            </View>
+
+
+
+            <View style={[styles.summarySection, {marginTop: 10}]}>
                 <Text style={styles.summaryTitle}>Summary</Text>
-                <Text style={styles.summaryText}>Total Materials Supplied: {reportData.reduce((acc, item) => acc + item.quantity, 0)}</Text>
+                <Text style={styles.summaryText}>This report contains the data of raw materials supplied.</Text>
+                <Text style={styles.summaryText}>Total materials supplied: {reportData.reduce((acc, item) => acc + item.quantity, 0)}</Text>
                 <Text style={styles.summaryText}>Top Material: {reportData.length > 0 ? reportData[0].materialType : 'N/A'}</Text>
             </View>
 
-            <View style={styles.tableSection}>
-                <Text style={styles.sectionTitle}>Quantity Distribution by Material Type</Text>
+            
+
+
+            <View style={[styles.tableSection, {marginTop: -10}]}>
+                <Text style={styles.sectionTitle}>Material Quantity Table</Text>
                 <View style={styles.table}>
                     <View style={styles.tableHeader}>
                         <Text style={styles.tableCell}>Material Type</Text>
                         <Text style={styles.tableCell}>Quantity</Text>
                     </View>
                     {reportData.map((item, index) => (
-                        <View style={styles.tableRow} key={index}>
+                        <View key={index} style={styles.tableRow}>
                             <Text style={styles.tableCell}>{item.materialType}</Text>
                             <Text style={styles.tableCell}>{item.quantity}</Text>
                         </View>
@@ -292,10 +329,15 @@ const MyDocument = ({ reportData }) => (
                 </View>
             </View>
 
-            <View style={styles.signatureSection}>
-                <Text style={styles.signatureText}>Signature of Supplier Manager</Text>
-                <View style={styles.signatureLine}></View>
+            <View style={[styles.signatureSection, {marginTop: -15}]}>
+                <Text style={styles.signatureText}>Prepared by:</Text>
+                <View style={styles.signatureLine} />
+                <Text style={styles.signatureText}>Supplier Manager</Text>
             </View>
+
+            
+
+            
         </Page>
     </Document>
 );

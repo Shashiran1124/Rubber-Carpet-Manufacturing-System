@@ -113,7 +113,7 @@ export default function KPIForm() {
       padding: '10px'
     }}>
       <div style={{ marginRight: '20px' }}>
-        <img src={kpiImage} alt="KPI" style={{ width: '500px', height: '80vh', borderRadius: '10px' }} />
+        <img src={kpiImage} alt="KPI" style={{ width: '600px', height: '100vh', borderRadius: '10px' }} />
       </div>
       <div style={{
         backgroundColor: '#EDEDEE',
@@ -123,6 +123,7 @@ export default function KPIForm() {
         width: '100%',
         maxWidth: '500px',
         border: '2px solid #000000',
+        height:'105vh',
       }}>
         <h2 style={{ textAlign: 'center', marginBottom: '10px', color: '#333' }}>KPI Form</h2>
         <form onSubmit={handleSubmit}>
@@ -137,7 +138,7 @@ export default function KPIForm() {
             { label: 'Responsible Department', name: 'Responsible_Department', type: 'text' }
           ].map(({ label, name, type, pattern }) => (
             <div key={name} style={{ marginBottom: '8px' }}> {/* Reduced margin */}
-              <label htmlFor={name} style={{ display: 'block', marginBottom: '2px', textAlign: 'left' }}>{label}:</label>
+              <label htmlFor={name} style={{ display: 'block', marginBottom: '1px', textAlign: 'left' }}>{label}:</label>
               <input
                 type={type}
                 id={name}
