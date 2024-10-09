@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography, MenuItem, Link } from "@mui/material"; 
+import { Button, Grid, TextField, Typography, MenuItem, Link } from "@mui/material";
 import { useState, useEffect, useMemo } from "react";
 import RegistrationImage from '../../images/Registration.jpg';
 import { useNavigate, useLocation } from "react-router-dom";
@@ -48,8 +48,17 @@ const EmployeeForm = () => {
 
     const handleContactInput = e => {
         const value = e.target.value;
-        if (/^\d*$/.test(value) && value.length <= 10) {
+        // Allow the contact number to be empty or match the pattern
+        if (value === '' || /^0\d{0,9}$/.test(value)) {
             setContact(value);
+        }
+    };
+
+    const handleNicInput = e => {
+        const value = e.target.value.toUpperCase();
+        // Allow the NIC to be empty or match the pattern
+        if (value === '' || /^[1-9]\d{0,10}[V]?$/.test(value)) {
+            setNic(value);
         }
     };
 
@@ -265,7 +274,7 @@ const EmployeeForm = () => {
                             label="NIC Number"
                             variant="outlined"
                             value={nic}
-                            onChange={e => setNic(e.target.value)}
+                            onChange={handleNicInput}
                             sx={{ marginBottom: '20px' }}
                         />
                     </Grid>
@@ -278,11 +287,6 @@ const EmployeeForm = () => {
                             value={contact}
                             onChange={handleContactInput}
                             sx={{ marginBottom: '20px' }}
-                            inputProps={{
-                                maxLength: 10,
-                                inputMode: 'numeric',
-                                pattern: "[0-9]{10}"
-                            }}
                         />
                     </Grid>
 
@@ -294,36 +298,30 @@ const EmployeeForm = () => {
                             value={address}
                             onChange={e => setAddress(e.target.value)}
                             sx={{ marginBottom: '20px' }}
+                            inputProps={{ maxLength: 50 }}
                         />
                     </Grid>
 
-                    <Grid item xs={12} sx={{ textAlign: 'center' }}>
+                    <Grid item xs={12}>
                         <Button
+                            fullWidth
+                            variant="contained"
+                            color="primary"
                             onClick={handleSubmit}
-                            sx={{
-                                backgroundColor: '#00c6e6',
-                                color: '#ffffff',
-                                padding: '10px 20px',
-                                borderRadius: '5px',
-                                '&:hover': {
-                                    backgroundColor: '#00a6c6'
-                                }
-                            }}
                         >
                             {employee._id ? 'Update' : 'Submit'}
                         </Button>
                     </Grid>
-
-                    {/* Add the hyperlink at the bottom-right corner */}
-                    <Grid item xs={12}>
-                        <Link href="/EmployeeTable" underline="none" sx={{ display: 'block', textAlign: 'center', marginTop: '10px' }}>
-                            Go Back to Table
-                        </Link>
-                    </Grid>
                 </Grid>
+            </Grid>
+
+            <Grid item xs={12} sx={{ textAlign: 'center', marginTop: '20px' }}>
+                <Link href="/EmployeeTable" underline="hover">
+                    Back to Employee Table
+                </Link>
             </Grid>
         </Grid>
     );
-}
+};
 
 export default EmployeeForm;

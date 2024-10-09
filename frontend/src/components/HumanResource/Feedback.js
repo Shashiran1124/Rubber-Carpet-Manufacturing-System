@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import FeedbackForm from "./FeedbackForm";  // Import your FeedbackForm component
-import Navbar from "./NavBar";              // Import the Navbar component
+import FeedbackForm from "./FeedbackForm";  
+import Navbar from "./NavBar";              
 import EmpSidebar from "../Production/EmpSideBar";
 
 const Feedback = () => {

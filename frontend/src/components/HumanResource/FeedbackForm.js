@@ -41,8 +41,13 @@ const FeedbackFormhr = () => {
 
     const handleContactInput = (e) => {
         const value = e.target.value;
-        if (/^\d*$/.test(value) && value.length <= 10) {
-            setFormData({ ...formData, phone: value });
+
+        // Allow any numeric input including backspace
+        if (/^[0-9]*$/.test(value) && value.length <= 10) {
+            // Validate to ensure it starts with '0' if not empty
+            if (value.length === 0 || (value[0] === '0' && value.length <= 10)) {
+                setFormData({ ...formData, phone: value });
+            }
         }
     };
 

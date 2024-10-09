@@ -28,9 +28,6 @@ const Navbarhr = ({ notifications = [] }) => {
                         P.R.I Rubber Industries
                     </Typography>
                 </Box>
-                <IconButton edge="end" color="inherit">
-                    <ShareIcon />
-                </IconButton>
                 <IconButton edge="end" color="inherit" onClick={handleNotificationClick}>
                     <Badge badgeContent={notifications.length} color="error">
                         <NotificationsIcon />
