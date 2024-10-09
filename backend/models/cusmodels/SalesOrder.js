@@ -17,6 +17,12 @@ const salesOrderSchema = new Schema({
         required: true,
         maxLength: 10
     },
+
+    email: {
+        type: String,
+        required: true
+    },    
+
     productCatalog: {
         type: String,
         required: true

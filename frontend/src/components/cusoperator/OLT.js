@@ -96,6 +96,7 @@ export default function ViewOrderTable() {
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Customer Name</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Order Date</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Contact Number</th>
+            <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>E-mail</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Product Catalog</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Address</th>
             <th style={{ border: '1.5px solid #000000', padding: '8px', backgroundColor: '#C7C7C7' }}>Quantity</th>
@@ -112,6 +113,7 @@ export default function ViewOrderTable() {
                 {new Date(new Date(order.orderDate).getTime() + new Date(order.orderDate).getTimezoneOffset() * 60000).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
               </td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.contactNumber}</td>
+              <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.email}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.productCatalog}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.address}</td>
               <td style={{ border: '1.5px solid #000000', padding: '8px' }}>{order.quantity}</td>

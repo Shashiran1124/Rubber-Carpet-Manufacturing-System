@@ -8,7 +8,7 @@ import PRIImage from '../../images/PRI.png';
 // Register components to use with Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQuantityBarChartData }) => {
+const PDFContent = ({ summary, totalSalesByMonth }) => {
   return (
     <div style={{ padding: '20px 30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#FFFFFF', minHeight: '100vh', width:'90%', border: '3.5px solid black',fontFamily: 'Italic' }}>
      
@@ -63,28 +63,10 @@ const PDFContent = ({ summary, totalSalesByMonth, getBarChartData, getProductQua
           </table>
         </div>
 
-        <div style={{ width: '60%',marginLeft:'170px' }}>
-          <h2 style={{ marginBottom: '-3px', color: '#FF0000', fontSize: '18px', textAlign: 'center',marginLeft:'10px' }}>Monthly Sales Chart</h2>
-          <Bar data={getBarChartData()} options={{
-            responsive: true,
-            plugins: { legend: { position: 'top' }, title: { display: true, text: 'Monthly Total Sales', font: { size: 16, weight: 'bold' }, color: '#000000' }},
-            layout: { padding: { top: 30 }},
-            scales: { x: { ticks: { color: 'rgba(0, 0, 0, 1)' }, grid: { color: 'rgba(0, 0, 0, 0.2)' }},
-                      y: { ticks: { color: 'rgba(0, 0, 0, 1)' }, grid: { color: 'rgba(0, 0, 0, 0.2)' }, beginAtZero: true }},
-          }} />
-        </div>
+        
       </div>
 
-      <div style={{ width: '70%',marginLeft:'110px' }}>
-        <h2 style={{ marginBottom: '-0px', color: '#FF0000', fontSize: '18px', textAlign: 'center' }}>Product Quantity Chart</h2>
-        <Bar data={getProductQuantityBarChartData()} options={{
-            responsive: true,
-            plugins: { legend: { position: 'top' }, title: { display: true, text: 'Product Quantity by Month', font: { size: 16, weight: 'bold' }, color: '#000000' }},
-            layout: { padding: { top: 30 }},
-            scales: { x: { ticks: { color: 'rgba(0, 0, 0, 1)' }, grid: { color: 'rgba(0, 0, 0, 0.2)' }},
-                      y: { ticks: { color: 'rgba(0, 0, 0, 1)' }, grid: { color: 'rgba(0, 0, 0, 0.2)' }, beginAtZero: true }},
-          }} />
-      </div>
+      
       <div style={{ height: '50px',width: '15%', marginTop: '50px', borderTop: '2.3px dotted black', textAlign: 'left', paddingTop: '10px',fontSize: '14px',fontWeight: 'bold' }}>
       <p style={{ margin: 0 }}>Malindu Nethmina </p>
         <p style={{ margin: 0 }}>Customer Manager </p>
@@ -123,63 +105,6 @@ export default function CalTableWithBarChart() {
     date.setMonth(monthNumber);
     return date.toLocaleString('default', { month: 'long' });
   };
-
-  const getBarChartData = () => {
-    const salesByMonth = {};
-    salesOrders.forEach(order => {
-      const month = getMonthName(new Date(order.month).getMonth() + 1);
-      salesByMonth[month] = (salesByMonth[month] || 0) + order.totalSales;
-    });
-
-    return {
-      labels: Object.keys(salesByMonth),
-      datasets: [{
-        label: 'Total Sales',
-        data: Object.values(salesByMonth),
-        backgroundColor: 'rgba(54, 162, 235, 0.6)',
-        borderColor: 'rgba(0, 0, 0, 1)',
-        borderWidth: 1.2,
-      }],
-    };
-  };
-
-  const getProductQuantityBarChartData = () => {
-    const products = [
-      'Industrial Rubber Mats',
-      'Gym Rubber Flooring',
-      'Rubber Runner Mats',
-      'Rubber Playground Mats',
-      'Commercial Rubber Flooring',
-      'Rubber Carpet Tiles'
-    ];
-
-    const months = [...new Set(salesOrders.map(order => getMonthName(new Date(order.month).getMonth() + 1)))];
-
-    const dataByMonth = months.map(month => {
-      const monthlyData = salesOrders.filter(order => getMonthName(new Date(order.month).getMonth() + 1) === month);
-      return products.map(product => {
-        return monthlyData
-          .filter(order => order.product === product)
-          .reduce((sum, order) => sum + order.totalQuantity, 0);
-      });
-    });
-
-    return {
-      labels: months,
-      datasets: products.map((product, index) => ({
-        label: product,
-        data: dataByMonth.map(data => data[index]),
-        backgroundColor: [
-          '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'
-        ][index],
-        borderColor: [
-          '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'
-        ][index],
-        borderWidth: 1,
-      })),
-    };
-  };
-
   const handleDownload = () => {
     const pdf = new jsPDF();
     const input = document.getElementById('pdfContent');
@@ -226,12 +151,13 @@ export default function CalTableWithBarChart() {
             acc[month].quantity += order.totalQuantity;
             return acc;
           }, {})}
-          getBarChartData={getBarChartData}
-          getProductQuantityBarChartData={getProductQuantityBarChartData}
+          
           
         />
         
       </div>
+
+      <div></div>
 
       {/* Download button visible only on frontend */}
       <button 

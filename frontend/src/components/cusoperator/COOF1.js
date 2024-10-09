@@ -10,6 +10,7 @@ export default function CusOpForm() {
     customerName: '',
     orderDate: '',
     contactNumber: '',
+    email: '',
     productCatalog: '',
     address: '',
     quantity: '',
@@ -28,6 +29,7 @@ export default function CusOpForm() {
         customerName: order.customerName,
         orderDate: formattedDate,
         contactNumber: order.contactNumber,
+        email: order.email,
         productCatalog: order.productCatalog,
         address: order.address,
         quantity: order.quantity,
@@ -203,6 +205,36 @@ export default function CusOpForm() {
               </div>
             )}
           </div>
+
+          <div style={{ marginBottom: '8px' }}>
+            <label htmlFor="email" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>E-mail:</label> {/* New Email Field */}
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              style={{
+                width: '100%',
+                padding: '8px',
+                border: '1px solid #696767',
+                borderRadius: '8px',
+                boxSizing: 'border-box',
+                color: '#000',
+                fontSize: '14px'
+              }}
+            />
+            {errors.email && (
+              <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
+                {errors.email}
+              </div>
+            )}
+          </div>
+
+
+
+
           <div style={{ marginBottom: '8px' }}>
             <label htmlFor="productCatalog" style={{ display: 'block', marginBottom: '2px', textAlign: 'left', color: '#000', fontSize: '12px', fontWeight: '600' }}>Product Catalog:</label>
             <select
