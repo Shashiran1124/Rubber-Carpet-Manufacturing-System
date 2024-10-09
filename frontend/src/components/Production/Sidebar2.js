@@ -153,7 +153,7 @@ const Sidebar2 = () => {
          )}
 
        {(user?.email === 'emp@email.com' || user?.email === 'first5@email.com')&& (
-        <StyledListItem button onClick={() => navigate('/empdashreports')}>
+        <StyledListItem button onClick={() => navigate('/empdashordertable')}>
           <ListItemIcon sx={{ color: '#fff' }}>
             <PersonIcon />
           </ListItemIcon>
