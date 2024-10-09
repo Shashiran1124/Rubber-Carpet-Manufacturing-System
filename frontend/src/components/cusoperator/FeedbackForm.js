@@ -197,6 +197,7 @@ export default function FeedbackForm() {
               onChange={handleChange}
               required
               min={new Date().toISOString().split('T')[0]}
+              max={new Date().toISOString().split('T')[0]}
               style={{
                 width: '100%',
                 padding: '8px', // Reduced padding
