@@ -300,7 +300,7 @@ export default function OrderForm() {
               name="materialQTY"
               value={formData.materialQTY}
               onChange={handleChange}
-              onKeyDown={handleKeyDown} // Add the key down handler here
+              onKeyDown={handleKeyDown} // Add the key down handler here....
               required
               min="0"
               style={{
