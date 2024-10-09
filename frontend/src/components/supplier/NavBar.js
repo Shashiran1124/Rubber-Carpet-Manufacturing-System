@@ -89,7 +89,7 @@ const Navbarr1 = () => {
                     ) : (
                         notifications.map((order, index) => (
                             <ListItem key={index}>
-                                <ListItemText primary={`Order from ${order.companyName} due on ${new Date(order.dateOfOrder).toLocaleDateString()}`} />
+                                <ListItemText primary={`REMINDER : You have placed an Order to  ${order.companyName} due on Today(${new Date(order.dateOfOrder).toLocaleDateString()})`} />
                             </ListItem>
                         ))
                     )}

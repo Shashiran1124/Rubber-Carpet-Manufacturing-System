@@ -58,7 +58,7 @@ export default function F1T() {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1 style={{ marginBottom: '20px', color: '#000000', textAlign: 'center' }}>Suppliers List</h1>
+      <h1 style={{ marginBottom: '20px', color: '#000000', textAlign: 'center' }}>Supplier and Raw Material Details Table</h1>
       
       {/* Search Bar */}
       <input
@@ -73,7 +73,7 @@ export default function F1T() {
           borderRadius: '5px',
           border: '1px solid #ccc',
           fontSize: '16px',
-          marginLeft:'290px',
+          marginLeft:'400px',
         }}
       />
 
