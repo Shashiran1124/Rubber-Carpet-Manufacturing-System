@@ -142,7 +142,7 @@ export default function BuyPartView() {
                                     variant="contained"
                                     sx={{
                                         backgroundColor: "green",
-                                        color: "#000",
+                                        color: "#ffffff",
                                         marginTop: "10px",
                                     }}
                                     onClick={handleBuyPar}
