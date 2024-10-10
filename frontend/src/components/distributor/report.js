@@ -157,7 +157,7 @@ export default function Report() {
           padding: '20px',
           backgroundColor: '#f5f5f5',
           borderRadius: '15px',
-          height: '360vh',
+          height: '380vh',
          
         }}
         
@@ -340,34 +340,45 @@ export default function Report() {
         </Paper>
 
         {chartData.length > 0 && (
-          <Paper
-            elevation={3}
-            style={{
-              marginTop: '100px',
-              padding: '20px',
-              borderRadius: '15px',
-              backgroundColor: '#ffffff',
-            }}
-          >
-            <Typography variant="h5" style={{ marginBottom: '15px', color: theme.palette.primary.main }}>
-              Monthly Cost Bar Chart
-            </Typography>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={chartData} animationDuration={500}>
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Bar dataKey="Transport_Cost" fill={COLORS[0]} animationKey="month" />
-                <Bar dataKey="Fuel_Cost" fill={COLORS[1]} animationKey="month" />
-                <Bar dataKey="Vehicle_Repair_Cost" fill={COLORS[2]} animationKey="month" />
-                <Bar dataKey="Food_Cost" fill={COLORS[3]} animationKey="month" />
-                <Bar dataKey="Insurance_Cost" fill={COLORS[4]} animationKey="month" />
-              </BarChart>
-            </ResponsiveContainer>
-          </Paper>
-        )}
+  <Paper
+    elevation={3}
+    style={{
+      marginTop: '100px',
+      padding: '20px',
+      borderRadius: '15px',
+      backgroundColor: '#ffffff',
+    }}
+  >
+    <Typography variant="h5" style={{ marginBottom: '15px', color: theme.palette.primary.main }}>
+      Monthly Cost Table
+    </Typography>
+    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <thead>
+        <tr style={{ backgroundColor: theme.palette.primary.light, color: '#ffffff' }}>
+          <th style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>Month</th>
+          <th style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>Transport Cost</th>
+          <th style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>Fuel Cost</th>
+          <th style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>Vehicle Repair Cost</th>
+          <th style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>Food Cost</th>
+          <th style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>Insurance Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        {chartData.map((data, index) => (
+          <tr key={index}>
+            <td style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>{data.month}</td>
+            <td style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>{data.Transport_Cost.toFixed(2)}</td>
+            <td style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>{data.Fuel_Cost.toFixed(2)}</td>
+            <td style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>{data.Vehicle_Repair_Cost.toFixed(2)}</td>
+            <td style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>{data.Food_Cost.toFixed(2)}</td>
+            <td style={{ padding: '12px', border: `1px solid ${theme.palette.divider}` }}>{data.Insurance_Cost.toFixed(2)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </Paper>
+)}
+
 
         <Paper
           elevation={3}
@@ -418,7 +429,7 @@ export default function Report() {
         </Paper>
         <div style={{ height: '50px',width: '18%', marginTop: '60px', textAlign: 'left',borderTop: '2px dotted black', paddingTop: '10px',fontSize: '16px' }}>
         <p style={{ margin: 0  }}>Nishan Nilanga </p>
-        <p style={{ margin: 0 }}>Distributor Coordinator </p>
+        <p style={{ margin: 0 }}>Distribution Coordinator </p>
         <p style={{ margin: 0 }}>Date:{new Date().toLocaleDateString()}</p>
          </div>
         

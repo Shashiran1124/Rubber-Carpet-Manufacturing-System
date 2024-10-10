@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Toolbar, IconButton, InputBase, Typography, Avatar, Box, Badge, Popover, List, ListItem, ListItemText } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
+import { AppBar, Toolbar, IconButton, Typography, Avatar, Box, Badge, Popover, List, ListItem, ListItemText } from "@mui/material";
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import SettingsIcon from '@mui/icons-material/Settings';
-import ShareIcon from '@mui/icons-material/Share';
 import PRIImage from '../../images/PRI.png'; 
 
 const Navbarr1 = () => {
@@ -92,7 +89,7 @@ const Navbarr1 = () => {
                     ) : (
                         notifications.map((order, index) => (
                             <ListItem key={index}>
-                                <ListItemText primary={`Order #${order.materialType} due on ${new Date(order.dateOfOrder).toLocaleDateString()}`} />
+                                <ListItemText primary={`REMINDER : You have placed an Order to  ${order.companyName} due on Today(${new Date(order.dateOfOrder).toLocaleDateString()})`} />
                             </ListItem>
                         ))
                     )}

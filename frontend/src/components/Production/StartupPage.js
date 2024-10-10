@@ -398,17 +398,17 @@ const StartupPage = () => {
               {/* Address */}
               <ListItem>
                 <ListItemIcon><LocationOn fontSize="large" color="primary" /></ListItemIcon>
-                <ListItemText primary="Our Office Address" secondary="Palm Court Bldg M, 501/B, 5th Floor, New Link Road, Beside Goregaon Sports Complex, Malad West, Mumbai, Maharashtra 400064" />
+                <ListItemText primary="Our Office Address" secondary=" PRI Rubber Manufacturing (Pvt) Ltd. 123, Industrial Zone, Colombo 05,Colombo,,00500,Sri Lanka" />
               </ListItem>
               {/* Email */}
               <ListItem>
                 <ListItemIcon><Mail fontSize="large" color="primary" /></ListItemIcon>
-                <ListItemText primary="General Enquiries" secondary="websupport@justdial.com" />
+                <ListItemText primary="General Enquiries" secondary="prirubber@email.com" />
               </ListItem>
               {/* Phone */}
               <ListItem>
                 <ListItemIcon><Phone fontSize="large" color="primary" /></ListItemIcon>
-                <ListItemText primary="Call Us" secondary="+91-8888888888" />
+                <ListItemText primary="Call Us" secondary="+94-78 111 1111" />
               </ListItem>
               {/* Office Hours */}
               <ListItem>
@@ -484,15 +484,13 @@ const StartupPage = () => {
               CONTACT
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              Palm Court Bldg M, 501/B, 5th Floor, New Link Road, 
-              Beside Goregaon Sports Complex, Malad West, 
-              Mumbai, Maharashtra 400064, India
+            PRI Rubber Manufacturing (Pvt) Ltd. 123, Industrial Zone, Colombo 05,Colombo,,00500,Sri Lanka
             </Typography>
             <Typography variant="body2" color="textSecondary" sx={{ marginTop: '10px' }}>
-              +91-8888888888
+              +94-78 111 1111
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              websupport@justdial.com
+              prirubber@email.com
             </Typography>
           </Grid>
         </Grid>

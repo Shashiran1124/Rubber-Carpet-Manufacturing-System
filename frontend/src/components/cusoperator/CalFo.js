@@ -103,9 +103,10 @@ export default function SalesOrderForm() {
   };
 
   // Restrict to year 2024 and months
-  const currentYear = '2024';
-  const minMonth = `${currentYear}-01`;
-  const maxMonth = `${currentYear}-12`;
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+  const minMonth = `${currentYear}-${currentMonth}`;
 
   return (
     <div style={{
@@ -157,7 +158,7 @@ export default function SalesOrderForm() {
               value={formData.month}
               onChange={handleChange}
               min={minMonth}
-              max={maxMonth}
+
               required
               style={{
                 width: '100%',
